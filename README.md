@@ -38,3 +38,9 @@ The `AR · 抗藥性探索` tab adds year, organism, antibiotic, specimen, origi
 The homepage includes a built-in responsive antibiogram explorer with organism/year/mode filtering, cell selection, source provenance, susceptibility percent (S%), available tested-isolate denominators (n), linked 2022-2024 time-series for selected verified combinations, deep links, and CSV export. Data comes from `data/antibiogram_2024_validated.csv` (20 cells, 2024 report Figure 3-1-1, report p. 34) and `data/antibiogram_trends_2022_2024.csv` (21 report narrative observations, 2022 p.31 and 2023/2024 p.30). No absent values are imputed; 95% CIs are not generated for narrative-only reported integer percentages without n. The existing separate `antibiogram.html` remains available as a legacy view.
 
 **Not yet completed:** exhaustive all-organism 2022-2024 heatmap extraction, hospital-level data matrices, specimen or CO/HO stratification, multi-year denominators and verified WHO numerical comparison. The completed features are limited to the above source-backed observations.
+
+## 2026-10-21 Heatmap and interactive chart expansion
+
+- 2024 national antibiogram dataset expanded to 145 verified transcribed S%/tested-n cells from Figure 3-1-1, printed page 34 (including the Enterobacterales panels for penicillins and cephalosporins and miscellaneous agents).
+- Main dashboard now adds pointer-hover precision tooltips for main organism ranking bars, 2019–2024 retrospective totals, edition snapshots, AR charts, and integrated antibiogram cells. Touch users can click heatmap cells to see details.
+- Full 2022/2023 matrices and 2024 hospital-tier matrices are **not yet fully extracted**; unavailable cells remain absent. Do not advertise three full editions as complete. Numerical figures have not undergone independent double-entry verification.
