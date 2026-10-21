@@ -1,0 +1,22 @@
+year,organism,antibiotic,susceptible_pct,tested_n,scope,report_figure,printed_page,extraction_method
+2022,Staphylococcus aureus,Oxacillin,56,,national_all_specimens,3-1-1,31,narrative
+2023,Staphylococcus aureus,Oxacillin,55,,national_all_specimens,3-1-1,30,narrative
+2024,Staphylococcus aureus,Oxacillin,53,,national_all_specimens,3-1-1,30,narrative
+2022,Staphylococcus aureus,Minocycline,86,,national_all_specimens,3-1-1,31,narrative
+2023,Staphylococcus aureus,Minocycline,95,,national_all_specimens,3-1-1,30,narrative
+2024,Staphylococcus aureus,Minocycline,95,,national_all_specimens,3-1-1,30,narrative
+2022,Enterococcus faecium,Vancomycin,44,,national_all_specimens,3-1-1,31,narrative
+2023,Enterococcus faecium,Vancomycin,48,,national_all_specimens,3-1-1,30,narrative
+2024,Enterococcus faecium,Vancomycin,52,,national_all_specimens,3-1-1,30,narrative
+2022,Enterococcus faecalis,Vancomycin,99,,national_all_specimens,3-1-1,31,narrative
+2023,Enterococcus faecalis,Vancomycin,99,,national_all_specimens,3-1-1,30,narrative
+2024,Enterococcus faecalis,Vancomycin,100,,national_all_specimens,3-1-1,30,narrative
+2022,Streptococcus pneumoniae,Penicillin G,68,,national_all_specimens,3-1-1,31,narrative
+2023,Streptococcus pneumoniae,Penicillin G,71,,national_all_specimens,3-1-1,30,narrative
+2024,Streptococcus pneumoniae,Penicillin G,68,,national_all_specimens,3-1-1,30,narrative
+2022,Streptococcus pneumoniae,Ceftriaxone,82,,national_all_specimens,3-1-1,31,narrative
+2023,Streptococcus pneumoniae,Ceftriaxone,88,,national_all_specimens,3-1-1,30,narrative
+2024,Streptococcus pneumoniae,Ceftriaxone,85,,national_all_specimens,3-1-1,30,narrative
+2022,Streptococcus pneumoniae,Cefuroxime,30,,national_all_specimens,3-1-1,31,narrative
+2023,Streptococcus pneumoniae,Cefuroxime,6,,national_all_specimens,3-1-1,30,narrative
+2024,Streptococcus pneumoniae,Cefuroxime,19,,national_all_specimens,3-1-1,30,narrative
