@@ -53,4 +53,22 @@ el('abExport').onclick=()=>down('year,organism,antibiotic,susceptible_pct,tested
 el('abShare').onclick=()=>{let u=new URL(location.href);u.searchParams.set('abYear',el('abYear').value);u.searchParams.set('abOrg',el('abOrg').value);u.searchParams.set('abMode',el('abMode').value);navigator.clipboard.writeText(u.href)};
 Promise.all([fetch('./data/antibiogram_2024_validated.csv').then(r=>{if(!r.ok)throw Error('2024 fetch');return r.text()}),fetch('./data/antibiogram_trends_2022_2024.csv').then(r=>{if(!r.ok)throw Error('trends fetch');return r.text()})]).then(([a,b])=>{let d1=parse(a).map(r=>({...r,kind:'ceph',figure:r.figure,page:r.printed_page})),d2=parse(b).map(r=>({...r,kind:'trend',figure:r.report_figure,page:r.printed_page}));data=d1.concat(d2);let qs=new URLSearchParams(location.search);let orgs=[...new Set(data.map(r=>r.organism))].sort();el('abOrg').innerHTML='<option value="all">全部菌種</option>'+orgs.map(o=>'<option>'+o+'</option>').join('');['abYear','abOrg','abMode'].forEach(id=>{let v=qs.get(id),e=el(id);if(v&&[...e.options].some(x=>x.value===v))e.value=v;e.onchange=groupRows});groupRows()}).catch(err=>{el('abMatrix').textContent='資料載入失敗：請確認 GitHub Pages 上的 CSV 已成功部署並重新整理。';el('abCaution').textContent='資料檔無法存取，已停用圖譜顯示，避免將缺值誤判為 0%。'});
 })();
+</script><style>
+#atlasTip{position:fixed;z-index:9999;pointer-events:none;max-width:330px;padding:13px 16px;border:1px solid var(--accent);border-radius:12px;background:var(--panel);color:var(--text);box-shadow:0 18px 36px #0009;white-space:pre-line;font-size:13px;line-height:1.65;opacity:0;transition:opacity .12s}
+#atlasTip.show{opacity:1}.item:hover .track{outline:1px solid var(--accent)}.abcell:hover{outline:3px solid var(--accent)!important;transform:scale(1.025)}.item:focus-within{outline:1px solid var(--accent)}.chart-helper{color:var(--mute);font-size:12px}
+</style><div id="atlasTip" role="tooltip" aria-live="off"></div><script>
+(()=>{let tip=document.getElementById('atlasTip');const fmt=v=>Number(v).toLocaleString('en-US');function show(event,content){tip.textContent=content;tip.classList.add('show');move(event)}function move(e){let x=(e.clientX||0)+16,y=(e.clientY||0)+16;tip.style.left=Math.max(8,Math.min(x,innerWidth-350))+'px';tip.style.top=Math.max(8,Math.min(y,innerHeight-150))+'px'}function hide(){tip.classList.remove('show')}
+document.addEventListener('pointerover',e=>{let t=e.target.closest('.abcell,.item,.heat,#trend circle,#abTrend circle,#rows tr');if(!t)return;let content='';if(t.matches('.abcell')){let o=t.dataset.o,d=t.dataset.d;content='2024／所選年度敏感性資料\n菌種：'+o+'\n抗生素：'+d+'\n'+t.textContent.replace(/\s+/g,' ').trim()+'\n詳情請點擊儲存格';}
+else if(t.matches('.heat')){content=t.getAttribute('aria-label')+'\n來源：2024 年報圖 3-1-1，第34頁'}
+else if(t.closest('#bars')){let i=[...document.querySelectorAll('#bars .item')].indexOf(t);let year=Number(document.getElementById('year').value);let r=typeof D!=='undefined'&&D[year]?.[2]?.[i];if(r)content='年度：'+year+'\n菌種：'+r[0]+'\n分離菌株數：'+fmt(r[1])+'\n資料來源：'+year+' 年報表 2-1'}
+else if(t.closest('#longBars')){let i=[...document.querySelectorAll('#longBars .item')].indexOf(t);let d=[[2019,603463],[2020,591201],[2021,628659],[2022,653415],[2023,729812],[2024,755833]][i];if(d)content='同版年報歷史序列\n年度：'+d[0]+'\n分離菌株數：'+fmt(d[1])+'\n2024 年報表 2-1，第14頁'}
+else if(t.closest('#arPlot')){content=t.closest('.item')?.innerText.replace(/\n/g,' · ')+'\n來源：所選年份年報表 2-1'}
+else if(t.matches('#trend circle')){let pts=[...document.querySelectorAll('#trend circle')],i=pts.indexOf(t),yr=2022+i;if(typeof D!=='undefined'&&D[yr])content='出版版本：'+yr+'\n當年度分離菌株數：'+fmt(D[yr][0])+'\n注意：不同版本統計口徑不同'}
+else if(t.matches('#abTrend circle')){content='所選菌種及抗生素年度敏感性趨勢\n'+t.outerHTML.match(/cx="([^"]+)/)?.[0]+'\n請參考趨勢圖標籤及下方來源'}
+else if(t.closest('#rows')){content=t.innerText.replace(/\s+/g,' · ')+'\n單位：分離菌株數'}
+if(content)show(e,content)});
+document.addEventListener('pointermove',e=>{if(tip.classList.contains('show'))move(e)});
+document.addEventListener('pointerout',e=>{if(e.target.closest('.abcell,.item,.heat,#trend circle,#abTrend circle,#rows tr'))hide()});
+document.addEventListener('scroll',hide,{passive:true});document.addEventListener('keydown',e=>{if(e.key==='Escape')hide()});
+})();
 </script></body></html>
