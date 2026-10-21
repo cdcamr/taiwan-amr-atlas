@@ -10,3 +10,10 @@ Static CSV resources: data/counts.csv and data/summary.csv. The page includes it
 
 ## Files
 index.html (standalone dashboard), data/*.csv (downloadable datasets).
+
+## 2026-10-21 verification update
+
+- Cross-checked 2022, 2023, and 2024 edition Table 2-1 national top-10 organism counts and totals against source PDFs. Edition snapshot totals: 616,692; 645,375; 755,833.
+- Added `data/longitudinal_2024.csv`: 2019 through 2024 historical totals as printed together in the **2024 report edition** Table 2-1 (p. 14): 603,463; 591,201; 628,659; 653,415; 729,812; 755,833. This intentionally differs from 2022/2023 *publication snapshots* because editions use different data extractions and inclusion scopes.
+- WHO GLASS numerical comparisons are not yet populated. The international module is a comparison-method note and external reference links, not a verified international ranking.
+- Publishing the sources is not the same as confirming successful GitHub Pages propagation; check the public URL after each push.
