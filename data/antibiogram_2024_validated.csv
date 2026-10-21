@@ -1,0 +1,21 @@
+year,organism,antibiotic,susceptible_pct,tested_n,scope,figure,printed_page
+2024,Escherichia coli,CZ,49,215396,national_all_specimens,3-1-1,34
+2024,Escherichia coli,FOX,77,59692,national_all_specimens,3-1-1,34
+2024,Escherichia coli,CXM,64,73595,national_all_specimens,3-1-1,34
+2024,Escherichia coli,FUR,58,32768,national_all_specimens,3-1-1,34
+2024,Escherichia coli,CTX,66,94985,national_all_specimens,3-1-1,34
+2024,Escherichia coli,CRO,68,141053,national_all_specimens,3-1-1,34
+2024,Escherichia coli,CFM,62,10721,national_all_specimens,3-1-1,34
+2024,Escherichia coli,CFP,92,6816,national_all_specimens,3-1-1,34
+2024,Escherichia coli,CAZ,75,182107,national_all_specimens,3-1-1,34
+2024,Escherichia coli,FEP,80,191745,national_all_specimens,3-1-1,34
+2024,Klebsiella pneumoniae,CZ,49,86394,national_all_specimens,3-1-1,34
+2024,Klebsiella pneumoniae,FOX,64,25844,national_all_specimens,3-1-1,34
+2024,Klebsiella pneumoniae,CXM,62,26767,national_all_specimens,3-1-1,34
+2024,Klebsiella pneumoniae,FUR,55,12561,national_all_specimens,3-1-1,34
+2024,Klebsiella pneumoniae,CTX,64,39158,national_all_specimens,3-1-1,34
+2024,Klebsiella pneumoniae,CRO,72,56481,national_all_specimens,3-1-1,34
+2024,Klebsiella pneumoniae,CFM,62,5383,national_all_specimens,3-1-1,34
+2024,Klebsiella pneumoniae,CFP,84,3247,national_all_specimens,3-1-1,34
+2024,Klebsiella pneumoniae,CAZ,66,78715,national_all_specimens,3-1-1,34
+2024,Klebsiella pneumoniae,FEP,78,79358,national_all_specimens,3-1-1,34
