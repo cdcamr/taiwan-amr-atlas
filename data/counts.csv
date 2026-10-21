@@ -1,0 +1,31 @@
+year,organism,count,rank,report,page
+2022,"Escherichia coli",182277,1,2022,15
+2022,"Staphylococcus aureus",112326,2,2022,15
+2022,"Klebsiella pneumoniae",75498,3,2022,15
+2022,"Pseudomonas aeruginosa",57287,4,2022,15
+2022,"Enterococcus faecalis",37980,5,2022,15
+2022,"Proteus spp.",33663,6,2022,15
+2022,"Enterococcus faecium",23626,7,2022,15
+2022,"Acinetobacter calcoaceticus-baumannii complex",21451,8,2022,15
+2022,"Enterobacter spp.",20597,9,2022,15
+2022,"Citrobacter spp.",15068,10,2022,15
+2023,"Escherichia coli",217437,1,2023,14
+2023,"Klebsiella pneumoniae",87015,2,2023,14
+2023,"Staphylococcus aureus",70482,3,2023,14
+2023,"Pseudomonas aeruginosa",64004,4,2023,14
+2023,"Enterococcus faecalis",42396,5,2023,14
+2023,"Proteus spp.",38451,6,2023,14
+2023,"Enterococcus faecium",27148,7,2023,14
+2023,"Acinetobacter baumannii",18450,8,2023,14
+2023,"Citrobacter spp.",16989,9,2023,14
+2023,"Enterobacter spp.",16919,10,2023,14
+2024,"Escherichia coli",255861,1,2024,14
+2024,"Klebsiella pneumoniae",103189,2,2024,14
+2024,"Staphylococcus aureus",84176,3,2024,14
+2024,"Pseudomonas aeruginosa",76463,4,2024,14
+2024,"Enterococcus faecalis",47647,5,2024,14
+2024,"Proteus spp.",45990,6,2024,14
+2024,"Enterococcus faecium",30929,7,2024,14
+2024,"Acinetobacter baumannii",19911,8,2024,14
+2024,"Enterobacter spp.",19878,9,2024,14
+2024,"Citrobacter spp.",19340,10,2024,14
