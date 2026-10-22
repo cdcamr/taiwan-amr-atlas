@@ -44,3 +44,18 @@ The homepage includes a built-in responsive antibiogram explorer with organism/y
 - 2024 national antibiogram dataset expanded to 145 verified transcribed S%/tested-n cells from Figure 3-1-1, printed page 34 (including the Enterobacterales panels for penicillins and cephalosporins and miscellaneous agents).
 - Main dashboard now adds pointer-hover precision tooltips for main organism ranking bars, 2019–2024 retrospective totals, edition snapshots, AR charts, and integrated antibiogram cells. Touch users can click heatmap cells to see details.
 - Full 2022/2023 matrices and 2024 hospital-tier matrices are **not yet fully extracted**; unavailable cells remain absent. Do not advertise three full editions as complete. Numerical figures have not undergone independent double-entry verification.
+
+## One Health Intelligence Lab (2026-10-22)
+
+The homepage embeds `one-health-lab.html`, which is also directly accessible as a full-screen workspace.
+
+- AR×AU / AR×HAI / human×animal and custom X/Y research pairs
+- Locally loaded CSV (`unit,year,metric_x,metric_y`) with matching unit+year and optional 0–2-year lag
+- Spearman midranks or Pearson correlation, descriptive scatter/trend visualizations, paired CSV export, PNG scatter export
+- A conservative minimum of eight matched pairs before showing a correlation coefficient; no p-value or causality claims
+- A human/animal compatibility checklist, separate WHO/ECDC/JANIS/FAO/WOAH official resource library
+- Data never leaves the browser through the analysis app; source files uploaded by visitors are not stored server-side
+
+**Important limitations:** This is an analysis engine, not a verified cross-sector national statistical result. It does not yet provide an automated data ingestion integration, inferential panel models, epidemiologic adjustment, or verified international cross-country ranks. Users are responsible for ensuring matched units, independence assumptions and surveillance definition comparability. CSV parsing is intentionally simple and supports unquoted numeric fields and simple unit names, not complex quoted CSV with embedded commas. Results are exploratory.
+
+Sources: https://www.who.int/initiatives/glass ; https://www.ecdc.europa.eu/en/data-dashboards-and-databases ; https://infarm.apps.fao.org/ ; https://amu.woah.org/amu-system-portal .
