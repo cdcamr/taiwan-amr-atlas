@@ -1,0 +1,217 @@
+report_edition,year,organism,isolates,rank,source_table,source_page,metric,scope
+2024,2019,"Escherichia coli",205245,1,2-1,14,isolate_count,national_all_specimens
+2024,2019,"Klebsiella pneumoniae",78599,2,2-1,14,isolate_count,national_all_specimens
+2024,2019,"Staphylococcus aureus",71943,3,2-1,14,isolate_count,national_all_specimens
+2024,2019,"Pseudomonas aeruginosa",60166,4,2-1,14,isolate_count,national_all_specimens
+2024,2019,"Enterococcus faecalis",37662,5,2-1,14,isolate_count,national_all_specimens
+2024,2019,"Proteus spp.",34543,6,2-1,14,isolate_count,national_all_specimens
+2024,2019,"Enterococcus faecium",19497,7,2-1,14,isolate_count,national_all_specimens
+2024,2019,"Acinetobacter baumannii",19133,8,2-1,14,isolate_count,national_all_specimens
+2024,2019,"Enterobacter spp.",16912,9,2-1,14,isolate_count,national_all_specimens
+2024,2019,"Citrobacter spp.",15456,10,2-1,14,isolate_count,national_all_specimens
+2024,2019,Other,44307,,2-1,14,isolate_count,national_all_specimens
+2024,2019,TOTAL,603463,,2-1,14,isolate_count,national_all_specimens
+2024,2020,"Escherichia coli",201209,1,2-1,14,isolate_count,national_all_specimens
+2024,2020,"Klebsiella pneumoniae",78493,2,2-1,14,isolate_count,national_all_specimens
+2024,2020,"Staphylococcus aureus",68935,3,2-1,14,isolate_count,national_all_specimens
+2024,2020,"Pseudomonas aeruginosa",58411,4,2-1,14,isolate_count,national_all_specimens
+2024,2020,"Enterococcus faecalis",37044,5,2-1,14,isolate_count,national_all_specimens
+2024,2020,"Proteus spp.",34402,6,2-1,14,isolate_count,national_all_specimens
+2024,2020,"Enterococcus faecium",20441,7,2-1,14,isolate_count,national_all_specimens
+2024,2020,"Acinetobacter baumannii",18673,8,2-1,14,isolate_count,national_all_specimens
+2024,2020,"Enterobacter spp.",16539,9,2-1,14,isolate_count,national_all_specimens
+2024,2020,"Citrobacter spp.",15393,10,2-1,14,isolate_count,national_all_specimens
+2024,2020,Other,41661,,2-1,14,isolate_count,national_all_specimens
+2024,2020,TOTAL,591201,,2-1,14,isolate_count,national_all_specimens
+2024,2021,"Escherichia coli",211152,1,2-1,14,isolate_count,national_all_specimens
+2024,2021,"Klebsiella pneumoniae",85279,2,2-1,14,isolate_count,national_all_specimens
+2024,2021,"Staphylococcus aureus",71100,3,2-1,14,isolate_count,national_all_specimens
+2024,2021,"Pseudomonas aeruginosa",64798,4,2-1,14,isolate_count,national_all_specimens
+2024,2021,"Enterococcus faecalis",40139,5,2-1,14,isolate_count,national_all_specimens
+2024,2021,"Proteus spp.",37942,6,2-1,14,isolate_count,national_all_specimens
+2024,2021,"Enterococcus faecium",22995,7,2-1,14,isolate_count,national_all_specimens
+2024,2021,"Acinetobacter baumannii",19153,8,2-1,14,isolate_count,national_all_specimens
+2024,2021,"Enterobacter spp.",17114,9,2-1,14,isolate_count,national_all_specimens
+2024,2021,"Citrobacter spp.",16640,10,2-1,14,isolate_count,national_all_specimens
+2024,2021,Other,42347,,2-1,14,isolate_count,national_all_specimens
+2024,2021,TOTAL,628659,,2-1,14,isolate_count,national_all_specimens
+2024,2022,"Escherichia coli",215889,1,2-1,14,isolate_count,national_all_specimens
+2024,2022,"Klebsiella pneumoniae",89876,2,2-1,14,isolate_count,national_all_specimens
+2024,2022,"Staphylococcus aureus",72109,3,2-1,14,isolate_count,national_all_specimens
+2024,2022,"Pseudomonas aeruginosa",67284,4,2-1,14,isolate_count,national_all_specimens
+2024,2022,"Enterococcus faecalis",42249,5,2-1,14,isolate_count,national_all_specimens
+2024,2022,"Proteus spp.",40127,6,2-1,14,isolate_count,national_all_specimens
+2024,2022,"Enterococcus faecium",26390,7,2-1,14,isolate_count,national_all_specimens
+2024,2022,"Acinetobacter baumannii",20441,8,2-1,14,isolate_count,national_all_specimens
+2024,2022,"Enterobacter spp.",17297,10,2-1,14,isolate_count,national_all_specimens
+2024,2022,"Citrobacter spp.",17586,9,2-1,14,isolate_count,national_all_specimens
+2024,2022,Other,44167,,2-1,14,isolate_count,national_all_specimens
+2024,2022,TOTAL,653415,,2-1,14,isolate_count,national_all_specimens
+2024,2023,"Escherichia coli",246054,1,2-1,14,isolate_count,national_all_specimens
+2024,2023,"Klebsiella pneumoniae",99114,2,2-1,14,isolate_count,national_all_specimens
+2024,2023,"Staphylococcus aureus",79133,3,2-1,14,isolate_count,national_all_specimens
+2024,2023,"Pseudomonas aeruginosa",71805,4,2-1,14,isolate_count,national_all_specimens
+2024,2023,"Enterococcus faecalis",47377,5,2-1,14,isolate_count,national_all_specimens
+2024,2023,"Proteus spp.",43662,6,2-1,14,isolate_count,national_all_specimens
+2024,2023,"Enterococcus faecium",30590,7,2-1,14,isolate_count,national_all_specimens
+2024,2023,"Acinetobacter baumannii",21432,8,2-1,14,isolate_count,national_all_specimens
+2024,2023,"Enterobacter spp.",19177,9,2-1,14,isolate_count,national_all_specimens
+2024,2023,"Citrobacter spp.",19098,10,2-1,14,isolate_count,national_all_specimens
+2024,2023,Other,52370,,2-1,14,isolate_count,national_all_specimens
+2024,2023,TOTAL,729812,,2-1,14,isolate_count,national_all_specimens
+2024,2024,"Escherichia coli",255861,1,2-1,14,isolate_count,national_all_specimens
+2024,2024,"Klebsiella pneumoniae",103189,2,2-1,14,isolate_count,national_all_specimens
+2024,2024,"Staphylococcus aureus",84176,3,2-1,14,isolate_count,national_all_specimens
+2024,2024,"Pseudomonas aeruginosa",76463,4,2-1,14,isolate_count,national_all_specimens
+2024,2024,"Enterococcus faecalis",47647,5,2-1,14,isolate_count,national_all_specimens
+2024,2024,"Proteus spp.",45990,6,2-1,14,isolate_count,national_all_specimens
+2024,2024,"Enterococcus faecium",30929,7,2-1,14,isolate_count,national_all_specimens
+2024,2024,"Acinetobacter baumannii",19911,8,2-1,14,isolate_count,national_all_specimens
+2024,2024,"Enterobacter spp.",19878,9,2-1,14,isolate_count,national_all_specimens
+2024,2024,"Citrobacter spp.",19340,10,2-1,14,isolate_count,national_all_specimens
+2024,2024,Other,52449,,2-1,14,isolate_count,national_all_specimens
+2024,2024,TOTAL,755833,,2-1,14,isolate_count,national_all_specimens
+2023,2018,"Escherichia coli",182074,1,2-1,14,isolate_count,national_all_specimens
+2023,2018,"Klebsiella pneumoniae",69720,2,2-1,14,isolate_count,national_all_specimens
+2023,2018,"Staphylococcus aureus",62519,3,2-1,14,isolate_count,national_all_specimens
+2023,2018,"Pseudomonas aeruginosa",54448,4,2-1,14,isolate_count,national_all_specimens
+2023,2018,"Enterococcus faecalis",31852,5,2-1,14,isolate_count,national_all_specimens
+2023,2018,"Proteus spp.",29623,6,2-1,14,isolate_count,national_all_specimens
+2023,2018,"Enterococcus faecium",16542,8,2-1,14,isolate_count,national_all_specimens
+2023,2018,"Acinetobacter baumannii",17608,7,2-1,14,isolate_count,national_all_specimens
+2023,2018,"Citrobacter spp.",13751,10,2-1,14,isolate_count,national_all_specimens
+2023,2018,"Enterobacter spp.",14771,9,2-1,14,isolate_count,national_all_specimens
+2023,2018,Other,37946,,2-1,14,isolate_count,national_all_specimens
+2023,2018,TOTAL,530854,,2-1,14,isolate_count,national_all_specimens
+2023,2019,"Escherichia coli",196627,1,2-1,14,isolate_count,national_all_specimens
+2023,2019,"Klebsiella pneumoniae",75159,2,2-1,14,isolate_count,national_all_specimens
+2023,2019,"Staphylococcus aureus",67845,3,2-1,14,isolate_count,national_all_specimens
+2023,2019,"Pseudomonas aeruginosa",58003,4,2-1,14,isolate_count,national_all_specimens
+2023,2019,"Enterococcus faecalis",35592,5,2-1,14,isolate_count,national_all_specimens
+2023,2019,"Proteus spp.",32990,6,2-1,14,isolate_count,national_all_specimens
+2023,2019,"Enterococcus faecium",18865,7,2-1,14,isolate_count,national_all_specimens
+2023,2019,"Acinetobacter baumannii",18514,8,2-1,14,isolate_count,national_all_specimens
+2023,2019,"Citrobacter spp.",14657,10,2-1,14,isolate_count,national_all_specimens
+2023,2019,"Enterobacter spp.",16231,9,2-1,14,isolate_count,national_all_specimens
+2023,2019,Other,41850,,2-1,14,isolate_count,national_all_specimens
+2023,2019,TOTAL,576333,,2-1,14,isolate_count,national_all_specimens
+2023,2020,"Escherichia coli",197465,1,2-1,14,isolate_count,national_all_specimens
+2023,2020,"Klebsiella pneumoniae",76966,2,2-1,14,isolate_count,national_all_specimens
+2023,2020,"Staphylococcus aureus",66852,3,2-1,14,isolate_count,national_all_specimens
+2023,2020,"Pseudomonas aeruginosa",57360,4,2-1,14,isolate_count,national_all_specimens
+2023,2020,"Enterococcus faecalis",36470,5,2-1,14,isolate_count,national_all_specimens
+2023,2020,"Proteus spp.",33758,6,2-1,14,isolate_count,national_all_specimens
+2023,2020,"Enterococcus faecium",20068,7,2-1,14,isolate_count,national_all_specimens
+2023,2020,"Acinetobacter baumannii",18179,8,2-1,14,isolate_count,national_all_specimens
+2023,2020,"Citrobacter spp.",15033,10,2-1,14,isolate_count,national_all_specimens
+2023,2020,"Enterobacter spp.",16039,9,2-1,14,isolate_count,national_all_specimens
+2023,2020,Other,40517,,2-1,14,isolate_count,national_all_specimens
+2023,2020,TOTAL,578707,,2-1,14,isolate_count,national_all_specimens
+2023,2021,"Escherichia coli",189648,1,2-1,14,isolate_count,national_all_specimens
+2023,2021,"Klebsiella pneumoniae",75910,2,2-1,14,isolate_count,national_all_specimens
+2023,2021,"Staphylococcus aureus",63469,3,2-1,14,isolate_count,national_all_specimens
+2023,2021,"Pseudomonas aeruginosa",57532,4,2-1,14,isolate_count,national_all_specimens
+2023,2021,"Enterococcus faecalis",36468,5,2-1,14,isolate_count,national_all_specimens
+2023,2021,"Proteus spp.",33942,6,2-1,14,isolate_count,national_all_specimens
+2023,2021,"Enterococcus faecium",20789,7,2-1,14,isolate_count,national_all_specimens
+2023,2021,"Acinetobacter baumannii",17220,8,2-1,14,isolate_count,national_all_specimens
+2023,2021,"Citrobacter spp.",15017,10,2-1,14,isolate_count,national_all_specimens
+2023,2021,"Enterobacter spp.",15468,9,2-1,14,isolate_count,national_all_specimens
+2023,2021,Other,38324,,2-1,14,isolate_count,national_all_specimens
+2023,2021,TOTAL,563787,,2-1,14,isolate_count,national_all_specimens
+2023,2022,"Escherichia coli",197971,1,2-1,14,isolate_count,national_all_specimens
+2023,2022,"Klebsiella pneumoniae",81860,2,2-1,14,isolate_count,national_all_specimens
+2023,2022,"Staphylococcus aureus",66690,3,2-1,14,isolate_count,national_all_specimens
+2023,2022,"Pseudomonas aeruginosa",61434,4,2-1,14,isolate_count,national_all_specimens
+2023,2022,"Enterococcus faecalis",39516,5,2-1,14,isolate_count,national_all_specimens
+2023,2022,"Proteus spp.",36411,6,2-1,14,isolate_count,national_all_specimens
+2023,2022,"Enterococcus faecium",24628,7,2-1,14,isolate_count,national_all_specimens
+2023,2022,"Acinetobacter baumannii",18671,8,2-1,14,isolate_count,national_all_specimens
+2023,2022,"Citrobacter spp.",16284,9,2-1,14,isolate_count,national_all_specimens
+2023,2022,"Enterobacter spp.",16229,10,2-1,14,isolate_count,national_all_specimens
+2023,2022,Other,40527,,2-1,14,isolate_count,national_all_specimens
+2023,2022,TOTAL,600221,,2-1,14,isolate_count,national_all_specimens
+2023,2023,"Escherichia coli",217437,1,2-1,14,isolate_count,national_all_specimens
+2023,2023,"Klebsiella pneumoniae",87015,2,2-1,14,isolate_count,national_all_specimens
+2023,2023,"Staphylococcus aureus",70482,3,2-1,14,isolate_count,national_all_specimens
+2023,2023,"Pseudomonas aeruginosa",64004,4,2-1,14,isolate_count,national_all_specimens
+2023,2023,"Enterococcus faecalis",42396,5,2-1,14,isolate_count,national_all_specimens
+2023,2023,"Proteus spp.",38451,6,2-1,14,isolate_count,national_all_specimens
+2023,2023,"Enterococcus faecium",27148,7,2-1,14,isolate_count,national_all_specimens
+2023,2023,"Acinetobacter baumannii",18450,8,2-1,14,isolate_count,national_all_specimens
+2023,2023,"Citrobacter spp.",16989,9,2-1,14,isolate_count,national_all_specimens
+2023,2023,"Enterobacter spp.",16919,10,2-1,14,isolate_count,national_all_specimens
+2023,2023,Other,46084,,2-1,14,isolate_count,national_all_specimens
+2023,2023,TOTAL,645375,,2-1,14,isolate_count,national_all_specimens
+2022,2017,"Escherichia coli",167903,1,2-1,15,isolate_count,national_all_specimens
+2022,2017,"Staphylococcus aureus",103042,2,2-1,15,isolate_count,national_all_specimens
+2022,2017,"Klebsiella pneumoniae",63519,3,2-1,15,isolate_count,national_all_specimens
+2022,2017,"Pseudomonas aeruginosa",51649,4,2-1,15,isolate_count,national_all_specimens
+2022,2017,"Enterococcus faecalis",29672,5,2-1,15,isolate_count,national_all_specimens
+2022,2017,"Proteus spp.",26862,6,2-1,15,isolate_count,national_all_specimens
+2022,2017,"Enterococcus faecium",14320,9,2-1,15,isolate_count,national_all_specimens
+2022,2017,"Acinetobacter calcoaceticus-baumannii complex",21244,7,2-1,15,isolate_count,national_all_specimens
+2022,2017,"Enterobacter spp.",19667,8,2-1,15,isolate_count,national_all_specimens
+2022,2017,"Citrobacter spp.",12624,10,2-1,15,isolate_count,national_all_specimens
+2022,2017,Other,33881,,2-1,15,isolate_count,national_all_specimens
+2022,2017,TOTAL,544383,,2-1,15,isolate_count,national_all_specimens
+2022,2018,"Escherichia coli",175589,1,2-1,15,isolate_count,national_all_specimens
+2022,2018,"Staphylococcus aureus",111318,2,2-1,15,isolate_count,national_all_specimens
+2022,2018,"Klebsiella pneumoniae",67013,3,2-1,15,isolate_count,national_all_specimens
+2022,2018,"Pseudomonas aeruginosa",53836,4,2-1,15,isolate_count,national_all_specimens
+2022,2018,"Enterococcus faecalis",32419,5,2-1,15,isolate_count,national_all_specimens
+2022,2018,"Proteus spp.",28856,6,2-1,15,isolate_count,national_all_specimens
+2022,2018,"Enterococcus faecium",17169,9,2-1,15,isolate_count,national_all_specimens
+2022,2018,"Acinetobacter calcoaceticus-baumannii complex",20827,7,2-1,15,isolate_count,national_all_specimens
+2022,2018,"Enterobacter spp.",19778,8,2-1,15,isolate_count,national_all_specimens
+2022,2018,"Citrobacter spp.",13370,10,2-1,15,isolate_count,national_all_specimens
+2022,2018,Other,35548,,2-1,15,isolate_count,national_all_specimens
+2022,2018,TOTAL,575723,,2-1,15,isolate_count,national_all_specimens
+2022,2019,"Escherichia coli",186086,1,2-1,15,isolate_count,national_all_specimens
+2022,2019,"Staphylococcus aureus",119826,2,2-1,15,isolate_count,national_all_specimens
+2022,2019,"Klebsiella pneumoniae",71455,3,2-1,15,isolate_count,national_all_specimens
+2022,2019,"Pseudomonas aeruginosa",56399,4,2-1,15,isolate_count,national_all_specimens
+2022,2019,"Enterococcus faecalis",35856,5,2-1,15,isolate_count,national_all_specimens
+2022,2019,"Proteus spp.",31626,6,2-1,15,isolate_count,national_all_specimens
+2022,2019,"Enterococcus faecium",19008,9,2-1,15,isolate_count,national_all_specimens
+2022,2019,"Acinetobacter calcoaceticus-baumannii complex",21329,7,2-1,15,isolate_count,national_all_specimens
+2022,2019,"Enterobacter spp.",20902,8,2-1,15,isolate_count,national_all_specimens
+2022,2019,"Citrobacter spp.",13996,10,2-1,15,isolate_count,national_all_specimens
+2022,2019,Other,40067,,2-1,15,isolate_count,national_all_specimens
+2022,2019,TOTAL,616550,,2-1,15,isolate_count,national_all_specimens
+2022,2020,"Escherichia coli",184374,1,2-1,15,isolate_count,national_all_specimens
+2022,2020,"Staphylococcus aureus",115870,2,2-1,15,isolate_count,national_all_specimens
+2022,2020,"Klebsiella pneumoniae",71776,3,2-1,15,isolate_count,national_all_specimens
+2022,2020,"Pseudomonas aeruginosa",55159,4,2-1,15,isolate_count,national_all_specimens
+2022,2020,"Enterococcus faecalis",35593,5,2-1,15,isolate_count,national_all_specimens
+2022,2020,"Proteus spp.",31571,6,2-1,15,isolate_count,national_all_specimens
+2022,2020,"Enterococcus faecium",19855,9,2-1,15,isolate_count,national_all_specimens
+2022,2020,"Acinetobacter calcoaceticus-baumannii complex",20347,8,2-1,15,isolate_count,national_all_specimens
+2022,2020,"Enterobacter spp.",20632,7,2-1,15,isolate_count,national_all_specimens
+2022,2020,"Citrobacter spp.",14178,10,2-1,15,isolate_count,national_all_specimens
+2022,2020,Other,37312,,2-1,15,isolate_count,national_all_specimens
+2022,2020,TOTAL,606667,,2-1,15,isolate_count,national_all_specimens
+2022,2021,"Escherichia coli",176092,1,2-1,15,isolate_count,national_all_specimens
+2022,2021,"Staphylococcus aureus",108824,2,2-1,15,isolate_count,national_all_specimens
+2022,2021,"Klebsiella pneumoniae",70441,3,2-1,15,isolate_count,national_all_specimens
+2022,2021,"Pseudomonas aeruginosa",55127,4,2-1,15,isolate_count,national_all_specimens
+2022,2021,"Enterococcus faecalis",35314,5,2-1,15,isolate_count,national_all_specimens
+2022,2021,"Proteus spp.",31566,6,2-1,15,isolate_count,national_all_specimens
+2022,2021,"Enterococcus faecium",20037,7,2-1,15,isolate_count,national_all_specimens
+2022,2021,"Acinetobacter calcoaceticus-baumannii complex",19725,9,2-1,15,isolate_count,national_all_specimens
+2022,2021,"Enterobacter spp.",19777,8,2-1,15,isolate_count,national_all_specimens
+2022,2021,"Citrobacter spp.",14028,10,2-1,15,isolate_count,national_all_specimens
+2022,2021,Other,34955,,2-1,15,isolate_count,national_all_specimens
+2022,2021,TOTAL,585886,,2-1,15,isolate_count,national_all_specimens
+2022,2022,"Escherichia coli",182277,1,2-1,15,isolate_count,national_all_specimens
+2022,2022,"Staphylococcus aureus",112326,2,2-1,15,isolate_count,national_all_specimens
+2022,2022,"Klebsiella pneumoniae",75498,3,2-1,15,isolate_count,national_all_specimens
+2022,2022,"Pseudomonas aeruginosa",57287,4,2-1,15,isolate_count,national_all_specimens
+2022,2022,"Enterococcus faecalis",37980,5,2-1,15,isolate_count,national_all_specimens
+2022,2022,"Proteus spp.",33663,6,2-1,15,isolate_count,national_all_specimens
+2022,2022,"Enterococcus faecium",23626,7,2-1,15,isolate_count,national_all_specimens
+2022,2022,"Acinetobacter calcoaceticus-baumannii complex",21451,8,2-1,15,isolate_count,national_all_specimens
+2022,2022,"Enterobacter spp.",20597,9,2-1,15,isolate_count,national_all_specimens
+2022,2022,"Citrobacter spp.",15068,10,2-1,15,isolate_count,national_all_specimens
+2022,2022,Other,36919,,2-1,15,isolate_count,national_all_specimens
+2022,2022,TOTAL,616692,,2-1,15,isolate_count,national_all_specimens
