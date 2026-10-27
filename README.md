@@ -120,3 +120,9 @@ Homepage reorganized with six anchor-navigation sections: Overview, AR, AU, HAI,
 - Existing `ar-explorer.html` and `antibiogram.html` remain source-CSV-powered. The One Health Lab is an exploratory client-side data analysis application, not a pre-calculated national cross-domain surveillance finding.
 
 **Limits:** This completes the main public-page restructuring and shared interaction patterns, NOT full AU/HAI data extraction or clinical validation. AU/HAI manifest entries currently do not exist, so those explorers will display no verified numerical data. No backend authentication, regulated cloud database, domain-specific indicator conversions, or end-to-end mobile/browser QA is claimed. Those remain separate deployment/data tasks.
+
+## Progressive RWD and accessibility stage 1 (2026-10-27)
+
+Added `css/responsive-accessibility.css` and `js/accessibility-enhancements.js` and loaded them from the seven main website pages (homepage, AR Explorer, Antibiogram, AU Explorer, HAI Explorer, One Health Lab and dataset admin). Features: keyboard-visible skip-to-main link, unified focus-visible treatment, assistive-tech status region, accessible labels and keyboard focus for horizontal chart/table scroll containers, header semantics on static tables, narrow-screen stacking, and reduced-motion preference. The original navigation structure, dashboard graphics, styles at desktop widths, and CSV values were not intentionally altered.
+
+**Not a WCAG AA certification:** Needs live visual regression on desktop/mobile, keyboard-only audit, screen-reader assessment, focus management for changing/dynamic tables, contrast checks, touch target and 200%/400% zoom tests, and formal applicable Taiwan accessibility audit. No independent browser QA claimed.
