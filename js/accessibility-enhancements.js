@@ -22,6 +22,28 @@ function setup(){
   const hint=document.createElement('p');hint.className='a11y-scroll-hint';hint.textContent='提示：在手機可左右滑動表格；使用鍵盤時可先聚焦圖表，再以方向鍵捲動。';el.parentNode.insertBefore(hint,el);
  });
  document.querySelectorAll('button').forEach(b=>{if(!b.getAttribute('type')&&!b.closest('form'))b.type='button'});
+ // Support dynamically created surveillance tables and filter updates without altering visual styling.
+ const enrich=()=>{
+  document.querySelectorAll('main table').forEach(t=>{
+   if(!t.querySelector('caption')){let c=document.createElement('caption');c.className='a11y-visually-hidden';c.textContent='監測資料明細表';t.prepend(c)}
+   t.querySelectorAll('thead th').forEach(th=>{if(!th.hasAttribute('scope'))th.scope='col'});
+  });
+ };
+ let pending=false;
+ const observer=new MutationObserver(mutations=>{
+  if(pending)return;
+  if(!mutations.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches?.('table')||n.querySelector?.('table')))))return;
+  pending=true;queueMicrotask(()=>{pending=false;enrich()});
+ });
+ observer.observe(main,{childList:true,subtree:true});
+ const announcer=document.getElementById('a11y-announcer');
+ document.addEventListener('change',e=>{
+  const control=e.target;
+  if(!control.matches?.('select'))return;
+  const title=control.closest('label')?.textContent?.trim()||'資料篩選';
+  if(announcer)announcer.textContent=title+'，已更新選擇';
+ });
+
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
 })();
