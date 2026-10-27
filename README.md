@@ -78,3 +78,11 @@ Sources: https://www.who.int/initiatives/glass ; https://www.ecdc.europa.eu/en/d
 5. Merge PR into main. GitHub Pages serves the new static JSON/CSV; the homepage displays the catalog without code edits.
 
 **Security and product limitations:** This is NOT a hosted SQL database, live REST service, authenticated multiuser CMS, server-side reviewer workflow or automatic GitHub publishing. There is no private authentication in static GitHub Pages. ZIP generation uses the public JSZip CDN; if that library is unavailable individual CSV and JSON export still works. Browser-imported information is not uploaded to an application server. The publishing release history and approvals must be maintained in GitHub PR reviews and protected branch settings. The catalog is for exploratory read-only display; existing AR/AU/HAI charts are not yet automatically bound to the generic catalog. Formal clinical surveillance QA needs additional domain-specific validation.
+
+## Automatic public data refresh (2026-10-27)
+
+The dashboard loads `js/live-data.js` and fetches `data/published/manifest.json` with cache-busting. The user may check immediately or enable/disable a 5-minute check while the page is visible. The module displays versioned public data and a generic year/value chart. Publishing is still a controlled GitHub PR merge to `main`; there is no public write API or unreviewed data publishing. It does not overwrite AR/AU/HAI legacy chart datasets automatically.
+
+The seed release `national-isolates-edition-snapshots` v1 contains previously verified national clinical-isolate totals from the respective 2022, 2023 and 2024 report editions. These values must not be treated as a cohort-standardized longitudinal series.
+
+To publish a new dataset, add immutable `data/published/<dataset-id>-<version>.json` files containing `{metadata, records}`, and insert a `status: published` entry with `id`, `version`, `published_at`, and `data_path` to the manifest. Keep prior versions as separate paths. Test the update on a feature branch; merge after source and schema review. Do not overwrite historical version files. Browser refresh checks the manifest only and fetches the selected JSON. Existing AU, HAI and antibiogram visualizations will need domain-specific adapters for direct replacement; the generic chart currently supports year/value datasets.
