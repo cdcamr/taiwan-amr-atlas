@@ -146,3 +146,9 @@ Added `css/responsive-accessibility.css` and `js/accessibility-enhancements.js` 
 - Moved the validated 2024 susceptibility matrix immediately below the data scope/source labels. The complete matrix is visible on initial load without selecting filters.
 - Consolidated organism, antimicrobial class, drug and display settings inside a native collapsible details/summary control below the heatmap, reducing visual overload while retaining all filtering, CSV export, source drill-down, search, and accessibility controls.
 - Kept existing S% color bands, 2024 validated source CSV, and all analytical computations unchanged. Wrapped the modern matrix section inside the original `<main>` for clearer landmark semantics. Repository structure and document markers checked; live-browser interaction QA still required.
+
+## Line/bar display filtering (2026-10-27)
+
+- AR Explorer: added chart-type dropdown (bar or line) while retaining edition, monitoring year, organism and count/share filters; selecting line when in organism ranking switches to longitudinal trend, avoiding misleading lines connecting unrelated categories. The generated SVG uses year-order points for trends, and the selected chart type persists in shareable URL state. CSV export remains consistent with selected data scope.
+- Antibiogram: added heatmap/bar-chart display dropdown. Bar charts plot *susceptible percentage S%* for the currently selected organism/drug/class dataset, and clicking a bar provides tested n and source; the existing heatmap remains the default. Neither display derives R% or fills missing data.
+- JS syntax was checked in the GitHub-fetched page scripts; full browser and mobile verification is still outstanding.
