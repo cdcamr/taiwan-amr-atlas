@@ -59,3 +59,22 @@ The homepage embeds `one-health-lab.html`, which is also directly accessible as 
 **Important limitations:** This is an analysis engine, not a verified cross-sector national statistical result. It does not yet provide an automated data ingestion integration, inferential panel models, epidemiologic adjustment, or verified international cross-country ranks. Users are responsible for ensuring matched units, independence assumptions and surveillance definition comparability. CSV parsing is intentionally simple and supports unquoted numeric fields and simple unit names, not complex quoted CSV with embedded commas. Results are exploratory.
 
 Sources: https://www.who.int/initiatives/glass ; https://www.ecdc.europa.eu/en/data-dashboards-and-databases ; https://infarm.apps.fao.org/ ; https://amu.woah.org/amu-system-portal .
+
+## Data Studio: public secondary-data maintenance (2026-10-27)
+
+- `data-studio.html`: local-browser import, CSV parsing including quoted fields, structural checks, duplicate key checks, basic numerator/denominator/percentage checks, 100-row preview, single-record edits, CSV and JSON export, draft ZIP publishing package.
+- `data/published/manifest.json`: read-only public release catalog; dashboard dynamically lists only items with `status: "published"` and a `data_path` like `data/published/your-dataset.json`.
+- Home dashboard now has a Data Studio entry and an automatic public catalog explorer. Published JSON datasets contain `metadata` and `records` arrays.
+
+### Releasing data with review
+
+1. Prepare officially published, aggregate public data only. Import CSV into Data Studio and resolve validation errors; confirm the source documentation, numerator, denominator, units and indicator logic manually.
+2. Export the draft ZIP. It contains CSV, JSON and `manifest-entry.json`. This package is **not automatically pushed** and is **not officially approved**.
+3. In GitHub, use a feature branch and Pull Request to add `data/published/<dataset-id>.csv` and `data/published/<dataset-id>.json`.
+4. After human review, add/update `data/published/manifest.json` with an entry such as:
+```json
+{"id":"sample-amr-2024","domain":"AR","version":"v1","status":"published","data_path":"data/published/sample-amr-2024.json","csv_path":"data/published/sample-amr-2024.csv"}
+```
+5. Merge PR into main. GitHub Pages serves the new static JSON/CSV; the homepage displays the catalog without code edits.
+
+**Security and product limitations:** This is NOT a hosted SQL database, live REST service, authenticated multiuser CMS, server-side reviewer workflow or automatic GitHub publishing. There is no private authentication in static GitHub Pages. ZIP generation uses the public JSZip CDN; if that library is unavailable individual CSV and JSON export still works. Browser-imported information is not uploaded to an application server. The publishing release history and approvals must be maintained in GitHub PR reviews and protected branch settings. The catalog is for exploratory read-only display; existing AR/AU/HAI charts are not yet automatically bound to the generic catalog. Formal clinical surveillance QA needs additional domain-specific validation.
