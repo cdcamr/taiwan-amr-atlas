@@ -28,7 +28,7 @@ function filterGrid(){
  const selected=drug.value;
  document.querySelectorAll('#abModernGrid .ab-row').forEach(row=>{
   let headers=row.querySelectorAll('.ab-label'), cells=row.querySelectorAll('.ab-cell,.ab-empty');
-  if(selected==='all'){row.hidden=false;[...headers,...cells].forEach(x=>x.hidden=false);return}
+  if(selected==='all'){row.hidden=false;row.style.removeProperty('--cols');[...headers,...cells].forEach(x=>x.hidden=false);return}
   if(headers.length>1){
    [...headers].slice(1).forEach(h=>{h.hidden=h.textContent.trim()!==selected});
    row.style.setProperty('--cols','1');
