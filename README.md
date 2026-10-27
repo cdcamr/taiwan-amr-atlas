@@ -134,3 +134,9 @@ Added `css/responsive-accessibility.css` and `js/accessibility-enhancements.js` 
 - Added AR Explorer labelled chart/table result regions and an AR screen-reader announcement after filtering/view changes.
 - Added coarse-pointer target sizing for main navigation/portals and Antibiogram cells, plus visible focus for scrollable chart/table containers.
 - No original CSV surveillance values, six homepage sections, or chart indicator semantics were changed. Browser-level keyboard/screen-reader tests and full WCAG AA audit remain pending.
+
+## Linked domain filters (2026-10-27)
+
+- `antibiogram.html`: added a CSV-driven single-antibiotic dropdown, which is constrained by available organism and class combinations, and an explicit 2024-only validated year selector. The heatmap, result count, filtered CSV export, reset, URL state, and accessibility status support respond to the new filter. No 2022/2023 full matrix data has been invented or merged.
+- `ar-explorer.html`: added an analysis data-type selector that opens the separately sourced Antibiogram page when susceptibility (S%) is requested, rather than treating AR isolate counts as drug susceptibility/resistance percentages.
+- Existing data files, site taxonomy, theme, and RWD/AA assets unchanged. Live browser and mobile integration QA remains pending.
