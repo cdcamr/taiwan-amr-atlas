@@ -96,3 +96,7 @@ To publish a new dataset, add immutable `data/published/<dataset-id>-<version>.j
 ## Dataset version administration (2026-10-27)
 
 `dataset-admin.html` provides a read-only catalog browser for the approved manifest and six legacy public AR CSV collections. Supports domain/status/text search, per-dataset versions, field inventory, record counts, in-browser text filtering, paged previews (20/50/100), data provenance, raw download and manual refresh. Links were added to the homepage and Data Studio. Approved versions are read from `data/published/manifest.json`. The six legacy collections are explicitly maintained as an inventory because their files predate the approved registry. This is not an authenticated backend, automatic version history reconstruction, editable SQL database, or approval console. No AU/HAI files are represented until their officially verified datasets are published.
+
+## Public homepage information architecture (2026-10-27)
+
+Homepage reorganized with six anchor-navigation sections: Overview, AR, AU, HAI, One Health, Global Resources. Existing interactive controls remain mounted and are relocated within thematic sections on page initialization. Dataset admin remains accessible through the single header entry; other management panels are removed from the public homepage. The One Health lab is linked rather than embedded, reducing page length. Responsive navigation and spacing improved. Browser-level visual and functional regression still requires verification after GitHub Pages deployment.
