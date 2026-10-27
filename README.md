@@ -126,3 +126,11 @@ Homepage reorganized with six anchor-navigation sections: Overview, AR, AU, HAI,
 Added `css/responsive-accessibility.css` and `js/accessibility-enhancements.js` and loaded them from the seven main website pages (homepage, AR Explorer, Antibiogram, AU Explorer, HAI Explorer, One Health Lab and dataset admin). Features: keyboard-visible skip-to-main link, unified focus-visible treatment, assistive-tech status region, accessible labels and keyboard focus for horizontal chart/table scroll containers, header semantics on static tables, narrow-screen stacking, and reduced-motion preference. The original navigation structure, dashboard graphics, styles at desktop widths, and CSV values were not intentionally altered.
 
 **Not a WCAG AA certification:** Needs live visual regression on desktop/mobile, keyboard-only audit, screen-reader assessment, focus management for changing/dynamic tables, contrast checks, touch target and 200%/400% zoom tests, and formal applicable Taiwan accessibility audit. No independent browser QA claimed.
+
+## Progressive RWD/Accessibility stage 2 (2026-10-27)
+
+- Expanded shared `js/accessibility-enhancements.js` to add accessible captions/column scopes to dynamically inserted surveillance tables and speak select updates to a polite status region.
+- Added `role=region` and keyboard navigation explanations to the Antibiogram matrix, `role=status`/`aria-live` to result count and detailed cell values.
+- Added AR Explorer labelled chart/table result regions and an AR screen-reader announcement after filtering/view changes.
+- Added coarse-pointer target sizing for main navigation/portals and Antibiogram cells, plus visible focus for scrollable chart/table containers.
+- No original CSV surveillance values, six homepage sections, or chart indicator semantics were changed. Browser-level keyboard/screen-reader tests and full WCAG AA audit remain pending.
