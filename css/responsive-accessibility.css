@@ -1,0 +1,26 @@
+/* Progressive RWD & accessibility enhancements. Existing desktop components remain unchanged. */
+html{scroll-padding-top:6rem}
+.a11y-skip{position:fixed;left:12px;top:10px;z-index:99999;transform:translateY(-180%);padding:11px 17px!important;border-radius:9px!important;background:#fff!important;color:#123c28!important;border:2px solid #123c28!important;font-weight:750;text-decoration:none}
+.a11y-skip:focus,.a11y-skip:focus-visible{transform:translateY(0)}
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #f5c84b!important;outline-offset:3px!important}
+:where(button,select,input,textarea){max-width:100%}
+.a11y-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.a11y-scroll-hint{font-size:12px;opacity:.84;margin:6px 0 10px}
+:where(.gridwrap,.ab-scroller,.wide,.scroll,.results){max-width:100%;overscroll-behavior-x:contain}
+:where(img,svg,canvas,video){max-width:100%}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media(max-width:800px){
+  :where(main){min-width:0}
+  :where(.panels,.comparegrid){grid-template-columns:minmax(0,1fr)!important}
+  :where(.panel,.card,.domain-portal){min-width:0}
+  :where(.hubfilters,.filters){max-width:100%}
+}
+@media(max-width:480px){
+  :where(body){overflow-wrap:anywhere}
+  :where(header){padding-left:14px!important;padding-right:14px!important}
+  :where(main){padding-left:14px!important;padding-right:14px!important}
+  :where(.cards,.stats){grid-template-columns:minmax(0,1fr)!important}
+  :where(.hubfilters label,.filters label){min-width:0!important}
+  :where(.hubfilters select,.filters select){max-width:100%}
+}
+@media(min-width:801px){.a11y-scroll-hint{display:none}}
