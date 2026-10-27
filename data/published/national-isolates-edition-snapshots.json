@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "dataset_id": "national-isolates-edition-snapshots",
+    "domain": "AR",
+    "version": "v1",
+    "source_title": "Taiwan AMR surveillance annual reports 2022, 2023, 2024 (each edition Table 2-1)",
+    "source_url": "https://www.cdc.gov.tw/",
+    "generated_at": "2026-10-27",
+    "status": "published",
+    "count": 3,
+    "notes": "Edition snapshot series, NOT equivalent standardized surveillance cohort; changes in participating hospitals."
+  },
+  "records": [
+    {
+      "year": 2022,
+      "sector": "AR",
+      "indicator": "national_isolate_count",
+      "value": 616692,
+      "unit": "isolates",
+      "source_page": "2022 report Table 2-1 p15",
+      "report_edition": "2022"
+    },
+    {
+      "year": 2023,
+      "sector": "AR",
+      "indicator": "national_isolate_count",
+      "value": 645375,
+      "unit": "isolates",
+      "source_page": "2023 report Table 2-1 p14",
+      "report_edition": "2023"
+    },
+    {
+      "year": 2024,
+      "sector": "AR",
+      "indicator": "national_isolate_count",
+      "value": 755833,
+      "unit": "isolates",
+      "source_page": "2024 report Table 2-1 p14",
+      "report_edition": "2024"
+    }
+  ]
+}
