@@ -100,3 +100,11 @@ To publish a new dataset, add immutable `data/published/<dataset-id>-<version>.j
 ## Public homepage information architecture (2026-10-27)
 
 Homepage reorganized with six anchor-navigation sections: Overview, AR, AU, HAI, One Health, Global Resources. Existing interactive controls remain mounted and are relocated within thematic sections on page initialization. Dataset admin remains accessible through the single header entry; other management panels are removed from the public homepage. The One Health lab is linked rather than embedded, reducing page length. Responsive navigation and spacing improved. Browser-level visual and functional regression still requires verification after GitHub Pages deployment.
+
+## UX optimization phase 1 (2026-10-27)
+
+- Added `ar-explorer.html`, a dedicated national AR surveillance Explorer fed directly by `data/ar_isolates_by_edition_2017_2024.csv` (216 Table 2-1 rows spanning three report editions).
+- Unified controls: report edition, surveillance year, organism, count/share indicator. Interactive ranking, six-year retrospective trend, tabular view, accessible bar tooltips, export of current result, and shareable URL query state. All share the same source and data rules.
+- Simplified the AR section of the homepage to a portal card linking to AR Explorer, separate Antibiogram, and source CSV. Legacy in-page AR elements remain in DOM for compatibility but are hidden in the public layout; no source values were changed.
+- Future phases: full domain-level visualization templates for AU/HAI, per-chart source/version drawers, interactive antibiotic sensitivity matrix, accessibility/mobile regression, and validated dataset schema migration.
+- **Validation status:** repository file presence and linking verified. Live GitHub Pages rendering, JavaScript runtime, and browser/mobile visual checks not yet independently verified.
