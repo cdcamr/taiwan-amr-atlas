@@ -24,3 +24,11 @@ html{scroll-padding-top:6rem}
   :where(.hubfilters select,.filters select){max-width:100%}
 }
 @media(min-width:801px){.a11y-scroll-hint{display:none}}
+
+/* Compact touch target and focus enhancements; no data-chart color changes. */
+@media (pointer:coarse){
+  :where(.site-sections a,.portal-quicklinks a,.domain-portal a){min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  :where(.ab-cell,.heat){min-height:52px}
+}
+:where(.ab-scroller,.gridwrap,.scroll,.results):focus-visible{outline:3px solid #f5c84b!important;outline-offset:-3px!important}
+@media print{.a11y-skip,.admin-entry,.bot,.chat{display:none!important}}
