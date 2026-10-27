@@ -160,3 +160,10 @@ Added `css/responsive-accessibility.css` and `js/accessibility-enhancements.js` 
 ## Antibiogram cross-year comparison phase (2026-10-27)
 
 `antibiogram.html` now progressively loads `js/antibiogram-trend-compare.js`, which creates a separate 2022-2024 susceptible percentage trend panel from `data/antibiogram_trends_2022_2024.csv`. It includes 7 organism-drug combinations / 21 narrative-derived yearly results, supporting up to four selected series, line and grouped-bar chart modes, source table with report figure/printed page/extraction method, CSV filtered export and shareable comparison state. The existing heatmap remains the default primary visual. Trend values are S% (not R%); `tested_n` is blank, so no confidence intervals are calculated or invented. Source CSV files and static publication metadata unchanged. Inline and new JavaScript syntax verified; real browser/RWD and assistive-technology functional verification still pending.
+
+## Data quality next phase (2026-10-27)
+
+- `js/antibiogram-trend-compare.js` validates required year/organism/antibiotic/percentage/source fields, percentage bounds (0–100), national scope and duplicate organism-drug-year rows before plotting; invalid rows are excluded and counted in a visible status note.
+- Trend chart and data table now identify evidence as an annual-report narrative transcription with no available tested denominator (`tested_n`), so confidence intervals and significance claims are not computed.
+- `antibiogram.html` adds an explicit provenance note distinguishing the 2024 chart-derived, denominator-bearing heatmap from the separate three-year narrative-derived trend comparison. This phase introduces no new source data and changes no original data values.
+- JavaScript syntax and linked HTML references were checked. This is not a completed browser regression or WCAG AA audit.
