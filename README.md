@@ -140,3 +140,9 @@ Added `css/responsive-accessibility.css` and `js/accessibility-enhancements.js` 
 - `antibiogram.html`: added a CSV-driven single-antibiotic dropdown, which is constrained by available organism and class combinations, and an explicit 2024-only validated year selector. The heatmap, result count, filtered CSV export, reset, URL state, and accessibility status support respond to the new filter. No 2022/2023 full matrix data has been invented or merged.
 - `ar-explorer.html`: added an analysis data-type selector that opens the separately sourced Antibiogram page when susceptibility (S%) is requested, rather than treating AR isolate counts as drug susceptibility/resistance percentages.
 - Existing data files, site taxonomy, theme, and RWD/AA assets unchanged. Live browser and mobile integration QA remains pending.
+
+## Antibiogram heatmap-first UX (2026-10-27)
+
+- Moved the validated 2024 susceptibility matrix immediately below the data scope/source labels. The complete matrix is visible on initial load without selecting filters.
+- Consolidated organism, antimicrobial class, drug and display settings inside a native collapsible details/summary control below the heatmap, reducing visual overload while retaining all filtering, CSV export, source drill-down, search, and accessibility controls.
+- Kept existing S% color bands, 2024 validated source CSV, and all analytical computations unchanged. Wrapped the modern matrix section inside the original `<main>` for clearer landmark semantics. Repository structure and document markers checked; live-browser interaction QA still required.
