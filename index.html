@@ -125,5 +125,7 @@ const world=document.getElementById('worldHeading');if(world){let el=world.close
 let extras=[...main.children].filter(x=>x!==mount&&!x.classList?.contains('site-sections')&&!x.classList?.contains('navtabs'));
 for(let el of extras){if(el.classList?.contains('section')&&el.textContent.includes('OPEN DATA')){let next=el.nextElementSibling;pick(el,'global');if(next?.classList.contains('panel'))pick(next,'global')}else if(el.classList?.contains('footer'))pick(el,'global')}
 const navtabs=main.querySelector('.navtabs');if(navtabs)navtabs.hidden=true;
+for(const el of [...main.children]){if(el===mount||el.classList?.contains('site-sections')||el===navtabs)continue;if(el.classList?.contains('footer'))pick(el,'global');else if(el.classList?.contains('section')&&el.textContent.includes('EXPLORE · AU'))el.remove();else pick(el,'overview')}
+
 })();
 </script></body></html>
