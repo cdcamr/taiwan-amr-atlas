@@ -1,5 +1,16 @@
 {
-  "schema_version": "1.0",
-  "description": "Public approved secondary surveillance dataset catalog. Draft data is not listed.",
-  "datasets": []
+  "schema_version": "1.1",
+  "description": "Approved public secondary surveillance release catalog. Only status=published datasets are visible.",
+  "updated_at": "2026-10-27",
+  "datasets": [
+    {
+      "id": "national-isolates-edition-snapshots",
+      "domain": "AR",
+      "version": "v1",
+      "status": "published",
+      "published_at": "2026-10-27",
+      "data_path": "data/published/national-isolates-edition-snapshots.json",
+      "source_title": "2022–2024 Taiwan AMR annual report Table 2-1 totals"
+    }
+  ]
 }
