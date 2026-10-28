@@ -167,3 +167,7 @@ Added `css/responsive-accessibility.css` and `js/accessibility-enhancements.js` 
 - Trend chart and data table now identify evidence as an annual-report narrative transcription with no available tested denominator (`tested_n`), so confidence intervals and significance claims are not computed.
 - `antibiogram.html` adds an explicit provenance note distinguishing the 2024 chart-derived, denominator-bearing heatmap from the separate three-year narrative-derived trend comparison. This phase introduces no new source data and changes no original data values.
 - JavaScript syntax and linked HTML references were checked. This is not a completed browser regression or WCAG AA audit.
+
+## Report-source specimen and onset filters (2026-10-28)
+
+The stacked organism share chart in AR Explorer now uses **2024 report edition** verified table values for 2019-2024 from Tables 2-2-1 (blood, printed p16), 2-2-2 (urine, p18), 2-2-3 (sputum, p20), 2-2-4 (pus/wound, p22), 2-2-5 (stool, p24), 2-3-1 (CO, p26), and 2-3-2 (HO, p28). The 504-row source `data/ar_2024_report_specimen_onset.csv` contains exactly 42 years/strata, whose organism counts + Other equal the published TOTAL in every case. Specimen and onset selectors are **mutually exclusive**: source report does not supply their cross-product in these tables. Earlier report editions retain national all-specimen data. Shared site data, Antibiogram, and original chart were not changed. Rollback snapshots in `history/`. Browser QA remains pending.
