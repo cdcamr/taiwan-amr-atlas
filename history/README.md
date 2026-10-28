@@ -24,3 +24,10 @@
 - 本次新增檔案：`js/ar-report-figure21.js`，並於 `ar-explorer.html` 加入引用及圖表樣式。
 - 回復步驟：將上述歷程檔完整內容複製覆蓋根目錄 `ar-explorer.html`，並停止載入新增腳本即可；原始 CSV 沒有修改。
 - 此為依使用者提供的圖 2-1 試作之前十大菌種比例堆疊圖，色票為圖片近似取樣；待與年報可編輯原始圖表確認精確色碼。資料採各菌種數除以同年全部分離株數，因此十菌合計不到 100%，未將剩餘比例錯誤補值。
+
+## 2026-10-28：堆疊圖檢體／感染來源控制與懸浮資訊
+
+- 完整回復檔：`history/ar-explorer-before-specimen-origin-filters-20261028.html`、`history/ar-report-figure21-before-filters-20261028.js`。
+- 本次調整：移除堆疊圖可見的「圖 2-1」字樣；新增檢體、感染來源篩選選單及滑鼠／鍵盤／點擊圖形數值詳情，原始 CSV 不變。
+- 現有 `data/ar_isolates_by_edition_2017_2024.csv` 僅具 `national_all_specimens`，且無獨立 CO、HO 欄位；因此不得把總數作為特定檢體或感染來源值。新增下拉選單僅展示已核對的「全部檢體／合併感染來源」選項；待正式資料匯入才能擴充。
+- 回復方式：分別將上述兩份歷程檔覆蓋根目錄 `ar-explorer.html` 及 `js/ar-report-figure21.js` 並提交；其他資料不需更動。
