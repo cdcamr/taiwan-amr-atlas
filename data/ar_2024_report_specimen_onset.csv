@@ -1,0 +1,505 @@
+report_edition,year,stratum,organism,isolates,source_table,printed_page
+2024,2019,blood,"Escherichia coli",30984,2-2-1,16
+2024,2019,blood,"Klebsiella pneumoniae",11527,2-2-1,16
+2024,2019,blood,"Staphylococcus aureus",9948,2-2-1,16
+2024,2019,blood,"Pseudomonas aeruginosa",3951,2-2-1,16
+2024,2019,blood,"Enterococcus faecium",2273,2-2-1,16
+2024,2019,blood,"Proteus spp.",2306,2-2-1,16
+2024,2019,blood,"Enterococcus faecalis",2542,2-2-1,16
+2024,2019,blood,"Enterobacter spp.",1923,2-2-1,16
+2024,2019,blood,"Acinetobacter baumannii",1570,2-2-1,16
+2024,2019,blood,"Serratia spp.",1039,2-2-1,16
+2024,2019,blood,"Other",3046,2-2-1,16
+2024,2019,blood,"TOTAL",71109,2-2-1,16
+2024,2020,blood,"Escherichia coli",30945,2-2-1,16
+2024,2020,blood,"Klebsiella pneumoniae",11921,2-2-1,16
+2024,2020,blood,"Staphylococcus aureus",10116,2-2-1,16
+2024,2020,blood,"Pseudomonas aeruginosa",3999,2-2-1,16
+2024,2020,blood,"Enterococcus faecium",2438,2-2-1,16
+2024,2020,blood,"Proteus spp.",2515,2-2-1,16
+2024,2020,blood,"Enterococcus faecalis",2632,2-2-1,16
+2024,2020,blood,"Enterobacter spp.",1832,2-2-1,16
+2024,2020,blood,"Acinetobacter baumannii",1648,2-2-1,16
+2024,2020,blood,"Serratia spp.",1112,2-2-1,16
+2024,2020,blood,"Other",2850,2-2-1,16
+2024,2020,blood,"TOTAL",72008,2-2-1,16
+2024,2021,blood,"Escherichia coli",32585,2-2-1,16
+2024,2021,blood,"Klebsiella pneumoniae",12928,2-2-1,16
+2024,2021,blood,"Staphylococcus aureus",11211,2-2-1,16
+2024,2021,blood,"Pseudomonas aeruginosa",4457,2-2-1,16
+2024,2021,blood,"Enterococcus faecium",2759,2-2-1,16
+2024,2021,blood,"Proteus spp.",2901,2-2-1,16
+2024,2021,blood,"Enterococcus faecalis",2877,2-2-1,16
+2024,2021,blood,"Enterobacter spp.",1915,2-2-1,16
+2024,2021,blood,"Acinetobacter baumannii",1719,2-2-1,16
+2024,2021,blood,"Serratia spp.",1197,2-2-1,16
+2024,2021,blood,"Other",3227,2-2-1,16
+2024,2021,blood,"TOTAL",77776,2-2-1,16
+2024,2022,blood,"Escherichia coli",31622,2-2-1,16
+2024,2022,blood,"Klebsiella pneumoniae",13308,2-2-1,16
+2024,2022,blood,"Staphylococcus aureus",11820,2-2-1,16
+2024,2022,blood,"Pseudomonas aeruginosa",4394,2-2-1,16
+2024,2022,blood,"Enterococcus faecium",3278,2-2-1,16
+2024,2022,blood,"Proteus spp.",3029,2-2-1,16
+2024,2022,blood,"Enterococcus faecalis",3106,2-2-1,16
+2024,2022,blood,"Enterobacter spp.",1996,2-2-1,16
+2024,2022,blood,"Acinetobacter baumannii",1914,2-2-1,16
+2024,2022,blood,"Serratia spp.",1239,2-2-1,16
+2024,2022,blood,"Other",3482,2-2-1,16
+2024,2022,blood,"TOTAL",79188,2-2-1,16
+2024,2023,blood,"Escherichia coli",35443,2-2-1,16
+2024,2023,blood,"Klebsiella pneumoniae",14269,2-2-1,16
+2024,2023,blood,"Staphylococcus aureus",12495,2-2-1,16
+2024,2023,blood,"Pseudomonas aeruginosa",4812,2-2-1,16
+2024,2023,blood,"Enterococcus faecium",3743,2-2-1,16
+2024,2023,blood,"Proteus spp.",3192,2-2-1,16
+2024,2023,blood,"Enterococcus faecalis",3305,2-2-1,16
+2024,2023,blood,"Enterobacter spp.",2170,2-2-1,16
+2024,2023,blood,"Acinetobacter baumannii",1903,2-2-1,16
+2024,2023,blood,"Serratia spp.",1318,2-2-1,16
+2024,2023,blood,"Other",4021,2-2-1,16
+2024,2023,blood,"TOTAL",86671,2-2-1,16
+2024,2024,blood,"Escherichia coli",37929,2-2-1,16
+2024,2024,blood,"Klebsiella pneumoniae",14503,2-2-1,16
+2024,2024,blood,"Staphylococcus aureus",13073,2-2-1,16
+2024,2024,blood,"Pseudomonas aeruginosa",5156,2-2-1,16
+2024,2024,blood,"Enterococcus faecium",3860,2-2-1,16
+2024,2024,blood,"Proteus spp.",3617,2-2-1,16
+2024,2024,blood,"Enterococcus faecalis",3413,2-2-1,16
+2024,2024,blood,"Enterobacter spp.",2267,2-2-1,16
+2024,2024,blood,"Acinetobacter baumannii",1791,2-2-1,16
+2024,2024,blood,"Serratia spp.",1436,2-2-1,16
+2024,2024,blood,"Other",3692,2-2-1,16
+2024,2024,blood,"TOTAL",90737,2-2-1,16
+2024,2019,urine,"Escherichia coli",159181,2-2-2,18
+2024,2019,urine,"Klebsiella pneumoniae",31318,2-2-2,18
+2024,2019,urine,"Enterococcus faecalis",23141,2-2-2,18
+2024,2019,urine,"Proteus spp.",20593,2-2-2,18
+2024,2019,urine,"Pseudomonas aeruginosa",20507,2-2-2,18
+2024,2019,urine,"Enterococcus faecium",11865,2-2-2,18
+2024,2019,urine,"Citrobacter spp.",6369,2-2-2,18
+2024,2019,urine,"Staphylococcus aureus",4827,2-2-2,18
+2024,2019,urine,"Morganella spp.",5586,2-2-2,18
+2024,2019,urine,"Acinetobacter baumannii",3422,2-2-2,18
+2024,2019,urine,"Other",9102,2-2-2,18
+2024,2019,urine,"TOTAL",295911,2-2-2,18
+2024,2020,urine,"Escherichia coli",157283,2-2-2,18
+2024,2020,urine,"Klebsiella pneumoniae",32529,2-2-2,18
+2024,2020,urine,"Enterococcus faecalis",22709,2-2-2,18
+2024,2020,urine,"Proteus spp.",20985,2-2-2,18
+2024,2020,urine,"Pseudomonas aeruginosa",20493,2-2-2,18
+2024,2020,urine,"Enterococcus faecium",12630,2-2-2,18
+2024,2020,urine,"Citrobacter spp.",6461,2-2-2,18
+2024,2020,urine,"Staphylococcus aureus",5015,2-2-2,18
+2024,2020,urine,"Morganella spp.",5342,2-2-2,18
+2024,2020,urine,"Acinetobacter baumannii",3634,2-2-2,18
+2024,2020,urine,"Other",9796,2-2-2,18
+2024,2020,urine,"TOTAL",296877,2-2-2,18
+2024,2021,urine,"Escherichia coli",163488,2-2-2,18
+2024,2021,urine,"Klebsiella pneumoniae",36171,2-2-2,18
+2024,2021,urine,"Enterococcus faecalis",24287,2-2-2,18
+2024,2021,urine,"Proteus spp.",23219,2-2-2,18
+2024,2021,urine,"Pseudomonas aeruginosa",22711,2-2-2,18
+2024,2021,urine,"Enterococcus faecium",13989,2-2-2,18
+2024,2021,urine,"Citrobacter spp.",7113,2-2-2,18
+2024,2021,urine,"Staphylococcus aureus",5575,2-2-2,18
+2024,2021,urine,"Morganella spp.",5977,2-2-2,18
+2024,2021,urine,"Acinetobacter baumannii",3785,2-2-2,18
+2024,2021,urine,"Other",10888,2-2-2,18
+2024,2021,urine,"TOTAL",317203,2-2-2,18
+2024,2022,urine,"Escherichia coli",167613,2-2-2,18
+2024,2022,urine,"Klebsiella pneumoniae",38215,2-2-2,18
+2024,2022,urine,"Enterococcus faecalis",26296,2-2-2,18
+2024,2022,urine,"Proteus spp.",24704,2-2-2,18
+2024,2022,urine,"Pseudomonas aeruginosa",22922,2-2-2,18
+2024,2022,urine,"Enterococcus faecium",16685,2-2-2,18
+2024,2022,urine,"Citrobacter spp.",7655,2-2-2,18
+2024,2022,urine,"Staphylococcus aureus",5927,2-2-2,18
+2024,2022,urine,"Morganella spp.",6343,2-2-2,18
+2024,2022,urine,"Acinetobacter baumannii",3814,2-2-2,18
+2024,2022,urine,"Other",11586,2-2-2,18
+2024,2022,urine,"TOTAL",331760,2-2-2,18
+2024,2023,urine,"Escherichia coli",191319,2-2-2,18
+2024,2023,urine,"Klebsiella pneumoniae",41689,2-2-2,18
+2024,2023,urine,"Enterococcus faecalis",29665,2-2-2,18
+2024,2023,urine,"Proteus spp.",27027,2-2-2,18
+2024,2023,urine,"Pseudomonas aeruginosa",24099,2-2-2,18
+2024,2023,urine,"Enterococcus faecium",19783,2-2-2,18
+2024,2023,urine,"Citrobacter spp.",8105,2-2-2,18
+2024,2023,urine,"Staphylococcus aureus",6544,2-2-2,18
+2024,2023,urine,"Morganella spp.",6680,2-2-2,18
+2024,2023,urine,"Acinetobacter baumannii",3765,2-2-2,18
+2024,2023,urine,"Other",12269,2-2-2,18
+2024,2023,urine,"TOTAL",370945,2-2-2,18
+2024,2024,urine,"Escherichia coli",198631,2-2-2,18
+2024,2024,urine,"Klebsiella pneumoniae",43439,2-2-2,18
+2024,2024,urine,"Enterococcus faecalis",29886,2-2-2,18
+2024,2024,urine,"Proteus spp.",28230,2-2-2,18
+2024,2024,urine,"Pseudomonas aeruginosa",25369,2-2-2,18
+2024,2024,urine,"Enterococcus faecium",19690,2-2-2,18
+2024,2024,urine,"Citrobacter spp.",8160,2-2-2,18
+2024,2024,urine,"Staphylococcus aureus",6878,2-2-2,18
+2024,2024,urine,"Morganella spp.",6557,2-2-2,18
+2024,2024,urine,"Acinetobacter baumannii",3584,2-2-2,18
+2024,2024,urine,"Other",12189,2-2-2,18
+2024,2024,urine,"TOTAL",382613,2-2-2,18
+2024,2019,sputum,"Pseudomonas aeruginosa",24367,2-2-3,20
+2024,2019,sputum,"Klebsiella pneumoniae",24935,2-2-3,20
+2024,2019,sputum,"Staphylococcus aureus",15038,2-2-3,20
+2024,2019,sputum,"Escherichia coli",9853,2-2-3,20
+2024,2019,sputum,"Acinetobacter baumannii",11270,2-2-3,20
+2024,2019,sputum,"Serratia spp.",3970,2-2-3,20
+2024,2019,sputum,"Proteus spp.",3048,2-2-3,20
+2024,2019,sputum,"Enterobacter spp.",4406,2-2-3,20
+2024,2019,sputum,"Haemophilus influenzae",2807,2-2-3,20
+2024,2019,sputum,"Citrobacter spp.",1246,2-2-3,20
+2024,2019,sputum,"Other",4306,2-2-3,20
+2024,2019,sputum,"TOTAL",105246,2-2-3,20
+2024,2020,sputum,"Pseudomonas aeruginosa",23478,2-2-3,20
+2024,2020,sputum,"Klebsiella pneumoniae",24348,2-2-3,20
+2024,2020,sputum,"Staphylococcus aureus",14165,2-2-3,20
+2024,2020,sputum,"Escherichia coli",9613,2-2-3,20
+2024,2020,sputum,"Acinetobacter baumannii",10610,2-2-3,20
+2024,2020,sputum,"Serratia spp.",4011,2-2-3,20
+2024,2020,sputum,"Proteus spp.",3149,2-2-3,20
+2024,2020,sputum,"Enterobacter spp.",4197,2-2-3,20
+2024,2020,sputum,"Haemophilus influenzae",1777,2-2-3,20
+2024,2020,sputum,"Citrobacter spp.",1259,2-2-3,20
+2024,2020,sputum,"Other",3513,2-2-3,20
+2024,2020,sputum,"TOTAL",100120,2-2-3,20
+2024,2021,sputum,"Pseudomonas aeruginosa",26206,2-2-3,20
+2024,2021,sputum,"Klebsiella pneumoniae",25840,2-2-3,20
+2024,2021,sputum,"Staphylococcus aureus",14144,2-2-3,20
+2024,2021,sputum,"Escherichia coli",10076,2-2-3,20
+2024,2021,sputum,"Acinetobacter baumannii",10505,2-2-3,20
+2024,2021,sputum,"Serratia spp.",4341,2-2-3,20
+2024,2021,sputum,"Proteus spp.",3858,2-2-3,20
+2024,2021,sputum,"Enterobacter spp.",3992,2-2-3,20
+2024,2021,sputum,"Haemophilus influenzae",1402,2-2-3,20
+2024,2021,sputum,"Citrobacter spp.",1408,2-2-3,20
+2024,2021,sputum,"Other",3277,2-2-3,20
+2024,2021,sputum,"TOTAL",105049,2-2-3,20
+2024,2022,sputum,"Pseudomonas aeruginosa",28611,2-2-3,20
+2024,2022,sputum,"Klebsiella pneumoniae",28739,2-2-3,20
+2024,2022,sputum,"Staphylococcus aureus",15731,2-2-3,20
+2024,2022,sputum,"Escherichia coli",11330,2-2-3,20
+2024,2022,sputum,"Acinetobacter baumannii",11383,2-2-3,20
+2024,2022,sputum,"Serratia spp.",4767,2-2-3,20
+2024,2022,sputum,"Proteus spp.",4267,2-2-3,20
+2024,2022,sputum,"Enterobacter spp.",4466,2-2-3,20
+2024,2022,sputum,"Haemophilus influenzae",1189,2-2-3,20
+2024,2022,sputum,"Citrobacter spp.",1540,2-2-3,20
+2024,2022,sputum,"Other",3728,2-2-3,20
+2024,2022,sputum,"TOTAL",115751,2-2-3,20
+2024,2023,sputum,"Pseudomonas aeruginosa",31109,2-2-3,20
+2024,2023,sputum,"Klebsiella pneumoniae",32170,2-2-3,20
+2024,2023,sputum,"Staphylococcus aureus",17400,2-2-3,20
+2024,2023,sputum,"Escherichia coli",12557,2-2-3,20
+2024,2023,sputum,"Acinetobacter baumannii",12220,2-2-3,20
+2024,2023,sputum,"Serratia spp.",5107,2-2-3,20
+2024,2023,sputum,"Proteus spp.",4505,2-2-3,20
+2024,2023,sputum,"Enterobacter spp.",4983,2-2-3,20
+2024,2023,sputum,"Haemophilus influenzae",2773,2-2-3,20
+2024,2023,sputum,"Citrobacter spp.",1806,2-2-3,20
+2024,2023,sputum,"Other",4485,2-2-3,20
+2024,2023,sputum,"TOTAL",129115,2-2-3,20
+2024,2024,sputum,"Pseudomonas aeruginosa",33662,2-2-3,20
+2024,2024,sputum,"Klebsiella pneumoniae",33519,2-2-3,20
+2024,2024,sputum,"Staphylococcus aureus",18718,2-2-3,20
+2024,2024,sputum,"Escherichia coli",13896,2-2-3,20
+2024,2024,sputum,"Acinetobacter baumannii",11361,2-2-3,20
+2024,2024,sputum,"Serratia spp.",5775,2-2-3,20
+2024,2024,sputum,"Proteus spp.",5313,2-2-3,20
+2024,2024,sputum,"Enterobacter spp.",5244,2-2-3,20
+2024,2024,sputum,"Haemophilus influenzae",3840,2-2-3,20
+2024,2024,sputum,"Citrobacter spp.",1818,2-2-3,20
+2024,2024,sputum,"Other",4746,2-2-3,20
+2024,2024,sputum,"TOTAL",137892,2-2-3,20
+2024,2019,wound,"Staphylococcus aureus",38546,2-2-4,22
+2024,2019,wound,"Escherichia coli",15815,2-2-4,22
+2024,2019,wound,"Klebsiella pneumoniae",11643,2-2-4,22
+2024,2019,wound,"Pseudomonas aeruginosa",11422,2-2-4,22
+2024,2019,wound,"Enterococcus faecalis",8335,2-2-4,22
+2024,2019,wound,"Proteus spp.",6005,2-2-4,22
+2024,2019,wound,"Enterococcus faecium",2816,2-2-4,22
+2024,2019,wound,"Enterobacter spp.",3344,2-2-4,22
+2024,2019,wound,"Citrobacter spp.",2610,2-2-4,22
+2024,2019,wound,"Acinetobacter baumannii",3001,2-2-4,22
+2024,2019,wound,"Other",6004,2-2-4,22
+2024,2019,wound,"TOTAL",109541,2-2-4,22
+2024,2020,wound,"Staphylococcus aureus",37686,2-2-4,22
+2024,2020,wound,"Escherichia coli",15871,2-2-4,22
+2024,2020,wound,"Klebsiella pneumoniae",11823,2-2-4,22
+2024,2020,wound,"Pseudomonas aeruginosa",11257,2-2-4,22
+2024,2020,wound,"Enterococcus faecalis",8296,2-2-4,22
+2024,2020,wound,"Proteus spp.",6106,2-2-4,22
+2024,2020,wound,"Enterococcus faecium",2947,2-2-4,22
+2024,2020,wound,"Enterobacter spp.",3232,2-2-4,22
+2024,2020,wound,"Citrobacter spp.",2516,2-2-4,22
+2024,2020,wound,"Acinetobacter baumannii",3089,2-2-4,22
+2024,2020,wound,"Other",5611,2-2-4,22
+2024,2020,wound,"TOTAL",108434,2-2-4,22
+2024,2021,wound,"Staphylococcus aureus",38096,2-2-4,22
+2024,2021,wound,"Escherichia coli",17365,2-2-4,22
+2024,2021,wound,"Klebsiella pneumoniae",12538,2-2-4,22
+2024,2021,wound,"Pseudomonas aeruginosa",11975,2-2-4,22
+2024,2021,wound,"Enterococcus faecalis",9101,2-2-4,22
+2024,2021,wound,"Proteus spp.",6983,2-2-4,22
+2024,2021,wound,"Enterococcus faecium",3480,2-2-4,22
+2024,2021,wound,"Enterobacter spp.",3377,2-2-4,22
+2024,2021,wound,"Citrobacter spp.",2735,2-2-4,22
+2024,2021,wound,"Acinetobacter baumannii",3245,2-2-4,22
+2024,2021,wound,"Other",5899,2-2-4,22
+2024,2021,wound,"TOTAL",114794,2-2-4,22
+2024,2022,wound,"Staphylococcus aureus",36907,2-2-4,22
+2024,2022,wound,"Escherichia coli",17264,2-2-4,22
+2024,2022,wound,"Klebsiella pneumoniae",12404,2-2-4,22
+2024,2022,wound,"Pseudomonas aeruginosa",12180,2-2-4,22
+2024,2022,wound,"Enterococcus faecalis",9302,2-2-4,22
+2024,2022,wound,"Proteus spp.",7033,2-2-4,22
+2024,2022,wound,"Enterococcus faecium",3810,2-2-4,22
+2024,2022,wound,"Enterobacter spp.",3275,2-2-4,22
+2024,2022,wound,"Citrobacter spp.",2809,2-2-4,22
+2024,2022,wound,"Acinetobacter baumannii",3313,2-2-4,22
+2024,2022,wound,"Other",6184,2-2-4,22
+2024,2022,wound,"TOTAL",114481,2-2-4,22
+2024,2023,wound,"Staphylococcus aureus",40235,2-2-4,22
+2024,2023,wound,"Escherichia coli",18739,2-2-4,22
+2024,2023,wound,"Klebsiella pneumoniae",13322,2-2-4,22
+2024,2023,wound,"Pseudomonas aeruginosa",12639,2-2-4,22
+2024,2023,wound,"Enterococcus faecalis",10047,2-2-4,22
+2024,2023,wound,"Proteus spp.",7446,2-2-4,22
+2024,2023,wound,"Enterococcus faecium",4233,2-2-4,22
+2024,2023,wound,"Enterobacter spp.",3575,2-2-4,22
+2024,2023,wound,"Citrobacter spp.",3171,2-2-4,22
+2024,2023,wound,"Acinetobacter baumannii",3319,2-2-4,22
+2024,2023,wound,"Other",6777,2-2-4,22
+2024,2023,wound,"TOTAL",123503,2-2-4,22
+2024,2024,wound,"Staphylococcus aureus",43300,2-2-4,22
+2024,2024,wound,"Escherichia coli",19248,2-2-4,22
+2024,2024,wound,"Klebsiella pneumoniae",13473,2-2-4,22
+2024,2024,wound,"Pseudomonas aeruginosa",12992,2-2-4,22
+2024,2024,wound,"Enterococcus faecalis",9913,2-2-4,22
+2024,2024,wound,"Proteus spp.",7781,2-2-4,22
+2024,2024,wound,"Enterococcus faecium",4195,2-2-4,22
+2024,2024,wound,"Enterobacter spp.",3508,2-2-4,22
+2024,2024,wound,"Citrobacter spp.",3208,2-2-4,22
+2024,2024,wound,"Acinetobacter baumannii",3091,2-2-4,22
+2024,2024,wound,"Other",6901,2-2-4,22
+2024,2024,wound,"TOTAL",127610,2-2-4,22
+2024,2019,stool,"Salmonella spp.",3480,2-2-5,24
+2024,2019,stool,"Enterococcus faecium",1155,2-2-5,24
+2024,2019,stool,"Pseudomonas aeruginosa",438,2-2-5,24
+2024,2019,stool,"Klebsiella pneumoniae",472,2-2-5,24
+2024,2019,stool,"Escherichia coli",158,2-2-5,24
+2024,2019,stool,"Staphylococcus aureus",302,2-2-5,24
+2024,2019,stool,"Enterococcus faecalis",38,2-2-5,24
+2024,2019,stool,"Acinetobacter baumannii",19,2-2-5,24
+2024,2019,stool,"Shigella spp.",80,2-2-5,24
+2024,2019,stool,"Citrobacter spp.",7,2-2-5,24
+2024,2019,stool,"Other",64,2-2-5,24
+2024,2019,stool,"TOTAL",6213,2-2-5,24
+2024,2020,stool,"Salmonella spp.",3833,2-2-5,24
+2024,2020,stool,"Enterococcus faecium",1536,2-2-5,24
+2024,2020,stool,"Pseudomonas aeruginosa",411,2-2-5,24
+2024,2020,stool,"Klebsiella pneumoniae",506,2-2-5,24
+2024,2020,stool,"Escherichia coli",195,2-2-5,24
+2024,2020,stool,"Staphylococcus aureus",287,2-2-5,24
+2024,2020,stool,"Enterococcus faecalis",80,2-2-5,24
+2024,2020,stool,"Acinetobacter baumannii",26,2-2-5,24
+2024,2020,stool,"Shigella spp.",95,2-2-5,24
+2024,2020,stool,"Citrobacter spp.",15,2-2-5,24
+2024,2020,stool,"Other",54,2-2-5,24
+2024,2020,stool,"TOTAL",7038,2-2-5,24
+2024,2021,stool,"Salmonella spp.",3687,2-2-5,24
+2024,2021,stool,"Enterococcus faecium",1529,2-2-5,24
+2024,2021,stool,"Pseudomonas aeruginosa",459,2-2-5,24
+2024,2021,stool,"Klebsiella pneumoniae",485,2-2-5,24
+2024,2021,stool,"Escherichia coli",282,2-2-5,24
+2024,2021,stool,"Staphylococcus aureus",320,2-2-5,24
+2024,2021,stool,"Enterococcus faecalis",82,2-2-5,24
+2024,2021,stool,"Acinetobacter baumannii",31,2-2-5,24
+2024,2021,stool,"Shigella spp.",82,2-2-5,24
+2024,2021,stool,"Citrobacter spp.",18,2-2-5,24
+2024,2021,stool,"Other",73,2-2-5,24
+2024,2021,stool,"TOTAL",7048,2-2-5,24
+2024,2022,stool,"Salmonella spp.",3870,2-2-5,24
+2024,2022,stool,"Enterococcus faecium",1712,2-2-5,24
+2024,2022,stool,"Pseudomonas aeruginosa",456,2-2-5,24
+2024,2022,stool,"Klebsiella pneumoniae",484,2-2-5,24
+2024,2022,stool,"Escherichia coli",279,2-2-5,24
+2024,2022,stool,"Staphylococcus aureus",296,2-2-5,24
+2024,2022,stool,"Enterococcus faecalis",121,2-2-5,24
+2024,2022,stool,"Acinetobacter baumannii",42,2-2-5,24
+2024,2022,stool,"Shigella spp.",65,2-2-5,24
+2024,2022,stool,"Citrobacter spp.",10,2-2-5,24
+2024,2022,stool,"Other",84,2-2-5,24
+2024,2022,stool,"TOTAL",7419,2-2-5,24
+2024,2023,stool,"Salmonella spp.",4580,2-2-5,24
+2024,2023,stool,"Enterococcus faecium",1713,2-2-5,24
+2024,2023,stool,"Pseudomonas aeruginosa",588,2-2-5,24
+2024,2023,stool,"Klebsiella pneumoniae",465,2-2-5,24
+2024,2023,stool,"Escherichia coli",335,2-2-5,24
+2024,2023,stool,"Staphylococcus aureus",311,2-2-5,24
+2024,2023,stool,"Enterococcus faecalis",129,2-2-5,24
+2024,2023,stool,"Acinetobacter baumannii",42,2-2-5,24
+2024,2023,stool,"Shigella spp.",49,2-2-5,24
+2024,2023,stool,"Citrobacter spp.",12,2-2-5,24
+2024,2023,stool,"Other",86,2-2-5,24
+2024,2023,stool,"TOTAL",8310,2-2-5,24
+2024,2024,stool,"Salmonella spp.",3581,2-2-5,24
+2024,2024,stool,"Enterococcus faecium",1576,2-2-5,24
+2024,2024,stool,"Pseudomonas aeruginosa",589,2-2-5,24
+2024,2024,stool,"Klebsiella pneumoniae",567,2-2-5,24
+2024,2024,stool,"Escherichia coli",338,2-2-5,24
+2024,2024,stool,"Staphylococcus aureus",252,2-2-5,24
+2024,2024,stool,"Enterococcus faecalis",119,2-2-5,24
+2024,2024,stool,"Acinetobacter baumannii",56,2-2-5,24
+2024,2024,stool,"Shigella spp.",42,2-2-5,24
+2024,2024,stool,"Citrobacter spp.",22,2-2-5,24
+2024,2024,stool,"Other",85,2-2-5,24
+2024,2024,stool,"TOTAL",7227,2-2-5,24
+2024,2019,co,"Escherichia coli",183459,2-3-1,26
+2024,2019,co,"Klebsiella pneumoniae",58656,2-3-1,26
+2024,2019,co,"Staphylococcus aureus",59851,2-3-1,26
+2024,2019,co,"Pseudomonas aeruginosa",39989,2-3-1,26
+2024,2019,co,"Enterococcus faecalis",29149,2-3-1,26
+2024,2019,co,"Proteus spp.",26500,2-3-1,26
+2024,2019,co,"Citrobacter spp.",9858,2-3-1,26
+2024,2019,co,"Enterococcus faecium",7930,2-3-1,26
+2024,2019,co,"Enterobacter spp.",8453,2-3-1,26
+2024,2019,co,"Acinetobacter baumannii",8465,2-3-1,26
+2024,2019,co,"Other",30124,2-3-1,26
+2024,2019,co,"TOTAL",462434,2-3-1,26
+2024,2020,co,"Escherichia coli",182556,2-3-1,26
+2024,2020,co,"Klebsiella pneumoniae",59162,2-3-1,26
+2024,2020,co,"Staphylococcus aureus",58037,2-3-1,26
+2024,2020,co,"Pseudomonas aeruginosa",39074,2-3-1,26
+2024,2020,co,"Enterococcus faecalis",29017,2-3-1,26
+2024,2020,co,"Proteus spp.",27018,2-3-1,26
+2024,2020,co,"Citrobacter spp.",9871,2-3-1,26
+2024,2020,co,"Enterococcus faecium",8215,2-3-1,26
+2024,2020,co,"Enterobacter spp.",8141,2-3-1,26
+2024,2020,co,"Acinetobacter baumannii",8116,2-3-1,26
+2024,2020,co,"Other",28016,2-3-1,26
+2024,2020,co,"TOTAL",457223,2-3-1,26
+2024,2021,co,"Escherichia coli",190663,2-3-1,26
+2024,2021,co,"Klebsiella pneumoniae",63464,2-3-1,26
+2024,2021,co,"Staphylococcus aureus",59501,2-3-1,26
+2024,2021,co,"Pseudomonas aeruginosa",42947,2-3-1,26
+2024,2021,co,"Enterococcus faecalis",31279,2-3-1,26
+2024,2021,co,"Proteus spp.",29939,2-3-1,26
+2024,2021,co,"Citrobacter spp.",10714,2-3-1,26
+2024,2021,co,"Enterococcus faecium",8916,2-3-1,26
+2024,2021,co,"Enterobacter spp.",8552,2-3-1,26
+2024,2021,co,"Acinetobacter baumannii",8446,2-3-1,26
+2024,2021,co,"Other",28264,2-3-1,26
+2024,2021,co,"TOTAL",482685,2-3-1,26
+2024,2022,co,"Escherichia coli",196107,2-3-1,26
+2024,2022,co,"Klebsiella pneumoniae",67718,2-3-1,26
+2024,2022,co,"Staphylococcus aureus",60466,2-3-1,26
+2024,2022,co,"Pseudomonas aeruginosa",45081,2-3-1,26
+2024,2022,co,"Enterococcus faecalis",33494,2-3-1,26
+2024,2022,co,"Proteus spp.",31622,2-3-1,26
+2024,2022,co,"Citrobacter spp.",11389,2-3-1,26
+2024,2022,co,"Enterococcus faecium",10248,2-3-1,26
+2024,2022,co,"Enterobacter spp.",8701,2-3-1,26
+2024,2022,co,"Acinetobacter baumannii",8712,2-3-1,26
+2024,2022,co,"Other",29781,2-3-1,26
+2024,2022,co,"TOTAL",503319,2-3-1,26
+2024,2023,co,"Escherichia coli",222449,2-3-1,26
+2024,2023,co,"Klebsiella pneumoniae",74187,2-3-1,26
+2024,2023,co,"Staphylococcus aureus",66991,2-3-1,26
+2024,2023,co,"Pseudomonas aeruginosa",48259,2-3-1,26
+2024,2023,co,"Enterococcus faecalis",37732,2-3-1,26
+2024,2023,co,"Proteus spp.",34477,2-3-1,26
+2024,2023,co,"Citrobacter spp.",12513,2-3-1,26
+2024,2023,co,"Enterococcus faecium",12213,2-3-1,26
+2024,2023,co,"Enterobacter spp.",9701,2-3-1,26
+2024,2023,co,"Acinetobacter baumannii",9462,2-3-1,26
+2024,2023,co,"Other",35775,2-3-1,26
+2024,2023,co,"TOTAL",563759,2-3-1,26
+2024,2024,co,"Escherichia coli",230769,2-3-1,26
+2024,2024,co,"Klebsiella pneumoniae",77693,2-3-1,26
+2024,2024,co,"Staphylococcus aureus",71427,2-3-1,26
+2024,2024,co,"Pseudomonas aeruginosa",51743,2-3-1,26
+2024,2024,co,"Enterococcus faecalis",37763,2-3-1,26
+2024,2024,co,"Proteus spp.",36472,2-3-1,26
+2024,2024,co,"Citrobacter spp.",12789,2-3-1,26
+2024,2024,co,"Enterococcus faecium",12470,2-3-1,26
+2024,2024,co,"Enterobacter spp.",9778,2-3-1,26
+2024,2024,co,"Acinetobacter baumannii",9101,2-3-1,26
+2024,2024,co,"Other",35197,2-3-1,26
+2024,2024,co,"TOTAL",585202,2-3-1,26
+2024,2019,ho,"Klebsiella pneumoniae",21499,2-3-2,28
+2024,2019,ho,"Escherichia coli",22322,2-3-2,28
+2024,2019,ho,"Pseudomonas aeruginosa",21551,2-3-2,28
+2024,2019,ho,"Enterococcus faecium",11985,2-3-2,28
+2024,2019,ho,"Staphylococcus aureus",12971,2-3-2,28
+2024,2019,ho,"Acinetobacter baumannii",11227,2-3-2,28
+2024,2019,ho,"Enterococcus faecalis",8369,2-3-2,28
+2024,2019,ho,"Enterobacter spp.",6352,2-3-2,28
+2024,2019,ho,"Proteus spp.",4855,2-3-2,28
+2024,2019,ho,"Serratia spp.",3626,2-3-2,28
+2024,2019,ho,"Other",5124,2-3-2,28
+2024,2019,ho,"TOTAL",129881,2-3-2,28
+2024,2020,ho,"Klebsiella pneumoniae",22000,2-3-2,28
+2024,2020,ho,"Escherichia coli",21475,2-3-2,28
+2024,2020,ho,"Pseudomonas aeruginosa",21405,2-3-2,28
+2024,2020,ho,"Enterococcus faecium",12938,2-3-2,28
+2024,2020,ho,"Staphylococcus aureus",12691,2-3-2,28
+2024,2020,ho,"Acinetobacter baumannii",11173,2-3-2,28
+2024,2020,ho,"Enterococcus faecalis",8407,2-3-2,28
+2024,2020,ho,"Enterobacter spp.",6117,2-3-2,28
+2024,2020,ho,"Proteus spp.",4876,2-3-2,28
+2024,2020,ho,"Serratia spp.",3757,2-3-2,28
+2024,2020,ho,"Other",4766,2-3-2,28
+2024,2020,ho,"TOTAL",129605,2-3-2,28
+2024,2021,ho,"Klebsiella pneumoniae",24168,2-3-2,28
+2024,2021,ho,"Escherichia coli",22630,2-3-2,28
+2024,2021,ho,"Pseudomonas aeruginosa",23511,2-3-2,28
+2024,2021,ho,"Enterococcus faecium",14506,2-3-2,28
+2024,2021,ho,"Staphylococcus aureus",13097,2-3-2,28
+2024,2021,ho,"Acinetobacter baumannii",11281,2-3-2,28
+2024,2021,ho,"Enterococcus faecalis",8935,2-3-2,28
+2024,2021,ho,"Enterobacter spp.",6080,2-3-2,28
+2024,2021,ho,"Proteus spp.",5695,2-3-2,28
+2024,2021,ho,"Serratia spp.",4093,2-3-2,28
+2024,2021,ho,"Other",5336,2-3-2,28
+2024,2021,ho,"TOTAL",139332,2-3-2,28
+2024,2022,ho,"Klebsiella pneumoniae",25100,2-3-2,28
+2024,2022,ho,"Escherichia coli",22870,2-3-2,28
+2024,2022,ho,"Pseudomonas aeruginosa",24394,2-3-2,28
+2024,2022,ho,"Enterococcus faecium",17010,2-3-2,28
+2024,2022,ho,"Staphylococcus aureus",13229,2-3-2,28
+2024,2022,ho,"Acinetobacter baumannii",12338,2-3-2,28
+2024,2022,ho,"Enterococcus faecalis",9215,2-3-2,28
+2024,2022,ho,"Enterobacter spp.",6270,2-3-2,28
+2024,2022,ho,"Proteus spp.",6045,2-3-2,28
+2024,2022,ho,"Serratia spp.",4422,2-3-2,28
+2024,2022,ho,"Other",5568,2-3-2,28
+2024,2022,ho,"TOTAL",146461,2-3-2,28
+2024,2023,ho,"Klebsiella pneumoniae",27587,2-3-2,28
+2024,2023,ho,"Escherichia coli",25140,2-3-2,28
+2024,2023,ho,"Pseudomonas aeruginosa",25727,2-3-2,28
+2024,2023,ho,"Enterococcus faecium",19194,2-3-2,28
+2024,2023,ho,"Staphylococcus aureus",13615,2-3-2,28
+2024,2023,ho,"Acinetobacter baumannii",12625,2-3-2,28
+2024,2023,ho,"Enterococcus faecalis",9871,2-3-2,28
+2024,2023,ho,"Enterobacter spp.",7072,2-3-2,28
+2024,2023,ho,"Proteus spp.",6195,2-3-2,28
+2024,2023,ho,"Serratia spp.",4503,2-3-2,28
+2024,2023,ho,"Other",6128,2-3-2,28
+2024,2023,ho,"TOTAL",157657,2-3-2,28
+2024,2024,ho,"Klebsiella pneumoniae",28057,2-3-2,28
+2024,2024,ho,"Escherichia coli",27512,2-3-2,28
+2024,2024,ho,"Pseudomonas aeruginosa",26853,2-3-2,28
+2024,2024,ho,"Enterococcus faecium",19038,2-3-2,28
+2024,2024,ho,"Staphylococcus aureus",14295,2-3-2,28
+2024,2024,ho,"Acinetobacter baumannii",11352,2-3-2,28
+2024,2024,ho,"Enterococcus faecalis",10038,2-3-2,28
+2024,2024,ho,"Enterobacter spp.",7156,2-3-2,28
+2024,2024,ho,"Proteus spp.",6727,2-3-2,28
+2024,2024,ho,"Serratia spp.",4990,2-3-2,28
+2024,2024,ho,"Other",6475,2-3-2,28
+2024,2024,ho,"TOTAL",162493,2-3-2,28
