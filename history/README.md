@@ -31,3 +31,10 @@
 - 本次調整：移除堆疊圖可見的「圖 2-1」字樣；新增檢體、感染來源篩選選單及滑鼠／鍵盤／點擊圖形數值詳情，原始 CSV 不變。
 - 現有 `data/ar_isolates_by_edition_2017_2024.csv` 僅具 `national_all_specimens`，且無獨立 CO、HO 欄位；因此不得把總數作為特定檢體或感染來源值。新增下拉選單僅展示已核對的「全部檢體／合併感染來源」選項；待正式資料匯入才能擴充。
 - 回復方式：分別將上述兩份歷程檔覆蓋根目錄 `ar-explorer.html` 及 `js/ar-report-figure21.js` 並提交；其他資料不需更動。
+
+## 2026-10-28：正式年報檢體／感染來源六年數據實作
+
+- 在原有備份上接入 `data/ar_2024_report_specimen_onset.csv`（2024 年版年報第二章表 2-2-1～2-2-5、表 2-3-1～2-3-2）。
+- 包含 2019–2024 年血液、尿液、痰液、膿或傷口、糞便、CO、HO 七類，共 504 筆（含其他與總計）；42 組年度分層合計已與年報核對一致。
+- 僅同一版年報同一分類計算菌株數占比；不產生年報沒有的檢體 × 感染來源交叉結果。2022/2023 年版仍提供全國全部檢體合併資料。
+- 回復前一版：將 `history/ar-report-figure21-before-filters-20261028.js` 內容覆蓋 `js/ar-report-figure21.js`，並將 `history/ar-explorer-before-specimen-origin-filters-20261028.html` 覆蓋 `ar-explorer.html`；新 CSV 可留存，不需移除。
