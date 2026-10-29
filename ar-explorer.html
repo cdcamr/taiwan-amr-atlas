@@ -143,6 +143,9 @@
 .ap-intro h3{font-size:18px;margin:0 0 6px}
 .ap-intro p{font-size:13px;color:var(--mute);margin:4px 0}
 .ap-figure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:15px 0 24px}
+.ap-figure-group{font-size:16px;margin:22px 0 8px;font-weight:700}
+.ap-figure-spacer{min-height:1px}
+.ap-figure-grid.ap-one-panel{grid-template-columns:minmax(0,1fr)}
 .ap-figure{margin:11px 0 24px;min-width:0}
 .ap-figure-grid .ap-figure{margin:0}
 .ap-figure-heading{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:5px}
@@ -170,7 +173,7 @@
 .ap-table-wrap caption{text-align:left;font-weight:700;padding:9px 0}
 .ap-bottom{margin-top:18px;border-top:1px solid var(--line);padding-top:12px;font-size:12px}
 .ap-bottom p{color:var(--mute);line-height:1.8}
-@media(max-width:820px){.ap-filter{grid-template-columns:repeat(2,minmax(0,1fr))}.ap-figure-grid{grid-template-columns:minmax(0,1fr)}.ap-figure:not(.ap-figure-grid .ap-figure) .ap-svg-scroll svg{min-width:560px}}
+@media(max-width:820px){.ap-filter{grid-template-columns:repeat(2,minmax(0,1fr))}.ap-figure-grid{grid-template-columns:minmax(0,1fr)}.ap-figure-spacer{display:none}.ap-figure:not(.ap-figure-grid .ap-figure) .ap-svg-scroll svg{min-width:560px}}
 @media(max-width:520px){.ar-full-preview{padding:14px}.ap-filter{grid-template-columns:minmax(0,1fr)}.ap-paper{padding:8px 4px}.ap-svg-scroll svg{min-width:510px}.ap-head h2{font-size:20px}}
 @media(prefers-reduced-motion:reduce){.ap-svg-hit{transition:none}}
 </style><style>
