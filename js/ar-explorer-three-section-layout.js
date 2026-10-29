@@ -30,6 +30,11 @@ root.innerHTML='<div class="isolate-heading"><div><div class="eyebrow">SECTION 0
  '<button type="button" class="isolate-icon-action" data-isolate-kind="'+item.kind+'" aria-expanded="false" aria-controls="isolateSecondary" title="'+item.hint+'">'+icons[item.kind]+'<span class="isolate-icon-text"><strong>'+item.label+'</strong><small>'+item.hint+'</small></span></button>').join('')+'</div>'+
 '<div id="isolateSecondary" class="isolate-secondary" hidden><div class="isolate-secondary-top"><div><div class="eyebrow">ADDITIONAL ANALYSIS</div><h3 id="isolateSecondaryTitle">延伸分析</h3><p id="isolateSecondaryDesc">可利用下方選單調整年度及菌種。</p></div><button type="button" id="isolateCloseSecondary" class="isolate-close" aria-label="收起其他圖表並返回主要堆疊柱狀圖">✕ <span>收起圖表</span></button></div><div id="isolateFilterSlot"></div><div id="isolateSingleSlot"></div><div id="isolateCompareSlot"></div></div>';
 report.before(root);
+const navigatorBar=document.createElement('nav');
+navigatorBar.className='ar-section-links';
+navigatorBar.setAttribute('aria-label','AR 監測三大主區塊');
+navigatorBar.innerHTML='<a href="#isolateRankingSection"><span aria-hidden="true">▥</span> 分離菌株排名</a><a href="#arImportantSection"><span aria-hidden="true">▤</span> 重要菌種抗藥性</a><a href="#arMdroSection"><span aria-hidden="true">▧</span> MDRO 趨勢</a>';
+root.before(navigatorBar);
 if(metrics)root.querySelector('#isolateMetricsSlot').append(metrics);
 root.querySelector('#isolateStackSlot').append(report);
 root.querySelector('#isolateFilterSlot').append(filterPanel);
