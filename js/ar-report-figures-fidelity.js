@@ -16,7 +16,7 @@ const levels=['medical_center','regional_hospital','district_hospital'];
 const labels={medical_center:'醫學中心',regional_hospital:'區域醫院',district_hospital:'地區醫院',national:'全國','CO+HO':'CO＋HO',CO:'CO',HO:'HO',blood:'血液檢體',all:'全部檢體'};
 const lineColors={medical_center:'#4074B6',regional_hospital:'#E77845',district_hospital:'#A0A0A0',national:'#EFAF39'};
 const fills={medical_center:['#8FB8D8','#405F97'],regional_hospital:['#EBA687','#BB6137'],district_hospital:['#AAA8AA','#79777B']};
-let points=[],shown=[],tab='important',basePoints=[],hoPoints=[],kpPoints=[];
+let points=[],shown=[],tab='important',basePoints=[],hoPoints=[],kpPoints=[],narrative=[];
 function parse(txt){const a=txt.trim().split(/\r?\n/),h=a.shift().split(',');return a.map(line=>{const cells=line.split(',');return Object.fromEntries(h.map((k,i)=>[k,cells[i]??'']))}).filter(r=>{const v=Number(r.value);return Number.isFinite(v)&&v>=0&&((r.unit==='percent'&&v<=100)||r.unit==='isolates')&&['narrative_exact','chart_estimate'].includes(r.precision)})}
 const fmt=r=>(r.precision==='chart_estimate'?'約 ':'')+(r.unit==='percent'?Number(r.value).toFixed(1)+'%':Number(r.value).toLocaleString('zh-TW')+' 株');
 function describe(r){return[r.indicator,r.year+'（民國'+(+r.year-1911)+'）',labels[r.hospital_level]||r.hospital_level,labels[r.onset]||r.onset,labels[r.specimen]||r.specimen,r.antibiotic||r.component,fmt(r),r.precision==='chart_estimate'?'圖形估讀，非精確值':'年報文字核對值','圖'+r.source_figure+'，第'+r.source_page+'頁',r.narrative_page?'文字數值來源：第'+r.narrative_page+'頁':''].filter(Boolean).join(' · ')}
@@ -70,6 +70,51 @@ function kpBars(){
  '<div class="rsc-verified-bar"><span>血液檢體</span><div class="rsc-scale"><i style="width:'+r.blood+'%;background:#806A9C"></i></div><b>'+r.blood.toFixed(1)+'%</b></div>'+
  '<div class="rsc-verified-bar"><span>尿液檢體</span><div class="rsc-scale"><i style="width:'+r.urine+'%;background:#B0A0C2"></i></div><b>'+r.urine.toFixed(1)+'%</b></div></div>').join('');
  return '<div class="rsc-source-only"><h3>K. pneumoniae：血液與尿液的已核對抗藥率</h3><p>2024 年報第 56 頁明確記載的兩種抗生素（R%）。其餘菌藥及 CO／HO 分圖仍待取得完整精確數值。</p>'+cells+'</div>';
+}
+
+const narrativeSource='https://www.cdc.gov.tw/Category/Page/tx7G1t-G3lyodZ8m8uoYMA';
+const narrativeType={exact:'年報明載值',range:'年報明載藥物範圍',range_approx:'年報約略範圍',less_than:'年報上界',greater_than:'年報下界'};
+function narrativeValue(r){
+ const x=r.lower_pct,y=r.upper_pct;
+ if(r.relation==='exact')return Number(x).toFixed(1)+'%';
+ if(r.relation==='less_than')return '低於 '+Number(y).toFixed(1)+'%';
+ if(r.relation==='greater_than')return '高於 '+Number(x).toFixed(1)+'%';
+ return (r.relation==='range_approx'?'約 ':'')+Number(x).toFixed(1)+'–'+Number(y).toFixed(1)+'%';
+}
+function narrativeScope(r){
+ const labels={all:'全部檢體',blood:'血液',urine:'尿液',stool:'糞便',national:'全國',medical_center:'醫學中心',regional_hospital:'區域醫院',district_hospital:'地區醫院'};
+ return [r.onset==='CO+HO'?'CO＋HO':r.onset,labels[r.specimen]||r.specimen,labels[r.hospital_level]||r.hospital_level,r.year+'年'].join(' · ');
+}
+function narrativeRow(r){
+ return {section:r.indicator_type==='MDRO'?'mdro_verified':'important_verified',record_type:'narrative',indicator:r.code,year:r.year,onset:r.onset,specimen:r.specimen,hospital_level:r.hospital_level,antibiotic:r.label,component:'R',value:r.relation==='exact'?r.lower_pct:null,lower_pct:r.lower_pct,upper_pct:r.upper_pct,relation:r.relation,unit:'percent',precision:r.precision,source_page:r.source_page,narrative_page:r.source_page,source_figure:r.indicator_type==='MDRO'?'4-'+(mdroGroups.findIndex(x=>x[0]===r.code)+1):'3-2-'+(organisms.findIndex(x=>x[0]===r.code)+1),extraction_method:'transcribed_from_2024_report_narrative',note:r.note||''};
+}
+function narrativePlot(code,domain){
+ const records=narrative.filter(x=>x.code===code&&(domain==='mdro'?(x.indicator_type==='MDRO'):(x.indicator_type!=='MDRO')));
+ if(!records.length)return '';
+ const cards=records.map((r,i)=>{
+  const min=Number.isFinite(Number(r.lower_pct))&&r.lower_pct!==null?Number(r.lower_pct):0;
+  const max=Number.isFinite(Number(r.upper_pct))&&r.upper_pct!==null?Number(r.upper_pct):100;
+  const val=r.relation==='exact'?max:0;
+  let left=r.relation==='range'||r.relation==='range_approx'?min:r.relation==='greater_than'?min:0;
+  let width=r.relation==='exact'?val:r.relation==='less_than'?max:r.relation==='greater_than'?100-min:max-min;
+  left=Math.max(0,Math.min(100,left));width=Math.max(.2,Math.min(100-left,width));
+  const className=r.relation==='exact'?'rsc-official-solid':'rsc-official-range';
+  const txt=r.label+' '+narrativeValue(r)+' '+narrativeScope(r)+'；年報第 '+r.source_page+' 頁';
+  return '<button type="button" class="rsc-official-row" data-narrative-point="'+narrative.indexOf(r)+'" title="'+html(txt)+'" aria-label="'+html(txt)+'">'+
+  '<span class="rsc-official-drug">'+html(r.label)+'<small>'+html(narrativeScope(r))+'</small></span>'+
+  '<span class="rsc-official-track"><i class="'+className+'" style="left:'+left+'%;width:'+width+'%"></i></span>'+
+  '<strong class="rsc-official-value">'+html(narrativeValue(r))+'</strong></button>';
+ }).join('');
+ return '<section class="rsc-official-section" aria-label="'+html(code)+' 年報文字精確值與範圍">'+
+ '<div class="rsc-official-head"><h3>年報內文數值（非圖像估讀）</h3><span>'+records.length+' 筆來源敘述</span></div>'+
+ '<p>此區只顯示年報直接列示的數值或範圍；範圍表示不同抗生素品項的結果，不是同一藥物的信賴區間。</p>'+
+ '<div class="rsc-official-scale"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>'+
+ cards+'<p class="rsc-official-foot">實心紫色＝年報明載單一數值；紫色斜紋＝原文範圍或界限。<a href="'+narrativeSource+'" rel="noopener noreferrer" target="_blank">疾管署正式年報下載頁</a></p></section>';
+}
+function sourceReference(name,figure,page){
+ return '<section class="rsc-figure-ref" role="note"><strong>年報原圖：'+html(name)+'</strong>'+
+ '<p>請參閱圖 '+html(figure)+'（第 '+page+' 頁）。原圖部分菌藥組合或醫院分層未提供可完整核對的原始數表，目前以年報文字精確值呈現可驗證的部分，不用估值補滿其餘柱體。</p>'+
+ '<a href="'+narrativeSource+'" target="_blank" rel="noopener noreferrer">開啟疾管署正式年報頁面，下載並查看原圖</a></section>';
 }
 function important(){
  const selected=$('rscOrganism').value;
