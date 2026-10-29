@@ -192,7 +192,7 @@ function table(){
  const cols=['section','record_type','indicator','year','onset','specimen','hospital_level','antibiotic','component','value','unit','precision','source_figure','source_page','narrative_page','extraction_method'];
  $('rscTable').innerHTML='<table><caption>年報式圖表監測資料與來源／估讀註記</caption><thead><tr>'+cols.map(x=>'<th scope="col">'+x+'</th>').join('')+'</tr></thead><tbody>'+shown.map(r=>'<tr>'+cols.map(k=>'<td>'+html(k==='value'?fmt(r):r[k]||'—')+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
 }
-function render(){if(tab==='important')important();else mdro();$('rscCount').textContent='目前 '+shown.length+' 筆';table();addHover();section.querySelectorAll('.rsc-figure-png').forEach((b,i)=>b.onclick=()=>exportSvg(b.closest('figure').querySelector('svg'),'report-'+tab+'-figure-'+(i+1)+'.png'))}
+function render(){if(tab==='important')important();else mdro();$('rscDetail').textContent='將滑鼠移至圖中的色塊或資料點、點擊或按 Tab 聚焦，即可查看數值及來源。';$('rscCount').textContent='目前 '+shown.length+' 筆；含資料品質標記';$('rscCsvBtn').disabled=!shown.length;$('rscTableBtn').disabled=!shown.length;$('rscPngBtn').disabled=!$('rscPlots').querySelector('svg');$('rscTable').hidden=true;$('rscTableBtn').textContent='資料表';table();addHover();section.querySelectorAll('.rsc-figure-png').forEach((b,i)=>b.onclick=()=>exportSvg(b.closest('figure').querySelector('svg'),'report-'+tab+'-figure-'+(i+1)+'.png'))}
 
 function setupSelectors(){
  const current=$('rscOrganism').value;
