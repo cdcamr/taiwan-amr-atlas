@@ -22,7 +22,7 @@ const levels=['medical_center','regional_hospital','district_hospital'], allLeve
 const label={medical_center:'醫學中心',regional_hospital:'區域醫院',district_hospital:'地區醫院',national:'全國','CO+HO':'社區與醫療（CO＋HO）相關感染',CO:'社區相關感染（CO）',HO:'醫療相關感染（HO）',all:'全部檢體',blood:'血液檢體',urine:'尿液檢體',stool:'糞便檢體',wound:'膿或傷口檢體'};
 const lineColors={medical_center:'#4674b9',regional_hospital:'#df783e',district_hospital:'#979797',national:'#efb33b'};
 const stackColors={medical_center:['#95bcdc','#3f5994'],regional_hospital:['#ecaa8b','#b75d34'],district_hospital:['#aea9ab','#777578']};
-const refQuery=new URLSearchParams(location.search),state={domain:refQuery.get('previewDomain')==='mdro'?'mdro':'important',organism:refQuery.get('previewIndicator')||'',origin:refQuery.get('previewOnset')||'CO+HO',specimen:refQuery.get('previewSpecimen')||'all',drug:refQuery.get('previewDrug')||'all',year:refQuery.get('previewYear')||'all'};
+const refQuery=new URLSearchParams(location.search),state={domain:refQuery.get('previewDomain')==='mdro'?'mdro':'important',organism:refQuery.get('previewIndicator')||'',origin:refQuery.get('previewOnset')||'CO+HO',specimen:refQuery.get('previewSpecimen')||'all-panels',drug:refQuery.get('previewDrug')||'all',year:refQuery.get('previewYear')||'all'};
 let data=[],species=[],currentRows=[],displayCharts=[],officialCount=0,pdfUrl=null;
 const fmtn=v=>Math.round(+v||0).toLocaleString('zh-TW');
 const fmtr=r=>r.precision==='not_reported_lt20'?'＊ 未呈現':r.domain==='mdro'&&r.component!=='R'?fmtn(r.isolates)+' 株':Number(r.resistance_pct).toFixed(1)+'%';
@@ -55,17 +55,17 @@ function important(){
  const all=data.filter(r=>r.domain==='important'&&r.indicator===state.organism);
  const names=[...new Set(all.map(r=>r.antibiotic))],availableParts=[...new Set(all.filter(r=>r.onset==='CO+HO').map(r=>r.specimen))];
  const pick=state.drug==='all'?all:all.filter(r=>r.antibiotic===state.drug);
- const focus=state.specimen==='all'?availableParts:availableParts.filter(x=>x===state.specimen);
+ const focus=state.specimen==='all-panels'?availableParts:availableParts.filter(x=>x===state.specimen);
  const source=all[0]?.source_figure||'3-2';
- const A=focus.map(spec=>{const list=pick.filter(r=>r.onset==='CO+HO'&&r.specimen===spec);return hBar(list,'（A）CO＋HO／'+label[spec],all[0]?.color||'#806B9E',label[spec],source)});
+ const A=focus.map(spec=>{const list=pick.filter(r=>r.onset==='CO+HO'&&r.specimen===spec);return hBar(list,label[spec],all[0]?.color||'#806B9E','（A）社區與醫療（CO＋HO）相關感染',source)});
  const B=pick.filter(r=>r.onset==='CO'&&r.specimen==='all'),C=pick.filter(r=>r.onset==='HO'&&r.specimen==='all');
  displayCharts=A.concat([hBar(B,'（B）社區相關感染（CO）',all[0]?.color||'#806B9E','全部檢體',source),hBar(C,'（C）醫療相關感染（HO）',all[0]?.color||'#806B9E','全部檢體',source)]);
  currentRows=pick.filter(r=>r.onset!=='CO+HO'||focus.includes(r.specimen));
- $('apFigures').innerHTML='<div class="ap-intro"><h3>'+esc(all[0]?.organism||state.organism)+'｜113 年抗藥性百分比</h3><p>以年報的（A）（B）（C）分圖呈現；未發布的菌藥組合以＊標示，不以零值代替。</p></div><div class="ap-figure-grid">'+A.join('')+'</div><div class="ap-figure-grid">'+displayCharts.slice(A.length).join('')+'</div>';
+ const aLayout=(A.length===3&&focus[0]==='all')?'<div class="ap-figure-grid ap-a-top">'+A[0]+'<div class="ap-figure-spacer" aria-hidden="true"></div></div><div class="ap-figure-grid">'+A.slice(1).join('')+'</div>':'<div class="ap-figure-grid'+(A.length===1?' ap-one-panel':'')+'">'+A.join('')+'</div>';$('apFigures').innerHTML='<div class="ap-intro"><h3>'+esc(all[0]?.organism||state.organism)+'｜113 年抗藥性百分比</h3><p>依年報原圖的抗生素順序、菌種配色及（A）（B）（C）分圖呈現；未發布的組合以＊標示。</p></div><h4 class="ap-figure-group">（A）社區與醫療（CO＋HO）相關感染</h4>'+aLayout+'<div class="ap-figure-grid">'+displayCharts.slice(A.length).join('')+'</div>';
  return{availableParts,names};
 }
 function lineChart(rows,name,source){
- const W=950,H=390,L=77,R=38,T=35,B=63,w=W-L-R,h=H-T-B,top=Math.max(10,Math.min(100,Math.ceil((Math.max(0,...rows.map(r=>+r.resistance_pct))+6)/10)*10)),x=i=>L+i*w/5,y=v=>T+h-h*(+v)/top;
+ const W=950,H=390,L=77,R=38,T=35,B=63,w=W-L-R,h=H-T-B,top=state.organism==='CRAB'?100:Math.max(10,Math.min(100,Math.ceil((Math.max(0,...rows.map(r=>+r.resistance_pct))+6)/10)*10)),x=i=>L+i*w/5,y=v=>T+h-h*(+v)/top;
  let svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(name+' 108至113年抗藥率趨勢折線圖')+'"><rect width="'+W+'" height="'+H+'" fill="#fff"/>';
  for(let k=0;k<=5;k++){const p=top*k/5,Y=y(p);svg+='<text x="'+(L-11)+'" y="'+(Y+4)+'" font-size="13" text-anchor="end" fill="#222">'+p.toFixed(top<20?1:0)+'%</text>';if(k===0)svg+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y+'" y2="'+Y+'" stroke="#bbb"/>'}
  for(let i=0;i<6;i++)svg+='<text x="'+x(i)+'" y="'+(H-31)+'" font-size="15" fill="#222" text-anchor="middle">'+(108+i)+'</text>';
@@ -141,7 +141,7 @@ function updateOptions(){
  if(!['CO+HO','CO','HO'].includes(state.origin))state.origin='CO+HO';$('apOrigin').value=state.origin;
  if(state.domain==='important'){
   const rows=all.filter(r=>r.indicator===state.organism&&r.onset==='CO+HO'),spec=[...new Set(rows.map(r=>r.specimen))];
-  const options=[['all','年報完整分圖'],...spec.map(k=>[k,label[k]||k])];$('apSpecimen').innerHTML=options.map(([v,t])=>'<option value="'+v+'">'+esc(t)+'</option>').join('');if(!options.some(x=>x[0]===state.specimen))state.specimen='all';$('apSpecimen').value=state.specimen;
+  const options=[['all-panels','年報完整分圖'],...spec.map(k=>[k,label[k]||k])];$('apSpecimen').innerHTML=options.map(([v,t])=>'<option value="'+v+'">'+esc(t)+'</option>').join('');if(!options.some(x=>x[0]===state.specimen))state.specimen='all-panels';$('apSpecimen').value=state.specimen;
   const drugs=[...new Set(rows.map(r=>r.antibiotic))];$('apDrug').innerHTML='<option value="all">全部抗生素（年報順序）</option>'+drugs.map(d=>'<option value="'+esc(d)+'">'+esc(d)+'</option>').join('');if(!drugs.includes(state.drug))state.drug='all';$('apDrug').value=state.drug;
  } else {$('apYear').value=['2019','2020','2021','2022','2023','2024'].includes(state.year)?state.year:'all'}
 }
@@ -166,8 +166,8 @@ section.addEventListener('focusin',e=>{const el=e.target.closest('[data-ap-row]'
 section.addEventListener('focusout',hideTip);
 section.addEventListener('click',e=>{const el=e.target.closest('[data-ap-row]');if(el)showInfo(el)});
 section.addEventListener('keydown',e=>{const el=e.target.closest('[data-ap-row]');if(el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showInfo(el)}});
-section.querySelectorAll('[data-ap-domain]').forEach(b=>b.onclick=()=>{state.domain=b.dataset.apDomain;state.organism='';state.drug='all';state.specimen='all';section.querySelectorAll('[data-ap-domain]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw()});
-$('apOrganism').onchange=v=>{state.organism=$('apOrganism').value;state.drug='all';state.specimen='all';draw()};
+section.querySelectorAll('[data-ap-domain]').forEach(b=>b.onclick=()=>{state.domain=b.dataset.apDomain;state.organism='';state.drug='all';state.specimen='all-panels';section.querySelectorAll('[data-ap-domain]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw()});
+$('apOrganism').onchange=v=>{state.organism=$('apOrganism').value;state.drug='all';state.specimen='all-panels';draw()};
 $('apOrigin').onchange=()=>{state.origin=$('apOrigin').value;draw()};
 $('apSpecimen').onchange=()=>{state.specimen=$('apSpecimen').value;draw()};
 $('apDrug').onchange=()=>{state.drug=$('apDrug').value;draw()};
@@ -193,7 +193,7 @@ Promise.all([
  fetch('./data/ar_2024_full_demo_preview.csv',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('示意資料 HTTP '+r.status);return r.text()}),
  fetch('./data/ar_2024_full_official_import.csv',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'')
 ]).then(([demo,official])=>{
- data=parseCSV(demo);if(data.length<2000)throw Error('示意資料筆數不足');
+ data=parseCSV(demo);if(new Set(data.filter(r=>r.domain==='important').map(r=>r.indicator)).size!==12||new Set(data.filter(r=>r.domain==='mdro').map(r=>r.indicator)).size!==9)throw Error('重要菌種或MDRO資料不完整');
  if(official)importOfficial(parseCSV(official));
  species=[...new Map(data.filter(r=>r.domain==='important').map(r=>[r.indicator,r.organism])).entries()];
  if(state.domain==='mdro')section.querySelector('[data-ap-domain="mdro"]').click();else draw();
