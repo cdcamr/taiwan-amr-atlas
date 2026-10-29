@@ -27,7 +27,7 @@ root.innerHTML='<div class="isolate-heading"><div><div class="eyebrow">SECTION 0
 '<div id="isolateMetricsSlot"></div><div id="isolateStackSlot"></div>'+
 '<div class="isolate-secondary-heading"><h3>其他分析圖表</h3><p>選擇圖示查看折線圖、柱狀圖或年報表格，不會更動上方主要堆疊圖。</p></div>'+
 '<div class="isolate-shortcuts" role="group" aria-label="展開分離菌株其他圖表">'+actions.map(item=>
- '<button type="button" class="isolate-icon-action" data-isolate-kind="'+item.kind+'" aria-expanded="false" aria-controls="isolateSecondary" title="'+item.hint+'">'+icons[item.kind]+'<span class="isolate-icon-text"><strong>'+item.label+'</strong><small>'+item.hint+'</small></span></button>').join('')+'</div>'+
+ '<button type="button" class="isolate-icon-action" data-isolate-kind="'+item.kind+'" aria-expanded="false" aria-pressed="false" aria-controls="isolateSecondary" title="'+item.hint+'">'+icons[item.kind]+'<span class="isolate-icon-text"><strong>'+item.label+'</strong><small>'+item.hint+'</small></span></button>').join('')+'</div>'+
 '<div id="isolateSecondary" class="isolate-secondary" hidden><div class="isolate-secondary-top"><div><div class="eyebrow">ADDITIONAL ANALYSIS</div><h3 id="isolateSecondaryTitle">延伸分析</h3><p id="isolateSecondaryDesc">可利用下方選單調整年度及菌種。</p></div><button type="button" id="isolateCloseSecondary" class="isolate-close" aria-label="收起其他圖表並返回主要堆疊柱狀圖">✕ <span>收起圖表</span></button></div><div id="isolateFilterSlot"></div><div id="isolateSingleSlot"></div><div id="isolateCompareSlot"></div></div>';
 report.before(root);
 const navigatorBar=document.createElement('nav');
