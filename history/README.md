@@ -57,3 +57,14 @@
 - 前端支援年報式四分圖、四系列折線圖、兩種堆疊圖、懸浮／鍵盤數值提示、資料表、CSV 與逐圖 PNG。
 - **回復方式**：將上述備份 HTML 還原至根目錄 `ar-explorer.html` 即可回到先前頁面（原程式 `js/ar-report-resistance-panels.js` 沒有刪除）；新 JS、CSV 可留存但不再被引用。
 - GitHub 已確認檔案及語法；瀏覽器、RWD／AA、與原圖逐像素比對尚未完成。
+
+
+## 2026-10-29：完整第三、四章選單與 HO 趨勢資料
+- 本次修改前完整備份：`history/ar-report-figures-fidelity-before-complete-dropdowns-20261029.js`、`history/ar-explorer-before-complete-dropdowns-HO-20261029.html`。
+- 本次新增：`data/ar_2024_report_full_chart_catalog.csv`（12 類重要菌種與 9 類 MDRO×3 感染來源的 39 筆原圖索引）。
+- 本次新增：`data/ar_2024_mdro_HO_report_estimates.csv`，涵蓋 9 類 MDRO 的 108–113 年 HO 醫院層級抗藥性百分比（216 筆）及 I+R/S 菌株數估讀（302 筆）。總共 518 筆，每筆明列年報圖號與 `chart_estimate`。
+- 完整的 12 類重要菌種與 9 類 MDRO 已可由下拉選單切換。重要菌種中 A. baumannii 有 4 格估讀圖；K. pneumoniae 有 4 筆正式文字精確值；其餘菌種提供年報圖號及待核對提示，尚非完整數值重製。
+- MDRO HO 的折線圖及 I+R/S 堆疊圖均開放切換；VR E. faecalis 個別 I+R 柱體低於可靠圖像擷取解析度，該筆資料留白、**不可解讀為零**。CO／CO+HO 仍限既有 CRAB 完成數位化的部分，其餘提供來源圖號索引。
+- 新增內容不改變原有分離菌株數圖、2024 Antibiogram 熱圖或原始年報 CSV。
+- **回復方式**：用上述歷程檔分別覆蓋 `js/ar-report-figures-fidelity.js` 與 `ar-explorer.html` 再提交即可，新增 CSV 可以繼續保留不被舊版引用。
+- 來源圖形估讀值不可當成可核對的官方精確值、不得以此推算 Wilson 95% CI、不得用於正式政策比較。需用原始分析數表替換後才能宣稱完整精確互動年報。
