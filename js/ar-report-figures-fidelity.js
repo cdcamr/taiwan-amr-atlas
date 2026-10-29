@@ -116,25 +116,23 @@ function sourceReference(name,figure,page){
  '<p>請參閱圖 '+html(figure)+'（第 '+page+' 頁）。原圖部分菌藥組合或醫院分層未提供可完整核對的原始數表，目前以年報文字精確值呈現可驗證的部分，不用估值補滿其餘柱體。</p>'+
  '<a href="'+narrativeSource+'" target="_blank" rel="noopener noreferrer">開啟疾管署正式年報頁面，下載並查看原圖</a></section>';
 }
+
 function important(){
- const selected=$('rscOrganism').value;
- const entry=organisms.find(x=>x[0]===selected)||organisms[0];
- const [code,name,page,fig]=entry;
- if(code==='A_baumannii'){
-  $('rscPlots').innerHTML='<div class="rsc-intro"><strong>Acinetobacter baumannii 抗生素抗藥性百分比</strong><p>（A）社區與醫療（CO+HO）相關感染</p></div>'+
- '<div class="rsc-grid">'+horizontal('CO+HO','all','（A）CO＋HO','全部檢體')+horizontal('CO+HO','blood','（A）CO＋HO','血液檢體')+'</div>'+
- '<div class="rsc-grid">'+horizontal('CO','all','（B）社區相關感染（CO）','全部檢體')+horizontal('HO','all','（C）醫療相關感染（HO）','全部檢體')+'</div>';
-  shown=basePoints.filter(r=>r.section==='important');
-  $('rscStatus').textContent='圖 3-2-1：四格水平長條圖，來源數值標示為年報圖形估讀。';
+ const code=$('rscOrganism').value,entry=organisms.find(x=>x[0]===code)||organisms[0];
+ const [key,name,page,fig]=entry;
+ const official=narrative.filter(r=>r.code===key&&!r.indicator_type).map(narrativeRow);
+ const intro='<div class="rsc-intro"><strong>'+html(name)+'｜113 年抗生素抗藥性百分比</strong><p>年報圖 '+html(fig)+'，第 '+page+' 頁；下方實心／區間長條僅使用年報文字敘述的數值。</p></div>';
+ if(key==='A_baumannii'){
+  $('rscPlots').innerHTML=intro+narrativePlot(key,'important')+
+  '<p class="rsc-estimates-label">下列四格採原圖型式，但仍包含未取得原始數表的圖形估讀值；不能視為精確數據。</p>'+
+  '<div class="rsc-grid">'+horizontal('CO+HO','all','（A）CO＋HO','全部檢體')+horizontal('CO+HO','blood','（A）CO＋HO','血液檢體')+'</div>'+
+  '<div class="rsc-grid">'+horizontal('CO','all','（B）社區相關感染（CO）','全部檢體')+horizontal('HO','all','（C）醫療相關感染（HO）','全部檢體')+'</div>';
+  shown=official.concat(basePoints.filter(r=>r.section==='important'));
+  $('rscStatus').textContent='已顯示年報文字明列數值，以及圖 3-2-1 的四格估讀式圖形（來源精度分開標註）。';
  } else {
-  let contents='<div class="rsc-intro"><strong>'+html(name)+' 抗生素抗藥性百分比</strong><p>2024 年報圖 '+html(fig)+'，第 '+page+' 頁。</p></div>';
-  if(code==='K_pneumoniae')contents+=kpBars();
-  contents+='<div class="rsc-grid">'+statusFigure('（A）CO＋HO：全部／特定檢體','圖 '+fig+'（A）')+
-    statusFigure('（B）社區相關感染（CO）','圖 '+fig+'（B）')+'</div>'+
-    statusFigure('（C）醫療相關感染（HO）','圖 '+fig+'（C）');
-  $('rscPlots').innerHTML=contents;
-  shown=code==='K_pneumoniae'?kpPoints:[];
-  $('rscStatus').textContent=name+'：已納入完整年報菌種清單；圖 '+fig+' 的分圖資料尚未全部精確數位化。';
+  $('rscPlots').innerHTML=intro+narrativePlot(key,'important')+sourceReference(name,'圖 '+fig,page);
+  shown=official;
+  $('rscStatus').textContent='已依年報第 '+page+' 頁提供 '+official.length+' 筆文字明載數值／範圍；原圖其餘菌藥組合未經精確數位化，不會用估計柱高補值。';
  }
 }
 function lineChart(){
@@ -205,27 +203,27 @@ function hoStack(group,index){
 }
 function mdro(){
  const code=$('rscOrganism').value,group=mdroGroups.find(x=>x[0]===code)||mdroGroups[0];
- const index=mdroGroups.findIndex(x=>x[0]===code)+1,onset=$('rscOnset').value;
+ const index=mdroGroups.findIndex(x=>x[0]===code)+1,onset=$('rscOnset').value;const official=narrative.filter(r=>r.code===code&&r.indicator_type==='MDRO'&&r.onset===onset).map(narrativeRow);
  const title='<div class="rsc-intro"><strong>'+html(group[1])+'｜108–113 年醫院層級別監測</strong><p>感染來源：'+html(onset)+'，與年報第四章相同的醫院層級配色與年度編排。</p></div>';
  if(onset==='HO'){
    $('rscPlots').innerHTML=title+hoLine(group,index)+hoStack(group,index);
    shown=hoPoints.filter(r=>r.indicator===code&&r.onset==='HO');
    $('rscStatus').textContent=group[1]+'：HO 抗藥率六年折線圖與 I+R／S 堆疊柱狀圖；所有數值為圖形估讀。';
  } else if(code==='CRAB'&&onset==='CO+HO'){
-   $('rscPlots').innerHTML=title+lineChart()+stackChart('mdro_counts_onset','A. baumannii 菌株數－CO＋HO',['CO','HO'],14000,'圖 4-1-1-1，第 69 頁');
-   shown=basePoints.filter(r=>r.section==='mdro_resistance'||r.section==='mdro_counts_onset');
+   $('rscPlots').innerHTML=title+narrativePlot(code,'mdro')+lineChart()+stackChart('mdro_counts_onset','A. baumannii 菌株數－CO＋HO',['CO','HO'],14000,'圖 4-1-1-1，第 69 頁');
+   shown=official.concat(basePoints.filter(r=>r.section==='mdro_resistance'||r.section==='mdro_counts_onset'));
    $('rscStatus').textContent='CRAB 的 CO＋HO 六年抗藥率與 CO／HO 堆疊圖已載入。';
  } else if(code==='CRAB'&&onset==='CO'){
    $('rscPlots').innerHTML=title+stackChart('mdro_counts_ast','A. baumannii 菌株數－社區相關感染（CO）',['I+R','S'],6000,'圖 4-1-2-1，第 70 頁')+
    statusFigure('CRAB／CO 抗藥率趨勢','圖 4-1-2-2，第 70 頁');
-   shown=basePoints.filter(r=>r.section==='mdro_counts_ast');
+   shown=official.concat(basePoints.filter(r=>r.section==='mdro_counts_ast'));
    $('rscStatus').textContent='CRAB 的 CO I+R／S 圖已載入；CO 抗藥率仍待逐點核對。';
  } else {
    const page=68+4*(index-1)+(onset==='CO'?2:1);
    const figs=onset==='CO'?['4-'+index+'-2-1','4-'+index+'-2-2']:['4-'+index+'-1-1','4-'+index+'-1-2'];
-   $('rscPlots').innerHTML=title+statusFigure(group[1]+'｜'+onset+' 菌株數與抗藥率','圖 '+figs.join('、')+'，第 '+page+' 頁');
-   shown=[];
-   $('rscStatus').textContent=group[1]+' 的 '+onset+' 年報圖表可由來源查閱；此分層尚未完成可靠數位化。可切換 HO 查看完整六年圖形估讀資料。';
+   $('rscPlots').innerHTML=title+narrativePlot(code,'mdro')+sourceReference(group[1]+' '+onset,'圖 '+figs.join('、'),page);
+   shown=official;
+   $('rscStatus').textContent=group[1]+'／'+onset+'：目前 '+official.length+' 筆年報文字精確值；其他年報圖形尚無完整原始數表。可切換 HO 查看已標示為估讀值的六年圖表。';
  }
 }
 function addHover(){
