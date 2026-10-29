@@ -10,7 +10,7 @@ section.innerHTML='<div class="ap-head"><div><div class="eyebrow">2024 TAIWAN AM
 '<label id="apDrugWrap">抗生素<select id="apDrug"><option value="all">全部抗生素</option></select></label>'+
 '<label id="apYearWrap" hidden>年度重點<select id="apYear"><option value="all">108–113 年全期間</option><option value="2019">108 年</option><option value="2020">109 年</option><option value="2021">110 年</option><option value="2022">111 年</option><option value="2023">112 年</option><option value="2024">113 年</option></select></label>'+
 '</div>'+
-'<div class="ap-warning" role="note"><strong>資料辨識：</strong><span class="ap-key"><i class="ap-sample"></i>示意估計值</span><span class="ap-key"><i class="ap-narrative"></i>年報文字明載／經核對值</span><span class="ap-key"><b>＊</b> 年報未發布（檢測株數不足等）</span><p>本頁主要用來試看完整圖形及操作流程。示意估計值並非年報圖形的精確數位化結果，不得引用作為正式統計、信賴區間或政策績效。</p></div>'+
+'<details class="ap-pdf-check"><summary>與年報原圖對照（選用本機 PDF）</summary><p>選取 2024 年臺灣抗生素抗藥性監視年報 PDF，即可依目前菌種及感染來源定位原圖。PDF 僅在本機瀏覽器開啟，不會上傳網站。</p><div class="ap-pdf-controls"><input type="file" id="apPdfFile" accept=".pdf,application/pdf" aria-label="選取 2024 年報 PDF"><button type="button" id="apPdfOpen" disabled>在新分頁檢視原圖</button></div><p id="apPdfState" role="status" aria-live="polite">尚未選取年報 PDF</p><iframe id="apPdfView" title="本機 2024 年報原圖預覽" hidden loading="lazy"></iframe></details>'+'<div class="ap-warning" role="note"><strong>資料辨識：</strong><span class="ap-key"><i class="ap-sample"></i>示意估計值</span><span class="ap-key"><i class="ap-narrative"></i>年報文字明載／經核對值</span><span class="ap-key"><b>＊</b> 年報未發布（檢測株數不足等）</span><p>本頁主要用來試看完整圖形及操作流程。示意估計值並非年報圖形的精確數位化結果，不得引用作為正式統計、信賴區間或政策績效。</p></div>'+
 '<div class="ap-toolbar"><button type="button" id="apTableToggle" aria-expanded="false">查看資料表</button><button type="button" id="apCsvDownload">下載目前圖表 CSV</button><button type="button" id="apCopyLink">複製篩選連結</button><span id="apStatus" role="status" aria-live="polite">圖表載入中…</span></div>'+
 '<div id="apFigures"></div><div id="apSourceDetails" aria-live="polite" class="ap-info">將滑鼠移至色塊或資料點，或以 Tab／Enter 查看數值、資料品質與年報圖號。</div>'+
 '<div id="apTableWrap" hidden class="ap-table-wrap"></div><div class="ap-bottom"><strong>資料來源與限制</strong><p>圖型、分圖順序及配色參考《2024 年臺灣抗生素抗藥性監視年報》第三、四章。此處缺少正式數值的序列，先由示意模型產生，不能視為原報告測量結果。圖上不重建尚未取得的誤差線與 95% CI。</p></div>';
@@ -23,7 +23,7 @@ const label={medical_center:'醫學中心',regional_hospital:'區域醫院',dist
 const lineColors={medical_center:'#4674b9',regional_hospital:'#df783e',district_hospital:'#979797',national:'#efb33b'};
 const stackColors={medical_center:['#95bcdc','#3f5994'],regional_hospital:['#ecaa8b','#b75d34'],district_hospital:['#aea9ab','#777578']};
 const refQuery=new URLSearchParams(location.search),state={domain:refQuery.get('previewDomain')==='mdro'?'mdro':'important',organism:refQuery.get('previewIndicator')||'',origin:refQuery.get('previewOnset')||'CO+HO',specimen:refQuery.get('previewSpecimen')||'all',drug:refQuery.get('previewDrug')||'all',year:refQuery.get('previewYear')||'all'};
-let data=[],species=[],currentRows=[],displayCharts=[],officialCount=0;
+let data=[],species=[],currentRows=[],displayCharts=[],officialCount=0,pdfUrl=null;
 const fmtn=v=>Math.round(+v||0).toLocaleString('zh-TW');
 const fmtr=r=>r.precision==='not_reported_lt20'?'＊ 未呈現':r.domain==='mdro'&&r.component!=='R'?fmtn(r.isolates)+' 株':Number(r.resistance_pct).toFixed(1)+'%';
 const quality=r=>r.precision==='official_verified'?'已核對正式原始資料':r.precision==='narrative_exact'?'年報文字明載值':r.precision==='not_reported_lt20'?'年報未列示／檢測株數不足':'示意估計值（非官方）';
@@ -111,6 +111,27 @@ function table(){
  $('apTableWrap').innerHTML='<table><caption>目前選取之示意／精確資料與來源</caption><thead><tr>'+headings.map(v=>'<th scope="col">'+v+'</th>').join('')+'</tr></thead><tbody>'+
  currentRows.map(r=>'<tr>'+keys.map(k=>'<td>'+esc(k==='precision'?quality(r):k==='resistance_pct'&&r[k]!==''?Number(r[k]).toFixed(1)+'%':k==='isolates'&&r[k]!==''?fmtn(r[k]):r[k]||'—')+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
 }
+
+function activePdfPrintedPage(){
+ if(state.domain==='important'){const r=data.find(r=>r.domain==='important'&&r.indicator===state.organism);return r?Number(r.printed_page):53}
+ return 69+mdros.findIndex(m=>m[0]===state.organism)*4+['CO+HO','CO','HO'].indexOf(state.origin);
+}
+function refreshPdf(){
+ if(!pdfUrl)return;
+ const printed=activePdfPrintedPage(),physical=printed+8;
+ $('apPdfView').src=pdfUrl+'#page='+physical;
+ $('apPdfState').textContent='目前選擇的年報原圖：印刷第 '+printed+' 頁（PDF 第 '+physical+' 頁）';
+ $('apPdfView').hidden=false;$('apPdfOpen').disabled=false;
+}
+$('apPdfFile').onchange=()=>{
+ if(pdfUrl){URL.revokeObjectURL(pdfUrl);pdfUrl=null}
+ const f=$('apPdfFile').files?.[0];$('apPdfView').hidden=true;$('apPdfOpen').disabled=true;
+ if(!f){$('apPdfState').textContent='尚未選取 PDF';return}
+ if(!/\.pdf$/i.test(f.name)&&f.type!=='application/pdf'){$('apPdfState').textContent='請選擇 PDF 格式';return}
+ pdfUrl=URL.createObjectURL(f);refreshPdf();
+};
+$('apPdfOpen').onclick=()=>{if(pdfUrl)window.open(pdfUrl+'#page='+(activePdfPrintedPage()+8),'_blank','noopener')};
+window.addEventListener('beforeunload',()=>{if(pdfUrl)URL.revokeObjectURL(pdfUrl)});
 function urlState(){const u=new URL(location.href);Object.entries({previewDomain:state.domain,previewIndicator:state.organism,previewOnset:state.origin,previewSpecimen:state.specimen,previewDrug:state.drug,previewYear:state.year}).forEach(([k,v])=>u.searchParams.set(k,v));history.replaceState({},'',u);return u.href}
 function updateOptions(){
  const all=data.filter(r=>r.domain===state.domain),choices=state.domain==='important'?[...new Map(all.map(r=>[r.indicator,r.organism])).entries()]:mdros;
@@ -127,7 +148,7 @@ function updateOptions(){
 function draw(){
  updateOptions();
  if(state.domain==='important')important();else mdro();
- table();urlState();
+ table();urlState();refreshPdf();
  const n=currentRows.length,ex=currentRows.filter(r=>['narrative_exact','official_verified'].includes(r.precision)).length,blocked=currentRows.filter(r=>r.precision==='not_reported_lt20').length;
  $('apStatus').textContent='顯示 '+displayCharts.length+' 張圖、'+n+' 筆；年報明載 '+ex+' 筆、未發布 '+blocked+' 筆，其餘為示意估計。';
  $('apTableWrap').hidden=$('apTableToggle').getAttribute('aria-expanded')!=='true';
