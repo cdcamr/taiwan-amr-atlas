@@ -80,3 +80,13 @@
 - **逐步換正式資料**：將完成數值與來源核對的紀錄填入 `data/ar_2024_full_official_import.csv`，以相同主鍵及 `official_verified`、`verified_by` 覆蓋示意值。
 - **回復步驟**：將 `history/ar-explorer-before-full-demo-20261029.html` 完整內容還原覆蓋根目錄 `ar-explorer.html` 並提交；其他新增資料與腳本留存也不會影響舊版執行。
 - **測試**：已驗證 12 類菌種 4–5 張分圖，以及 9 類 MDRO × 3 感染來源（27 組）各 2 張圖均可被程式產製，並通過 CSV 結構、MDRO 各年度比率與組成一致性、JavaScript 語法檢核。公開網頁真實瀏覽器、行動版與 AA 測試仍待進行。
+
+## 2026-10-29：全菌種抗生素與 SA 圖表一致性修正
+
+- 本輪修改前已備份：`history/ar_2024_full_demo_preview_before-antibiotic-audit-20261029.csv`、`history/ar-report-complete-preview_before-antibiotic-audit-20261029.js`、`history/ar-explorer_before-antibiotic-audit-20261029.html`。
+- 核對 2024 年報第三章圖 3-2-1～圖 3-2-12，12 菌種合計 88 個菌藥組合，修正 `data/ar_2024_full_demo_preview.csv` 現為 2,004 筆（重要菌種 384 筆、MDRO 1,620 筆）。
+- SA 圖 3-2-7 僅 Cefoxitin、Oxacillin；四面板固定亮藍，保留 Oxacillin 47.4% 年報內文明載值。移除誤列品項。
+- 修正 P. aeruginosa、S. pneumoniae、Shigella、NTS 抗生素名稱順序與其他菌種配色；對原圖未發布者保留 ＊。
+- 修正 3 檢體 A 分圖位置及檢體選單 `all` 重複值；CRAB 趨勢圖及 CO＋HO／CO／HO 堆疊縱軸尺度更接近原年報。MDRO 切換測試曾發現 `ReferenceError: i is not defined`，已修正。
+- 回復：將上述歷程 HTML、JS 及 CSV 各覆蓋原始檔名即可。請參閱 `data/AR_REPORT_PREVIEW_README.md`。
+- 示意值仍為模擬資料；未進行正式公網瀏覽器與 AA 驗收。
