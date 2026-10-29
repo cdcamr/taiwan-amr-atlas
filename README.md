@@ -189,3 +189,15 @@ AR Explorer now uses `js/ar-report-figures-fidelity.js` in place of the previous
 - Original CRAB CO+HO/CO charts remain supported as before. For other MDRO CO+HO and CO, figure references are available but source values are not yet fully digitized; the UI correctly labels these missing data rather than displaying made-up charts.
 - Chapter III `A. baumannii` remains the original four-panel chart; `K. pneumoniae` includes the four exact narrative-derived 2024 blood/urine drug rates; the other ten organism selections display full source references and an explicit data-pending message. Complete dropdown **coverage must not be confused with complete machine-validated values**.
 - Backup files for both the JS implementation and the AR Explorer HTML are in `history/`. Existing Antibiogram and original AR count datasets are unchanged. Static JS syntax and dataset consistency have been checked; cross-browser/RWD/AA functional QA and original data verification remain outstanding.
+
+
+## Full AR yearbook-style interactive preview (2026-10-29)
+
+The AR Explorer now loads `js/ar-report-complete-preview.js` (the previous `js/ar-report-figures-fidelity.js` is preserved but no longer loaded). This is an intentionally complete **illustrative prototype**, not an official data republication.
+
+- All **12 important organism categories** have report-format horizontal R% bars in (A) CO+HO (all specimens + organism-specific additional specimens) and (B) CO, (C) HO, with single-agent filters. Combinations the annual report suppressed for insufficient specimens/testing remain marked `＊`, not zero.
+- All **9 MDRO categories × three origins** (CO+HO, CO, HO) have a six-year 2019–2024 hospital-level stacked isolate count chart and four-series national/medical-center/regional/district R% trend. The CO+HO count stacks show CO/HO; individual CO and HO stacks show I+R/S. Consistent colors, year highlighting, hover/focus details, CSV, per-chart PNG, and sharable selections are included.
+- `data/ar_2024_full_demo_preview.csv` has **2,016 rows**: 396 organism/drug/panel rows and 1,620 MDRO records. Most are labeled `illustrative_estimate`: deterministic *demonstration-only* values, **not official report values and not valid clinical or policy measurements**. Sixteen directly quoted yearbook narrative percentages retain `narrative_exact`; 25 suppressed entries remain `not_reported_lt20`.
+- A privacy-preserving optional PDF comparison control lets users load their own report locally; it is not uploaded.
+- The empty `data/ar_2024_full_official_import.csv` accepts `official_verified` replacements for the same row keys; only validated, provenance-bearing rows override demo observations. See `data/AR_REPORT_PREVIEW_README.md` for field schema, limitations, and later import instructions.
+- Version history is retained in `history/ar-explorer-before-full-demo-20261029.html`. Source CSV arithmetic and JS syntax tests passed; actual public browser/mobile/AA and PNG visual QA remain outstanding.
