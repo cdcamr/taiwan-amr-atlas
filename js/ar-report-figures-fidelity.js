@@ -18,7 +18,14 @@ const lineColors={medical_center:'#4074B6',regional_hospital:'#E77845',district_
 const fills={medical_center:['#8FB8D8','#405F97'],regional_hospital:['#EBA687','#BB6137'],district_hospital:['#AAA8AA','#79777B']};
 let points=[],shown=[],tab='important',basePoints=[],hoPoints=[],kpPoints=[],narrative=[];
 function parse(txt){const a=txt.trim().split(/\r?\n/),h=a.shift().split(',');return a.map(line=>{const cells=line.split(',');return Object.fromEntries(h.map((k,i)=>[k,cells[i]??'']))}).filter(r=>{const v=Number(r.value);return Number.isFinite(v)&&v>=0&&((r.unit==='percent'&&v<=100)||r.unit==='isolates')&&['narrative_exact','chart_estimate'].includes(r.precision)})}
-const fmt=r=>(r.precision==='chart_estimate'?'約 ':'')+(r.unit==='percent'?Number(r.value).toFixed(1)+'%':Number(r.value).toLocaleString('zh-TW')+' 株');
+const fmt=r=>{
+ if(r.relation==='exact')return Number(r.lower_pct).toFixed(1)+'%';
+ if(r.relation==='range'||r.relation==='range_approx')return (r.relation==='range_approx'?'約 ':'')+Number(r.lower_pct).toFixed(1)+'–'+Number(r.upper_pct).toFixed(1)+'%';
+ if(r.relation==='less_than')return '低於 '+Number(r.upper_pct).toFixed(1)+'%';
+ if(r.relation==='greater_than')return '高於 '+Number(r.lower_pct).toFixed(1)+'%';
+ const v=Number(r.value);
+ return (r.precision==='chart_estimate'?'約 ':'')+(r.unit==='percent'?v.toFixed(1)+'%':v.toLocaleString('zh-TW')+' 株');
+};
 function describe(r){return[r.indicator,r.year+'（民國'+(+r.year-1911)+'）',labels[r.hospital_level]||r.hospital_level,labels[r.onset]||r.onset,labels[r.specimen]||r.specimen,r.antibiotic||r.component,fmt(r),r.precision==='chart_estimate'?'圖形估讀，非精確值':'年報文字核對值','圖'+r.source_figure+'，第'+r.source_page+'頁',r.narrative_page?'文字數值來源：第'+r.narrative_page+'頁':''].filter(Boolean).join(' · ')}
 function mark(r){return ' class="rsc-mark" tabindex="0" data-point="'+points.indexOf(r)+'" aria-label="'+html(describe(r))+'"'}
 function card(title,subtitle,svg,source){return '<figure class="rsc-card"><div class="rsc-card-head"><h3>'+html(title)+'</h3><button type="button" class="rsc-figure-png" aria-label="下載此圖 PNG">↓ PNG</button></div><div class="rsc-subtitle">'+subtitle+'</div><div class="rsc-paper"><div class="rsc-scroll">'+svg+'</div></div><figcaption>2024 年報 '+source+'。圖形估讀值不代表精確資料。</figcaption></figure>'}
@@ -230,9 +237,14 @@ function addHover(){
  section.querySelectorAll('[data-point]').forEach(el=>{const r=points[Number(el.dataset.point)];if(!r)return;const fn=()=>{$('rscDetail').textContent=describe(r)};
  el.addEventListener('mouseenter',fn);el.addEventListener('focus',fn);el.addEventListener('click',fn);
  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fn()}})});
+ section.querySelectorAll('[data-narrative-point]').forEach(el=>{
+ const r=narrative[Number(el.dataset.narrativePoint)];if(!r)return;
+ const fn=()=>{$('rscDetail').textContent=r.label+'：'+narrativeValue(r)+'；'+narrativeScope(r)+'。'+narrativeType[r.relation]+'，2024年報第'+r.source_page+'頁'+(r.note?'。'+r.note:'')};
+ el.addEventListener('mouseenter',fn);el.addEventListener('focus',fn);el.addEventListener('click',fn);
+ });
 }
 function table(){
- const cols=['section','record_type','indicator','year','onset','specimen','hospital_level','antibiotic','component','value','unit','precision','source_figure','source_page','narrative_page','extraction_method'];
+ const cols=['section','record_type','indicator','year','onset','specimen','hospital_level','antibiotic','component','value','lower_pct','upper_pct','relation','unit','precision','source_figure','source_page','narrative_page','extraction_method','note'];
  $('rscTable').innerHTML='<table><caption>年報式圖表監測資料與來源／估讀註記</caption><thead><tr>'+cols.map(x=>'<th scope="col">'+x+'</th>').join('')+'</tr></thead><tbody>'+shown.map(r=>'<tr>'+cols.map(k=>'<td>'+html(k==='value'?fmt(r):r[k]||'—')+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
 }
 function render(){if(tab==='important')important();else mdro();$('rscDetail').textContent='將滑鼠移至圖中的色塊或資料點、點擊或按 Tab 聚焦，即可查看數值及來源。';$('rscCount').textContent='目前 '+shown.length+' 筆；含資料品質標記';$('rscCsvBtn').disabled=!shown.length;$('rscTableBtn').disabled=!shown.length;$('rscPngBtn').disabled=!$('rscPlots').querySelector('svg');$('rscTable').hidden=true;$('rscTableBtn').textContent='資料表';table();addHover();section.querySelectorAll('.rsc-figure-png').forEach((b,i)=>b.onclick=()=>exportSvg(b.closest('figure').querySelector('svg'),'report-'+tab+'-figure-'+(i+1)+'.png'))}
@@ -250,7 +262,7 @@ $('rscOnset').addEventListener('change',render);
 section.querySelectorAll('[data-rsc]').forEach(btn=>btn.onclick=()=>{tab=btn.dataset.rsc;section.querySelectorAll('[data-rsc]').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));setupSelectors();render()});
 $('rscTableBtn').onclick=()=>{$('rscTable').hidden=!$('rscTable').hidden;$('rscTableBtn').textContent=$('rscTable').hidden?'資料表':'隱藏資料表'};
 function download(data,name,type){let a=document.createElement('a'),u=URL.createObjectURL(new Blob([data],{type}));a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}
-$('rscCsvBtn').onclick=()=>{const keys=['section','record_type','indicator','year','onset','specimen','hospital_level','antibiotic','component','value','unit','precision','source_figure','source_page','narrative_page','extraction_method'];download('\uFEFF'+keys.join(',')+'\n'+shown.map(r=>keys.map(k=>'"'+String(r[k]??'').replaceAll('"','""')+'"').join(',')).join('\n'),'report-'+tab+'-with-precision.csv','text/csv;charset=utf-8')};
+$('rscCsvBtn').onclick=()=>{const keys=['section','record_type','indicator','year','onset','specimen','hospital_level','antibiotic','component','value','lower_pct','upper_pct','relation','unit','precision','source_figure','source_page','narrative_page','extraction_method','note'];download('\uFEFF'+keys.join(',')+'\n'+shown.map(r=>keys.map(k=>'"'+String(r[k]??'').replaceAll('"','""')+'"').join(',')).join('\n'),'report-'+tab+'-with-precision.csv','text/csv;charset=utf-8')};
 function exportSvg(svg,filename){
  if(!svg){$('rscStatus').textContent='目前沒有可下載的圖表';return}
  const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml;charset=utf-8'})),img=new Image();
@@ -260,5 +272,25 @@ function exportSvg(svg,filename){
 }
 $('rscPngBtn').textContent='第一張圖 PNG';
 $('rscPngBtn').onclick=()=>exportSvg($('rscPlots').querySelector('svg'),'report-'+tab+'-first-figure.png');
-Promise.all(['./data/ar_2024_report_style_chart_estimates.csv','./data/ar_2024_mdro_HO_report_estimates.csv','./data/ar_2024_key_resistance_report_points.csv'].map(url=>fetch(url,{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject(Error('HTTP '+r.status+' '+url))))).then(([a,b,c])=>{basePoints=parse(a);hoPoints=parse(b);const csv=c.trim().split(/\r?\n/),header=csv.shift().split(',');kpPoints=csv.map(line=>Object.fromEntries(header.map((k,i)=>[k,line.split(',')[i]]))).filter(r=>r.domain==='important').map(r=>({section:'important',record_type:'resistance',indicator:'K_pneumoniae',year:r.year,onset:'CO+HO',specimen:r.specimen,hospital_level:'national',antibiotic:r.antibiotic,component:'R',value:r.resistance_pct,unit:'percent',precision:'narrative_exact',source_figure:r.source_figure,source_page:r.printed_page,narrative_page:r.printed_page,extraction_method:'report_narrative'}));if(basePoints.length!==124||hoPoints.length!==518||kpPoints.length!==4)throw Error('資料筆數驗證未通過：'+basePoints.length+'/'+hoPoints.length+'/'+kpPoints.length);points=basePoints.concat(hoPoints,kpPoints);setupSelectors();render()}).catch(e=>$('rscStatus').textContent='圖表資料載入失敗：'+e.message);
+const sources=['./data/ar_2024_report_style_chart_estimates.csv','./data/ar_2024_mdro_HO_report_estimates.csv','./data/ar_2024_key_resistance_report_points.csv','./data/ar_2024_report_verified_narrative.json'];
+Promise.allSettled(sources.map(url=>fetch(url,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status+' '+url);return r.text()}))).then(results=>{
+ const got=i=>results[i].status==='fulfilled'?results[i].value:'';
+ basePoints=got(0)?parse(got(0)):[];
+ hoPoints=got(1)?parse(got(1)):[];
+ const c=got(2),oldRows=c?c.trim().split(/\r?\n/):[],head=oldRows.shift()?.split(',')||[];
+ kpPoints=oldRows.map(line=>Object.fromEntries(head.map((k,i)=>[k,line.split(',')[i]]))).filter(r=>r.domain==='important').map(r=>({section:'important',record_type:'resistance',indicator:'K_pneumoniae',year:r.year,onset:'CO+HO',specimen:r.specimen,hospital_level:'national',antibiotic:r.antibiotic,component:'R',value:r.resistance_pct,unit:'percent',precision:'narrative_exact',source_figure:r.source_figure,source_page:r.printed_page,narrative_page:r.printed_page,extraction_method:'report_narrative'}));
+ const narrativeJson=got(3)?JSON.parse(got(3)):null;
+ narrative=(narrativeJson?.records||[]).filter(r=>r&&r.code&&['exact','range','range_approx','less_than','greater_than'].includes(r.relation)&&Number.isInteger(Number(r.year))&&Number(r.year)>=2019&&Number(r.year)<=2024&&(r.lower_pct===null||Number(r.lower_pct)>=0&&Number(r.lower_pct)<=100)&&(r.upper_pct===null||Number(r.upper_pct)>=0&&Number(r.upper_pct)<=100));
+ if(!narrative.length&&!basePoints.length&&!hoPoints.length)throw Error('無可用年報文字或趨勢資料');
+ const accurate=narrative.filter(r=>r.relation==='exact'&&r.indicator_type==='MDRO'&&r.onset==='CO+HO');
+ basePoints.forEach(p=>{
+  if(p.section!=='mdro_resistance')return;
+  const n=accurate.find(x=>x.code===p.indicator&&String(x.year)===String(p.year)&&x.hospital_level===p.hospital_level);
+  if(n){p.value=String(n.lower_pct);p.precision='narrative_exact';p.narrative_page=n.source_page}
+ });
+ points=basePoints.concat(hoPoints,kpPoints);
+ setupSelectors();render();
+ const failures=results.map((x,i)=>x.status==='rejected'?sources[i]:'').filter(Boolean);
+ if(failures.length)$('rscStatus').textContent+='；注意：'+failures.length+' 個資料檔案暫無法讀取，已使用現有可驗證資料顯示。';
+}).catch(e=>{$('rscStatus').textContent='年報資料載入失敗：'+e.message});
 })();
