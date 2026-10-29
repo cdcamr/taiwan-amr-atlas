@@ -18,9 +18,14 @@ section.innerHTML='<div class="ap-head"><div><div class="eyebrow">2024 TAIWAN AM
 '<div id="apFigures"></div><div id="apSourceDetails" aria-live="polite" class="ap-info">將滑鼠移至色塊或資料點，或以 Tab／Enter 查看數值、資料品質與年報圖號。</div>'+
 '<div id="apTableWrap" hidden class="ap-table-wrap"></div><div class="ap-bottom"><strong>資料來源與限制</strong><p>圖型、分圖順序及配色參考《2024 年臺灣抗生素抗藥性監視年報》第三、四章。此處缺少正式數值的序列，先由示意模型產生，不能視為原報告測量結果。圖上不重建尚未取得的誤差線與 95% CI。</p></div>';
 section.querySelector('.ap-head h2').textContent=domainLock==='mdro'?'多重抗藥菌（MDRO）歷年趨勢':'重要菌種抗藥性百分比';
+section.querySelector('.ap-head h2').id='apSectionTitle';
+section.querySelector('.ap-head .eyebrow').textContent=domainLock==='mdro'?'SECTION 03 · MDRO TREND':'SECTION 02 · IMPORTANT ORGANISMS';
 section.querySelector('.ap-head p').textContent=domainLock==='mdro'?'依年報第 4 章呈現九類多重抗藥菌，分別切換 CO＋HO、CO 或 HO 的菌株數堆疊圖及抗藥率折線圖。':'依年報第 3 章呈現十二類重要菌種，（A）CO＋HO、（B）CO、（C）HO 及適用檢體分圖。';
 section.querySelector('.ap-controls-top')?.remove();
 section.querySelectorAll('[id]').forEach(el=>el.id=prefix+el.id);
+section.setAttribute('aria-labelledby',prefix+'apSectionTitle');
+section.querySelector('#'+prefix+'apPdfView')?.classList.add('ap-pdf-view');
+section.querySelector('#'+prefix+'apPdfState')?.classList.add('ap-pdf-state');
 const anchor=document.getElementById('reportFigure21')||document.getElementById('chartTitle')?.closest('.panel');
 if(domainLock==='mdro'){
  const previous=document.getElementById('arImportantSection');
