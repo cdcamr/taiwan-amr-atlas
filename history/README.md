@@ -90,3 +90,14 @@
 - 修正 3 檢體 A 分圖位置及檢體選單 `all` 重複值；CRAB 趨勢圖及 CO＋HO／CO／HO 堆疊縱軸尺度更接近原年報。MDRO 切換測試曾發現 `ReferenceError: i is not defined`，已修正。
 - 回復：將上述歷程 HTML、JS 及 CSV 各覆蓋原始檔名即可。請參閱 `data/AR_REPORT_PREVIEW_README.md`。
 - 示意值仍為模擬資料；未進行正式公網瀏覽器與 AA 驗收。
+
+
+## 2026-10-29：AR Explorer 三區塊與 ICON 延伸圖表布局
+
+- 改版前備份：`history/ar-explorer-before-3-section-icon-layout-20261029.html` 與 `history/ar-report-complete-preview-before-3-section-icon-layout-20261029.js`。
+- 主區塊 01「分離菌株排名與組成」：沿用原本 `js/ar-report-figure21.js` 的年報式堆疊柱狀圖，常態顯示；原有年份／檢體／感染來源下拉篩選、圖例、懸浮資訊及 CSV／PNG 功能均保留。
+- 分離菌株原本的單年排行柱狀圖、六年折線圖、多菌種比較折線／分組柱狀圖及年報表格，改為 4 個有文字標籤、鍵盤可操作的圖示入口；預設隱藏，展開後沿用原有 `chartType`、`data-view` 與 `compareSection` 既有程式，不再佔用主要頁面。
+- 主區塊 02「重要菌種抗藥性百分比」及主區塊 03「多重抗藥菌（MDRO）歷年趨勢」已分離；`js/ar-report-complete-preview.js` 以 `data-domain="important"`、`data-domain="mdro"` 各自掛載一個獨立實例，擁有各自的下拉篩選及 `imp...`／`mdro...` 網址參數。不再共用切換頁籤、DOM id 或圖表狀態。
+- 新增 `js/ar-explorer-three-section-layout.js` 控制分離菌株分析圖示及三區塊導覽，原有 `js/ar-multiseries-comparison.js`、`js/ar-report-figure21.js`、原始資料及 Antibiogram 均未改動。
+- 回復方式：以上兩份備份分別覆蓋 `ar-explorer.html` 及 `js/ar-report-complete-preview.js`，新布局程式留存但舊版 HTML 不再引用。
+- QA：兩份 JavaScript 與所有 inline scripts 語法通過；模擬 DOM 驗證雙區塊各有 12／9 選項且選單狀態互不干擾；原排名延伸 ICON 的柱狀、折線、比較、表格及收合路徑測試通過。**實際公網 Chromium／手機、下載及 AA 無障礙驗收仍待完成**。
