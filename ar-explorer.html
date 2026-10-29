@@ -59,6 +59,19 @@
 .rsc-mark:hover{filter:brightness(.82)}
 .rsc-mark:focus-visible{stroke:#161616;stroke-width:3;outline:none}
 .rsc-detail{border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--panel);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:13px}
+
+.rsc-controls label[hidden]{display:none!important}
+.rsc-source-only{background:var(--panel);border:1px dashed var(--line);border-radius:11px;padding:18px;margin:10px 0 16px;font-size:13px;line-height:1.8}
+.rsc-source-only p{margin:7px 0;color:var(--mute)}
+.rsc-source-only a{color:var(--accent);text-decoration:underline}
+.rsc-verified-drug{max-width:740px;padding:8px 0 12px;border-bottom:1px solid var(--line)}
+.rsc-verified-bar{display:grid;grid-template-columns:75px minmax(0,1fr) 65px;align-items:center;gap:8px;margin:7px 0}
+.rsc-verified-bar span{font-size:12px}
+.rsc-verified-bar .rsc-scale{border:1px solid var(--line);border-radius:3px;height:17px;overflow:hidden;background:var(--bg)}
+.rsc-verified-bar i{height:100%;display:block}
+.rsc-verified-bar b{text-align:right;font-variant-numeric:tabular-nums}
+.rsc-controls select{min-width:180px;max-width:100%}
+@media(max-width:700px){.rsc-source-only{padding:12px}.rsc-verified-bar{grid-template-columns:68px minmax(0,1fr) 50px}}
 #rscTable[hidden]{display:none!important}#rscTable{max-height:540px;overflow:auto}
 #rscTable caption{text-align:left;padding:10px 0;font-weight:750}
 .report-style-charts table{font-variant-numeric:tabular-nums}
