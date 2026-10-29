@@ -118,6 +118,61 @@
 .rsc-pdf-frame{height:min(80vh,900px);min-height:460px;border:1px solid var(--line);margin:12px 0;border-radius:7px;overflow:hidden}
 .rsc-pdf-frame iframe{width:100%;height:100%;border:0;background:#fff}
 @media(max-width:650px){.rsc-pdf-frame{height:62vh;min-height:380px}.rsc-original-pdf{padding:10px}}
+</style><style>
+/* 2024 annual report full-coverage demo: fixed report palette, responsive and accessible */
+.ar-full-preview{margin:20px 0;padding:22px}
+.ap-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.ap-head h2{margin:5px 0;font-size:23px}
+.ap-head p{color:var(--mute);margin:5px 0 12px;max-width:740px;line-height:1.7}
+.ap-mode{padding:9px 13px;border:1px solid var(--accent);border-radius:9px;font-size:12px;font-weight:750;white-space:nowrap}
+.ap-controls-top,.ap-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:14px 0}
+.ap-controls-top button[aria-pressed=true]{background:var(--accent);color:var(--bg);font-weight:750}
+.ap-filter{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}
+.ap-filter label{display:grid;gap:6px;color:var(--mute);font-size:12px;min-width:0}
+.ap-filter label[hidden]{display:none!important}
+.ap-filter select{min-width:0;max-width:100%;width:100%;min-height:40px;font-size:13px}
+.ap-warning{border:1px solid var(--line);border-left:4px solid var(--accent);padding:13px 16px;border-radius:9px;margin:15px 0;font-size:12px;line-height:1.8}
+.ap-warning p{margin:7px 0 0;color:var(--mute)}
+.ap-key{display:inline-flex;align-items:center;gap:7px;margin:4px 13px 4px 5px}
+.ap-key i{display:inline-block;width:18px;height:9px;border-radius:2px}
+.ap-key .ap-sample{background:#806B9E;opacity:.7}
+.ap-key .ap-narrative{background:#576c96}
+.ap-key b{font-size:14px}
+.ap-toolbar span{font-size:12px;color:var(--mute)}
+.ap-intro{margin:24px 0 15px}
+.ap-intro h3{font-size:18px;margin:0 0 6px}
+.ap-intro p{font-size:13px;color:var(--mute);margin:4px 0}
+.ap-figure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:15px 0 24px}
+.ap-figure{margin:11px 0 24px;min-width:0}
+.ap-figure-grid .ap-figure{margin:0}
+.ap-figure-heading{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:5px}
+.ap-figure h3{font-size:15px;margin:0}
+.ap-figure button.ap-png{font-size:12px;min-height:35px;padding:6px 12px}
+.ap-figure-meta{font-size:12px;color:var(--mute);margin:6px 0}
+.ap-paper{background:#fff;color:#222;border:1px solid #ddd;border-radius:7px;padding:12px 8px}
+.ap-svg-scroll{overflow-x:auto;overscroll-behavior-x:contain}
+.ap-svg-scroll svg{display:block;width:100%;min-width:440px;max-height:700px;height:auto;margin:auto}
+.ap-figure:not(.ap-figure-grid .ap-figure) .ap-svg-scroll svg{max-width:1080px}
+.ap-figure figcaption{font-size:11px;color:var(--mute);margin-top:7px}
+.ap-legend{display:flex;flex-wrap:wrap;gap:7px 18px;align-items:center;font-size:12px;line-height:1.7}
+.ap-legend span{display:inline-flex;gap:7px;align-items:center}
+.ap-legend span>i{display:inline-block;width:20px;height:6px;border-radius:3px}
+.ap-legend-stacked strong{margin-right:4px}
+.ap-svg-hit{cursor:pointer;transition:filter .15s}
+.ap-svg-hit:hover{filter:brightness(.75)}
+.ap-svg-hit:focus-visible{stroke:#111;stroke-width:3;outline:none}
+.ap-info{border-left:4px solid var(--accent);border-radius:7px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 14px;font-size:13px;line-height:1.8;margin:12px 0}
+.ap-floating-tip{position:fixed;z-index:120;max-width:300px;background:#172c24;color:#fff;padding:10px 12px;border-radius:9px;font-size:12px;line-height:1.65;box-shadow:0 7px 26px #0004;pointer-events:none}
+.ap-floating-tip[hidden]{display:none!important}
+.ap-table-wrap{overflow:auto;max-height:600px;margin:15px 0}
+.ap-table-wrap[hidden]{display:none!important}
+.ap-table-wrap table{min-width:910px;font-size:12px;font-variant-numeric:tabular-nums}
+.ap-table-wrap caption{text-align:left;font-weight:700;padding:9px 0}
+.ap-bottom{margin-top:18px;border-top:1px solid var(--line);padding-top:12px;font-size:12px}
+.ap-bottom p{color:var(--mute);line-height:1.8}
+@media(max-width:820px){.ap-filter{grid-template-columns:repeat(2,minmax(0,1fr))}.ap-figure-grid{grid-template-columns:minmax(0,1fr)}.ap-figure:not(.ap-figure-grid .ap-figure) .ap-svg-scroll svg{min-width:560px}}
+@media(max-width:520px){.ar-full-preview{padding:14px}.ap-filter{grid-template-columns:minmax(0,1fr)}.ap-paper{padding:8px 4px}.ap-svg-scroll svg{min-width:510px}.ap-head h2{font-size:20px}}
+@media(prefers-reduced-motion:reduce){.ap-svg-hit{transition:none}}
 </style></head><body><header><strong>◈ TAIWAN AMR ATLAS · AR EXPLORER</strong><div class="flex"><a href="./">← 監測總覽</a><a href="./antibiogram.html">Antibiogram ↗</a><button id="theme">◐ 主題</button></div></header><main><div class="eyebrow">INTERACTIVE NATIONAL SURVEILLANCE · CSV-DRIVEN</div><h1>AR 抗生素抗藥性監測探索</h1><p>全國分離菌株組成及年報版本比較。選取年報版本、監測年度及菌種，圖表、懸浮提示、資料表及下載同步更新。</p><div class="panel"><div class="flex filters"><label>分析資料類型<select id="arDatasetMode" aria-label="切換菌株數與敏感性圖譜"><option value="counts">菌株數與組成比例</option><option value="susceptibility">抗生素敏感性 S%（進入 Antibiogram）</option></select></label><label>年報出版版本<select id="edition"></select></label><label>監測年度<select id="year"></select></label><label>菌種<select id="org"></select></label><label>數值模式<select id="mode"><option value="count">分離菌株數</option><option value="share">占比（%）</option></select></label></div><div class="flex tabs"><label>圖表類型<select id="chartType"><option value="bar">柱狀圖</option><option value="line">折線圖</option></select></label><button data-view="report" aria-pressed="true">年報表 2-1</button><button data-view="rank" aria-pressed="false">菌種排行</button><button data-view="trend" aria-pressed="false">歷年趨勢</button><button data-view="table" aria-pressed="false">資料表格</button><button id="download" class="primary">↓ 下載篩選 CSV</button><button id="copy">複製此篩選網址</button></div></div><div class="cards"><div class="metric"><div class="small">全國菌株總數</div><strong id="total">—</strong></div><div class="metric"><div class="small">當年首位菌種</div><strong id="leader">—</strong></div><div class="metric"><div class="small">首位菌種占比</div><strong id="leading">—</strong></div></div><div class="panel"><h2 id="chartTitle">表 2-1｜全國臨床分離菌株數排名</h2><p class="small" id="reportIntro">預設比照年報表 2-1：菌種為列、六個監測年度為欄；亦可切換排行及趨勢。</p><div id="plot" class="rows" role="region" aria-label="抗藥性監測圖表，資料格可使用 Tab 鍵聚焦"></div><div id="tabular" class="scroll" role="region" aria-label="監測結果資料表" tabindex="0" hidden></div><p id="method" class="notice"></p><div id="arFeedback" class="a11y-visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div></div><div class="panel"><h2>進階分析</h2><div class="links"><a href="./antibiogram.html">2024 Antibiogram 敏感性圖譜 ↗</a><a href="./#antibiogramIntegrated">2022–2024 跨年菌藥趨勢 ↗</a><a href="./one-health-lab.html">One Health 跨領域研究室 ↗</a></div><p class="small">本頁指標為分離菌株數及其組成比例，<strong>不是抗生素抗藥率</strong>；敏感性與抗藥性數值應至 Antibiogram 專區查看。</p></div><div class="small">資料來源：2022、2023、2024 年《臺灣抗生素抗藥性監視年報》表 2-1。各年報版本的回溯年度數字可能不同，請勿混合版本或將分離株數解讀為發生率。</div></main><div class="tip" id="tooltip" role="tooltip"></div><script>
 (()=>{'use strict';const $=id=>document.getElementById(id),path='./data/ar_isolates_by_edition_2017_2024.csv',fmt=v=>Number(v).toLocaleString('zh-TW'),saf=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');let rows=[],view='report';const qs=new URLSearchParams(location.search);$('theme').onclick=()=>document.body.classList.toggle('light');
 function parse(str){let grid=str.trim().split(/\r?\n/).map(x=>x.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(y=>y.replace(/^"|"$/g,'').replaceAll('""','"')));let hd=grid.shift();return grid.map(arr=>Object.fromEntries(hd.map((col,i)=>[col,arr[i]??'']))).map(r=>({...r,report_edition:+r.report_edition,year:+r.year,isolates:+r.isolates}))}
@@ -135,4 +190,4 @@ $('plot').innerHTML='<div style="overflow-x:auto"><p class="small">折線圖顯�
 function download(){let m=values();if(view==='report'){const org=$('org').value,items=rows.filter(r=>r.report_edition===m.ed&&(org==='all'||r.organism===org));const cols=['report_edition','year','organism','isolates','rank','source_table','source_page','metric','scope'];const csv='\uFEFF'+cols.join(',')+'\n'+items.map(r=>cols.map(k=>'"'+String(r[k]??'').replaceAll('"','""')+'"').join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='ar-report-table-'+m.ed+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);return}let header='report_edition,year,organism,isolates,percentage_of_total,source_table,source_page\n',csv=header+m.items.map(r=>[m.ed,r.year,'"'+r.organism.replaceAll('"','""')+'"',r.num,r.den?(100*r.num/r.den).toFixed(5):'', '2-1',m.source].join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='ar-explorer-'+m.ed+'-'+m.year+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 const tip=$('tooltip');document.addEventListener('pointerover',e=>{let p=e.target.closest('[data-tip]');if(p){tip.textContent=p.dataset.tip;tip.classList.add('show')}});document.addEventListener('pointermove',e=>{if(tip.classList.contains('show')){tip.style.left=Math.max(8,Math.min(e.clientX+14,innerWidth-300))+'px';tip.style.top=Math.max(8,Math.min(e.clientY+14,innerHeight-195))+'px'}});document.addEventListener('pointerout',e=>{if(e.target.closest('[data-tip]'))tip.classList.remove('show')});document.addEventListener('focusin',e=>{let p=e.target.closest('[data-tip]');if(p){tip.textContent=p.dataset.tip;tip.style.left='16px';tip.style.top='16px';tip.classList.add('show')}});document.addEventListener('focusout',()=>tip.classList.remove('show'));fetch(path,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.text()}).then(t=>{rows=parse(t);if(rows.length!==216)throw Error('資料列數異常：'+rows.length);init()}).catch(e=>$('plot').innerHTML='<p>資料檔讀取失敗：'+e.message+'</p>');
 })();
-</script><script>(function(){const d=document.getElementById('arDatasetMode');if(!d)return;d.addEventListener('change',()=>{if(d.value==='susceptibility'){const url=new URL('./antibiogram.html',location.href);url.searchParams.set('species',document.getElementById('org')?.value||'all');location.href=url.toString()}})})();</script><script src="./js/ar-multiseries-comparison.js" defer></script><script src="./js/ar-report-figure21.js" defer></script><script src="./js/ar-report-figures-fidelity.js" defer></script><script src="./js/accessibility-enhancements.js" defer></script></body></html>
+</script><script>(function(){const d=document.getElementById('arDatasetMode');if(!d)return;d.addEventListener('change',()=>{if(d.value==='susceptibility'){const url=new URL('./antibiogram.html',location.href);url.searchParams.set('species',document.getElementById('org')?.value||'all');location.href=url.toString()}})})();</script><script src="./js/ar-multiseries-comparison.js" defer></script><script src="./js/ar-report-figure21.js" defer></script><script src="./js/ar-report-complete-preview.js" defer></script><script src="./js/accessibility-enhancements.js" defer></script></body></html>
