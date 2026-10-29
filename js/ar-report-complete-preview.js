@@ -84,7 +84,7 @@ function stackChart(rows,onset,name,source){
  const maxStack=Math.max(1,...levels.flatMap(l=>Array.from({length:6},(_,i)=>rows.filter(r=>r.hospital_level===l&&+r.year===2019+i).reduce((n,r)=>n+(+r.isolates||0),0))));
  const top=state.organism==='CRAB'?(onset==='CO+HO'?14000:onset==='CO'?6000:8000):Math.max(1000,Math.ceil(maxStack/5000)*5000),tick=state.organism==='CRAB'?(onset==='CO+HO'?2000:1000):top/5,y=v=>T+h-h*(+v)/top;
  let svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(name)+'"><rect width="'+W+'" height="'+H+'" fill="#fff"/>';
- for(let v=0;v<=top+0.0001;v+=tick){const Y=y(v);svg+='<text x="'+(L-9)+'" y="'+(Y+5)+'" font-size="13" text-anchor="end" fill="#222">'+Math.round(v).toLocaleString('en-US')+'</text>';if(i===0)svg+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y+'" y2="'+Y+'" stroke="#bbb"/>'}
+ for(let v=0;v<=top+0.0001;v+=tick){const Y=y(v);svg+='<text x="'+(L-9)+'" y="'+(Y+5)+'" font-size="13" text-anchor="end" fill="#222">'+Math.round(v).toLocaleString('en-US')+'</text>';if(v===0)svg+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y+'" y2="'+Y+'" stroke="#bbb"/>'}
  svg+='<text transform="translate(22,'+(T+h/2)+') rotate(-90)" font-size="15" fill="#222" text-anchor="middle">菌株數</text>';
  for(let yi=0;yi<6;yi++){const center=L+(yi+.5)*gw,dim=state.year!=='all'&&state.year!==String(2019+yi);if(yi)svg+='<line x1="'+(L+yi*gw)+'" x2="'+(L+yi*gw)+'" y1="'+(T+h)+'" y2="'+(H-8)+'" stroke="#d4d4d4"/>';
   for(let j=0;j<3;j++){const lev=levels[j],bx=center+(j-1)*(bw+10)-bw/2;let accum=0;
