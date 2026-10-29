@@ -68,3 +68,15 @@
 - 新增內容不改變原有分離菌株數圖、2024 Antibiogram 熱圖或原始年報 CSV。
 - **回復方式**：用上述歷程檔分別覆蓋 `js/ar-report-figures-fidelity.js` 與 `ar-explorer.html` 再提交即可，新增 CSV 可以繼續保留不被舊版引用。
 - 來源圖形估讀值不可當成可核對的官方精確值、不得以此推算 Wilson 95% CI、不得用於正式政策比較。需用原始分析數表替換後才能宣稱完整精確互動年報。
+
+
+## 2026-10-29：年報式完整示意版（12 類重要菌種／9 類 MDRO）
+
+- **修改前完整頁面**：`history/ar-explorer-before-full-demo-20261029.html`。
+- **修改前完整圖表程式**：`history/ar-report-figures-before-full-demo-20261029.js`。
+- **目前上線引用程式**：`js/ar-report-complete-preview.js`（原程式 `js/ar-report-figures-fidelity.js` 仍留存，不刪除）。
+- **新增示意資料**：`data/ar_2024_full_demo_preview.csv`，2016 筆，完整涵蓋 12 類重要菌種及 9 類 MDRO × CO＋HO／CO／HO，部分菌藥組合依年報保持未發表（＊）。
+- **示意值性質**：凡註記 `illustrative_estimate` 都是模擬示意值，並不是從年報原圖精確擷取之數據；僅 16 筆 `narrative_exact` 為年報文字明列值。原來源 `data/ar_2024_mdro_HO_report_estimates.csv` 仍保留，未被改寫。
+- **逐步換正式資料**：將完成數值與來源核對的紀錄填入 `data/ar_2024_full_official_import.csv`，以相同主鍵及 `official_verified`、`verified_by` 覆蓋示意值。
+- **回復步驟**：將 `history/ar-explorer-before-full-demo-20261029.html` 完整內容還原覆蓋根目錄 `ar-explorer.html` 並提交；其他新增資料與腳本留存也不會影響舊版執行。
+- **測試**：已驗證 12 類菌種 4–5 張分圖，以及 9 類 MDRO × 3 感染來源（27 組）各 2 張圖均可被程式產製，並通過 CSV 結構、MDRO 各年度比率與組成一致性、JavaScript 語法檢核。公開網頁真實瀏覽器、行動版與 AA 測試仍待進行。
