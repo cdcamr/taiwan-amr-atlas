@@ -16,7 +16,7 @@ const levels=['medical_center','regional_hospital','district_hospital'];
 const labels={medical_center:'醫學中心',regional_hospital:'區域醫院',district_hospital:'地區醫院',national:'全國','CO+HO':'CO＋HO',CO:'CO',HO:'HO',blood:'血液檢體',all:'全部檢體'};
 const lineColors={medical_center:'#4074B6',regional_hospital:'#E77845',district_hospital:'#A0A0A0',national:'#EFAF39'};
 const fills={medical_center:['#8FB8D8','#405F97'],regional_hospital:['#EBA687','#BB6137'],district_hospital:['#AAA8AA','#79777B']};
-let points=[],shown=[],tab='important',basePoints=[],hoPoints=[],kpPoints=[],narrative=[],reportPdfUrl=null;
+let points=[],shown=[],tab='important',basePoints=[],hoPoints=[],kpPoints=[],narrative=[],reportPdfUrl=null,exactOverrideCount=0;
 function parse(txt){const a=txt.trim().split(/\r?\n/),h=a.shift().split(',');return a.map(line=>{const cells=line.split(',');return Object.fromEntries(h.map((k,i)=>[k,cells[i]??'']))}).filter(r=>{const v=Number(r.value);return Number.isFinite(v)&&v>=0&&((r.unit==='percent'&&v<=100)||r.unit==='isolates')&&['narrative_exact','chart_estimate'].includes(r.precision)})}
 const fmt=r=>{
  if(r.relation==='exact')return Number(r.lower_pct).toFixed(1)+'%';
@@ -119,6 +119,46 @@ function narrativePlot(code,domain){
  cards+'<p class="rsc-official-foot">實心紫色＝年報明載單一數值；紫色斜紋＝原文範圍或界限。<a href="'+narrativeSource+'" rel="noopener noreferrer" target="_blank">疾管署正式年報下載頁</a></p></section>';
 }
 
+
+function readVerifiedOverrides(csv){
+ const lines=csv.trim().split(/\r?\n/),headers=lines.shift()?.split(',')||[];
+ if(!headers.includes('value')||!headers.includes('verified_by'))return [];
+ return lines.filter(Boolean).map(line=>{const values=line.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(x=>x.replace(/^"|"$/g,'').replace(/""/g,'"'));return Object.fromEntries(headers.map((k,i)=>[k,values[i]??'']))}).filter(r=>
+ r.indicator&&r.verified_by&&r.source_figure&&r.source_page&&
+ Number.isInteger(Number(r.year))&&Number(r.year)>=2019&&Number(r.year)<=2024&&
+ Number.isFinite(Number(r.value))&&Number(r.value)>=0&&
+ (r.unit==='isolates'||r.unit==='percent'&&Number(r.value)<=100)&&
+ ['resistance','counts'].includes(r.record_type));
+}
+function exactKey(r){
+ let type=r.record_type||((r.section==='important'||r.section==='mdro_resistance')?'resistance':'counts');
+ return [r.indicator,type,r.year,r.onset,r.specimen||'all',r.hospital_level||'national',r.antibiotic||'',r.component||'',r.unit].map(String).join('|');
+}
+function applyExactData(rows){
+ if(!rows.length)return;
+ const matched=new Map(rows.map(r=>[exactKey(r),r])),used=new Set();
+ [...basePoints,...hoPoints].forEach(point=>{
+  const item=matched.get(exactKey(point));if(!item)return;
+  point.value=item.value;point.precision='verified_exact';point.narrative_page=item.source_page;
+  point.source_page=item.source_page;point.source_figure=item.source_figure;point.extraction_method='official_verified_export';
+  point.verified_by=item.verified_by;used.add(exactKey(item));exactOverrideCount++;
+ });
+ // Additional exact antimicrobial values can be displayed as source-backed rows even
+ // when older raster charts never provided corresponding structured points.
+ for(const r of rows){
+  if(r.record_type!=='resistance'||r.unit!=='percent')continue;
+  const ref={
+   code:r.indicator,label:r.antibiotic||r.component,relation:'exact',
+   lower_pct:Number(r.value),upper_pct:Number(r.value),year:Number(r.year),
+   specimen:r.specimen||'all',onset:r.onset,hospital_level:r.hospital_level||'national',
+   source_page:Number(r.source_page),indicator_type:mdroGroups.some(x=>x[0]===r.indicator)?'MDRO':undefined,
+   precision:'reported_exact',note:'已核對原始精確資料：'+r.verified_by
+  };
+  const dup=narrative.findIndex(x=>x.code===ref.code&&x.label===ref.label&&x.year===ref.year&&x.specimen===ref.specimen&&x.onset===ref.onset&&x.hospital_level===ref.hospital_level);
+  if(dup>=0)narrative.splice(dup,1);
+  narrative.push(ref);
+ }
+}
 function verifiedNarrativeSvg(){
  const code=$('rscOrganism').value,domain=tab==='mdro'?'MDRO':'organism',onset=tab==='mdro'?$('rscOnset').value:'CO+HO';
  const list=narrative.filter(r=>r.code===code&&(domain==='MDRO'?r.indicator_type==='MDRO'&&r.onset===onset:!r.indicator_type));
@@ -302,7 +342,7 @@ $('rscPdfOpen').onclick=()=>{
  a.target='_blank';a.rel='noopener noreferrer';document.body.append(a);a.click();a.remove();
 };
 window.addEventListener('beforeunload',()=>{if(reportPdfUrl)URL.revokeObjectURL(reportPdfUrl)});
-function render(){if(tab==='important')important();else mdro();updateReportPdfPreview();$('rscDetail').textContent='將滑鼠移至圖中的色塊或資料點、點擊或按 Tab 聚焦，即可查看數值及來源。';const verifiedN=shown.filter(r=>r.precision==='narrative_exact'||r.precision==='reported_exact').length;const qualifiedN=shown.filter(r=>r.precision==='reported_qualifier').length;const estimatedN=shown.filter(r=>r.precision==='chart_estimate').length;$('rscCount').textContent='年報明載 '+verifiedN+' 筆、原文範圍／界限 '+qualifiedN+' 筆、圖形估讀 '+estimatedN+' 筆';$('rscCsvBtn').disabled=!shown.length;$('rscTableBtn').disabled=!shown.length;$('rscPngBtn').disabled=!$('rscPlots').querySelector('svg')&&!narrative.some(r=>r.code===$('rscOrganism').value&&(tab==='important'?!r.indicator_type:r.indicator_type==='MDRO'&&r.onset===$('rscOnset').value));$('rscTable').hidden=true;$('rscTableBtn').textContent='資料表';table();addHover();section.querySelectorAll('.rsc-figure-png').forEach((b,i)=>b.onclick=()=>exportSvg(b.closest('figure').querySelector('svg'),'report-'+tab+'-figure-'+(i+1)+'.png'))}
+function render(){if(tab==='important')important();else mdro();updateReportPdfPreview();$('rscDetail').textContent='將滑鼠移至圖中的色塊或資料點、點擊或按 Tab 聚焦，即可查看數值及來源。';const verifiedN=shown.filter(r=>r.precision==='narrative_exact'||r.precision==='reported_exact'||r.precision==='verified_exact').length;const qualifiedN=shown.filter(r=>r.precision==='reported_qualifier').length;const estimatedN=shown.filter(r=>r.precision==='chart_estimate').length;$('rscCount').textContent='年報明載 '+verifiedN+' 筆、原文範圍／界限 '+qualifiedN+' 筆、圖形估讀 '+estimatedN+' 筆';$('rscCsvBtn').disabled=!shown.length;$('rscTableBtn').disabled=!shown.length;$('rscPngBtn').disabled=!$('rscPlots').querySelector('svg')&&!narrative.some(r=>r.code===$('rscOrganism').value&&(tab==='important'?!r.indicator_type:r.indicator_type==='MDRO'&&r.onset===$('rscOnset').value));$('rscTable').hidden=true;$('rscTableBtn').textContent='資料表';table();addHover();section.querySelectorAll('.rsc-figure-png').forEach((b,i)=>b.onclick=()=>exportSvg(b.closest('figure').querySelector('svg'),'report-'+tab+'-figure-'+(i+1)+'.png'))}
 
 function setupSelectors(){
  const current=$('rscOrganism').value;
@@ -327,7 +367,7 @@ function exportSvg(svg,filename){
 }
 $('rscPngBtn').textContent='第一張圖 PNG';
 $('rscPngBtn').onclick=()=>exportSvg($('rscPlots').querySelector('svg')||verifiedNarrativeSvg(),'report-'+tab+'-first-figure.png');
-const sources=['./data/ar_2024_report_style_chart_estimates.csv','./data/ar_2024_mdro_HO_report_estimates.csv','./data/ar_2024_key_resistance_report_points.csv','./data/ar_2024_report_verified_narrative.json'];
+const sources=['./data/ar_2024_report_style_chart_estimates.csv','./data/ar_2024_mdro_HO_report_estimates.csv','./data/ar_2024_key_resistance_report_points.csv','./data/ar_2024_report_verified_narrative.json','./data/ar_2024_verified_exact_overrides.csv'];
 Promise.allSettled(sources.map(url=>fetch(url,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status+' '+url);return r.text()}))).then(results=>{
  const got=i=>results[i].status==='fulfilled'?results[i].value:'';
  basePoints=got(0)?parse(got(0)):[];
@@ -343,8 +383,10 @@ Promise.allSettled(sources.map(url=>fetch(url,{cache:'no-store'}).then(r=>{if(!r
   const n=accurate.find(x=>x.code===p.indicator&&String(x.year)===String(p.year)&&x.hospital_level===p.hospital_level);
   if(n){p.value=String(n.lower_pct);p.precision='narrative_exact';p.narrative_page=n.source_page}
  });
+ if(got(4))applyExactData(readVerifiedOverrides(got(4)));
  points=basePoints.concat(hoPoints,kpPoints);
  setupSelectors();render();
+ if(exactOverrideCount)$('rscStatus').textContent+='；其中 '+exactOverrideCount+' 筆圖表資料已以經核對的原始精確值覆寫。';
  const failures=results.map((x,i)=>x.status==='rejected'?sources[i]:'').filter(Boolean);
  if(failures.length)$('rscStatus').textContent+='；注意：'+failures.length+' 個資料檔案暫無法讀取，已使用現有可驗證資料顯示。';
 }).catch(e=>{$('rscStatus').textContent='年報資料載入失敗：'+e.message});
