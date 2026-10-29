@@ -5,7 +5,7 @@ section.innerHTML=
 '<div class="rsc-heading"><div><div class="eyebrow">REPORT STYLE · 2024 EDITION</div><h2>重要菌種抗藥性與多重抗藥菌趨勢</h2><p>比照年報圖型、分圖結構及固定配色。圖形讀取數值以「約」標示，不作為正式精確統計資料。</p></div><div class="rsc-actions"><button type="button" id="rscTableBtn">資料表</button><button type="button" id="rscCsvBtn">CSV 下載</button><button type="button" id="rscPngBtn">PNG 下載</button></div></div>'+
 '<div class="rsc-tabs"><button type="button" data-rsc="important" aria-pressed="true">重要菌種抗藥性</button><button type="button" data-rsc="mdro" aria-pressed="false">多重抗藥菌趨勢（CRAB）</button></div>'+
 '<div class="rsc-controls"><label>菌種／指標<select id="rscOrganism"></select></label><label id="rscOnsetWrap" hidden>感染來源<select id="rscOnset"><option value="CO+HO">CO＋HO</option><option value="CO">CO</option><option value="HO">HO</option></select></label><label>年報版本<select id="rscEdition"><option value="2024">2024 年報（113 年）</option></select></label></div>'+
-'<p class="rsc-evidence">資料品質：除年報文字明載的數值外，其他數值採圖形估讀（chart_estimate），目的是還原原圖視覺效果；原圖誤差線因欠缺精確信賴區間資料，未另行繪製。<span id="rscCount"></span></p>'+
+'<details class="rsc-original-pdf" id="rscOriginalPdf"><summary>查看年報原圖（選用本機 PDF）</summary><p>如需核對原圖，可選擇 2024 年臺灣抗生素抗藥性監視年報 PDF，瀏覽器會直接顯示目前菌種／MDRO 對應的年報頁碼；檔案不會上傳至網站。</p><label>年報 PDF <input id="rscReportFile" type="file" accept=".pdf,application/pdf"></label><button type="button" id="rscPdfOpen" disabled>在新分頁查看所選原圖</button><span id="rscReportFileStatus" role="status" aria-live="polite">尚未選擇年報檔</span><div class="rsc-pdf-frame" id="rscPdfPane" hidden><iframe id="rscPdfFrame" title="年報原圖 PDF 頁面預覽" loading="lazy"></iframe></div></details>'+'<p class="rsc-evidence">資料品質：除年報文字明載的數值外，其他數值採圖形估讀（chart_estimate），目的是還原原圖視覺效果；原圖誤差線因欠缺精確信賴區間資料，未另行繪製。<span id="rscCount"></span></p>'+
 '<p class="small" id="rscStatus" role="status" aria-live="polite">正在載入年報圖形資料…</p><div id="rscPlots"></div>'+
 '<div id="rscDetail" role="status" aria-live="polite" class="rsc-detail">移至圖形、點擊或使用 Tab 聚焦即可顯示數值與來源。</div>'+
 '<div id="rscTable" class="scroll" hidden></div><p class="small">資料來源：2024 年版《臺灣抗生素抗藥性監視年報》第 53、69、70 頁。抗藥性百分比為 R%，不同於 Antibiogram 的 S%；估讀值不得據以計算 95% CI。</p>';
@@ -16,7 +16,7 @@ const levels=['medical_center','regional_hospital','district_hospital'];
 const labels={medical_center:'醫學中心',regional_hospital:'區域醫院',district_hospital:'地區醫院',national:'全國','CO+HO':'CO＋HO',CO:'CO',HO:'HO',blood:'血液檢體',all:'全部檢體'};
 const lineColors={medical_center:'#4074B6',regional_hospital:'#E77845',district_hospital:'#A0A0A0',national:'#EFAF39'};
 const fills={medical_center:['#8FB8D8','#405F97'],regional_hospital:['#EBA687','#BB6137'],district_hospital:['#AAA8AA','#79777B']};
-let points=[],shown=[],tab='important',basePoints=[],hoPoints=[],kpPoints=[],narrative=[];
+let points=[],shown=[],tab='important',basePoints=[],hoPoints=[],kpPoints=[],narrative=[],reportPdfUrl=null;
 function parse(txt){const a=txt.trim().split(/\r?\n/),h=a.shift().split(',');return a.map(line=>{const cells=line.split(',');return Object.fromEntries(h.map((k,i)=>[k,cells[i]??'']))}).filter(r=>{const v=Number(r.value);return Number.isFinite(v)&&v>=0&&((r.unit==='percent'&&v<=100)||r.unit==='isolates')&&['narrative_exact','chart_estimate'].includes(r.precision)})}
 const fmt=r=>{
  if(r.relation==='exact')return Number(r.lower_pct).toFixed(1)+'%';
@@ -271,7 +271,38 @@ function table(){
  const cols=['section','record_type','indicator','year','onset','specimen','hospital_level','antibiotic','component','value','lower_pct','upper_pct','relation','unit','precision','source_figure','source_page','narrative_page','extraction_method','note'];
  $('rscTable').innerHTML='<table><caption>年報式圖表監測資料與來源／估讀註記</caption><thead><tr>'+cols.map(x=>'<th scope="col">'+x+'</th>').join('')+'</tr></thead><tbody>'+shown.map(r=>'<tr>'+cols.map(k=>'<td>'+html(k==='value'?fmt(r):r[k]||'—')+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
 }
-function render(){if(tab==='important')important();else mdro();$('rscDetail').textContent='將滑鼠移至圖中的色塊或資料點、點擊或按 Tab 聚焦，即可查看數值及來源。';const verifiedN=shown.filter(r=>r.precision==='narrative_exact'||r.precision==='reported_exact').length;const qualifiedN=shown.filter(r=>r.precision==='reported_qualifier').length;const estimatedN=shown.filter(r=>r.precision==='chart_estimate').length;$('rscCount').textContent='年報明載 '+verifiedN+' 筆、原文範圍／界限 '+qualifiedN+' 筆、圖形估讀 '+estimatedN+' 筆';$('rscCsvBtn').disabled=!shown.length;$('rscTableBtn').disabled=!shown.length;$('rscPngBtn').disabled=!$('rscPlots').querySelector('svg')&&!narrative.some(r=>r.code===$('rscOrganism').value&&(tab==='important'?!r.indicator_type:r.indicator_type==='MDRO'&&r.onset===$('rscOnset').value));$('rscTable').hidden=true;$('rscTableBtn').textContent='資料表';table();addHover();section.querySelectorAll('.rsc-figure-png').forEach((b,i)=>b.onclick=()=>exportSvg(b.closest('figure').querySelector('svg'),'report-'+tab+'-figure-'+(i+1)+'.png'))}
+
+function selectedReportPage(){
+ const code=$('rscOrganism').value;
+ if(tab==='important')return (organisms.find(x=>x[0]===code)||organisms[0])[2];
+ const index=mdroGroups.findIndex(x=>x[0]===code)+1;
+ const origin=$('rscOnset').value,offset=origin==='CO'?2:origin==='HO'?3:1;
+ return 68+4*(index-1)+offset;
+}
+function updateReportPdfPreview(){
+ if(!reportPdfUrl)return;
+ const page=selectedReportPage(),page1=page+8;
+ $('rscReportFileStatus').textContent='年報印刷頁 '+page+'；PDF 文件第 '+page1+' 頁（頁面會隨選單更新）';
+ $('rscPdfFrame').src=reportPdfUrl+'#page='+page1;
+ $('rscPdfPane').hidden=false;
+ $('rscPdfOpen').disabled=false;
+}
+$('rscReportFile').addEventListener('change',e=>{
+ const file=e.target.files&&e.target.files[0];
+ if(reportPdfUrl){URL.revokeObjectURL(reportPdfUrl);reportPdfUrl=null}
+ $('rscPdfPane').hidden=true;$('rscPdfOpen').disabled=true;
+ if(!file){$('rscReportFileStatus').textContent='尚未選擇年報檔';return}
+ if(!/\.pdf$/i.test(file.name)&&file.type!=='application/pdf'){$('rscReportFileStatus').textContent='請選擇 PDF 格式的 2024 年報';return}
+ reportPdfUrl=URL.createObjectURL(file);
+ updateReportPdfPreview();
+});
+$('rscPdfOpen').onclick=()=>{
+ if(!reportPdfUrl)return;
+ const a=document.createElement('a');a.href=reportPdfUrl+'#page='+(selectedReportPage()+8);
+ a.target='_blank';a.rel='noopener noreferrer';document.body.append(a);a.click();a.remove();
+};
+window.addEventListener('beforeunload',()=>{if(reportPdfUrl)URL.revokeObjectURL(reportPdfUrl)});
+function render(){if(tab==='important')important();else mdro();updateReportPdfPreview();$('rscDetail').textContent='將滑鼠移至圖中的色塊或資料點、點擊或按 Tab 聚焦，即可查看數值及來源。';const verifiedN=shown.filter(r=>r.precision==='narrative_exact'||r.precision==='reported_exact').length;const qualifiedN=shown.filter(r=>r.precision==='reported_qualifier').length;const estimatedN=shown.filter(r=>r.precision==='chart_estimate').length;$('rscCount').textContent='年報明載 '+verifiedN+' 筆、原文範圍／界限 '+qualifiedN+' 筆、圖形估讀 '+estimatedN+' 筆';$('rscCsvBtn').disabled=!shown.length;$('rscTableBtn').disabled=!shown.length;$('rscPngBtn').disabled=!$('rscPlots').querySelector('svg')&&!narrative.some(r=>r.code===$('rscOrganism').value&&(tab==='important'?!r.indicator_type:r.indicator_type==='MDRO'&&r.onset===$('rscOnset').value));$('rscTable').hidden=true;$('rscTableBtn').textContent='資料表';table();addHover();section.querySelectorAll('.rsc-figure-png').forEach((b,i)=>b.onclick=()=>exportSvg(b.closest('figure').querySelector('svg'),'report-'+tab+'-figure-'+(i+1)+'.png'))}
 
 function setupSelectors(){
  const current=$('rscOrganism').value;
