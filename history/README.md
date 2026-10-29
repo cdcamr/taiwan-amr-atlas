@@ -38,3 +38,11 @@
 - 包含 2019–2024 年血液、尿液、痰液、膿或傷口、糞便、CO、HO 七類，共 504 筆（含其他與總計）；42 組年度分層合計已與年報核對一致。
 - 僅同一版年報同一分類計算菌株數占比；不產生年報沒有的檢體 × 感染來源交叉結果。2022/2023 年版仍提供全國全部檢體合併資料。
 - 回復前一版：將 `history/ar-report-figure21-before-filters-20261028.js` 內容覆蓋 `js/ar-report-figure21.js`，並將 `history/ar-explorer-before-specimen-origin-filters-20261028.html` 覆蓋 `ar-explorer.html`；新 CSV 可留存，不需移除。
+
+## 2026-10-29：重要菌種抗藥率與多重抗藥菌趨勢試作
+
+- 調整前完整備份：`history/ar-explorer-before-key-pathogen-mdro-20261029.html`。
+- 新增：`js/ar-report-resistance-panels.js`、`data/ar_2024_key_resistance_report_points.csv`（10 筆年報文字明載的精確數值）。
+- 來源：2024 年版《臺灣抗生素抗藥性監視年報》頁 56（K. pneumoniae 血液及尿液之 ceftazidime、co-trimoxazole 抗藥率），頁 68（CRAB 108／113 年），頁 104（CRKP、CRPA 108／113 年）。
+- MDRO 僅呈現 108 與 113 年已核對端點，沒有補造 109–112 年值、沒有在缺漏年份間連線。重要菌種部分目前限 K. pneumoniae 兩種抗生素，並非第三章所有菌藥組合。
+- 回復方式：以歷程 HTML 覆蓋 `ar-explorer.html`；新增 JS/CSV 可保留但不會被頁面引用。原堆疊圖、Antibiogram 與原監測 CSV 未更改。
