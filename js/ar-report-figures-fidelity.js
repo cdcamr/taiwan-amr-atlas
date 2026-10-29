@@ -118,6 +118,30 @@ function narrativePlot(code,domain){
  '<div class="rsc-official-scale"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>'+
  cards+'<p class="rsc-official-foot">實心紫色＝年報明載單一數值；紫色斜紋＝原文範圍或界限。<a href="'+narrativeSource+'" rel="noopener noreferrer" target="_blank">疾管署正式年報下載頁</a></p></section>';
 }
+
+function verifiedNarrativeSvg(){
+ const code=$('rscOrganism').value,domain=tab==='mdro'?'MDRO':'organism',onset=tab==='mdro'?$('rscOnset').value:'CO+HO';
+ const list=narrative.filter(r=>r.code===code&&(domain==='MDRO'?r.indicator_type==='MDRO'&&r.onset===onset:!r.indicator_type));
+ if(!list.length)return null;
+ const W=1050,L=340,R=145,H=66+list.length*56,chartWidth=W-L-R,barTop=46;
+ let result='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="2024 年報文字明載抗藥率">';
+ result+='<rect width="'+W+'" height="'+H+'" fill="#ffffff"/><text x="20" y="27" font-size="20" fill="#202020" font-weight="bold">2024 年報內文核對值（R%）</text>';
+ result+='<defs><pattern id="verifiedStripes" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><rect width="10" height="10" fill="#d4c4e2"/><rect width="5" height="10" fill="#8d75a7"/></pattern></defs>';
+ for(let t=0;t<=100;t+=25){let x=L+chartWidth*t/100;result+='<text x="'+x+'" y="44" font-size="13" fill="#333" text-anchor="middle">'+t+'%</text>'}
+ list.forEach((r,i)=>{
+  const y=barTop+i*56+10,lo=r.lower_pct===null?0:Number(r.lower_pct),hi=r.upper_pct===null?100:Number(r.upper_pct);
+  let left=r.relation==='range'||r.relation==='range_approx'||r.relation==='greater_than'?lo:0;
+  let wide=r.relation==='exact'?hi:r.relation==='less_than'?hi:r.relation==='greater_than'?100-lo:hi-lo;
+  left=Math.max(0,Math.min(100,left));wide=Math.max(.3,Math.min(100-left,wide));
+  result+='<text x="20" y="'+(y+14)+'" fill="#222" font-size="14">'+html(r.label.length>42?r.label.slice(0,40)+'…':r.label)+'</text>';
+  result+='<rect x="'+L+'" y="'+y+'" width="'+chartWidth+'" height="21" fill="#f2f2f2"/>';
+  result+='<rect x="'+(L+chartWidth*left/100)+'" y="'+y+'" width="'+chartWidth*wide/100+'" height="21" fill="'+(r.relation==='exact'?'#806A9C':'url(#verifiedStripes)')+'"/>';
+  result+='<text x="'+(W-15)+'" y="'+(y+15)+'" fill="#222" text-anchor="end" font-size="15" font-weight="bold">'+html(narrativeValue(r))+'</text>';
+  result+='<text x="20" y="'+(y+34)+'" fill="#555" font-size="11">'+html(narrativeScope(r))+' · p.'+r.source_page+'</text>';
+ });
+ result+='</svg>';
+ const wrap=document.createElement('div');wrap.innerHTML=result;return wrap.querySelector('svg');
+}
 function sourceReference(name,figure,page){
  return '<section class="rsc-figure-ref" role="note"><strong>年報原圖：'+html(name)+'</strong>'+
  '<p>請參閱圖 '+html(figure)+'（第 '+page+' 頁）。原圖部分菌藥組合或醫院分層未提供可完整核對的原始數表，目前以年報文字精確值呈現可驗證的部分，不用估值補滿其餘柱體。</p>'+
@@ -247,7 +271,7 @@ function table(){
  const cols=['section','record_type','indicator','year','onset','specimen','hospital_level','antibiotic','component','value','lower_pct','upper_pct','relation','unit','precision','source_figure','source_page','narrative_page','extraction_method','note'];
  $('rscTable').innerHTML='<table><caption>年報式圖表監測資料與來源／估讀註記</caption><thead><tr>'+cols.map(x=>'<th scope="col">'+x+'</th>').join('')+'</tr></thead><tbody>'+shown.map(r=>'<tr>'+cols.map(k=>'<td>'+html(k==='value'?fmt(r):r[k]||'—')+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
 }
-function render(){if(tab==='important')important();else mdro();$('rscDetail').textContent='將滑鼠移至圖中的色塊或資料點、點擊或按 Tab 聚焦，即可查看數值及來源。';$('rscCount').textContent='目前 '+shown.length+' 筆；含資料品質標記';$('rscCsvBtn').disabled=!shown.length;$('rscTableBtn').disabled=!shown.length;$('rscPngBtn').disabled=!$('rscPlots').querySelector('svg');$('rscTable').hidden=true;$('rscTableBtn').textContent='資料表';table();addHover();section.querySelectorAll('.rsc-figure-png').forEach((b,i)=>b.onclick=()=>exportSvg(b.closest('figure').querySelector('svg'),'report-'+tab+'-figure-'+(i+1)+'.png'))}
+function render(){if(tab==='important')important();else mdro();$('rscDetail').textContent='將滑鼠移至圖中的色塊或資料點、點擊或按 Tab 聚焦，即可查看數值及來源。';$('rscCount').textContent='目前 '+shown.length+' 筆；含資料品質標記';$('rscCsvBtn').disabled=!shown.length;$('rscTableBtn').disabled=!shown.length;$('rscPngBtn').disabled=!$('rscPlots').querySelector('svg')&&!narrative.some(r=>r.code===$('rscOrganism').value&&(tab==='important'?!r.indicator_type:r.indicator_type==='MDRO'&&r.onset===$('rscOnset').value));$('rscTable').hidden=true;$('rscTableBtn').textContent='資料表';table();addHover();section.querySelectorAll('.rsc-figure-png').forEach((b,i)=>b.onclick=()=>exportSvg(b.closest('figure').querySelector('svg'),'report-'+tab+'-figure-'+(i+1)+'.png'))}
 
 function setupSelectors(){
  const current=$('rscOrganism').value;
@@ -271,7 +295,7 @@ function exportSvg(svg,filename){
  img.src=url;
 }
 $('rscPngBtn').textContent='第一張圖 PNG';
-$('rscPngBtn').onclick=()=>exportSvg($('rscPlots').querySelector('svg'),'report-'+tab+'-first-figure.png');
+$('rscPngBtn').onclick=()=>exportSvg($('rscPlots').querySelector('svg')||verifiedNarrativeSvg(),'report-'+tab+'-first-figure.png');
 const sources=['./data/ar_2024_report_style_chart_estimates.csv','./data/ar_2024_mdro_HO_report_estimates.csv','./data/ar_2024_key_resistance_report_points.csv','./data/ar_2024_report_verified_narrative.json'];
 Promise.allSettled(sources.map(url=>fetch(url,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status+' '+url);return r.text()}))).then(results=>{
  const got=i=>results[i].status==='fulfilled'?results[i].value:'';
