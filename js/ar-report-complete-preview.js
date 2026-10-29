@@ -1,6 +1,9 @@
 (()=>{'use strict';
+const domainLock=document.currentScript?.dataset?.domain==='mdro'?'mdro':'important';
+const prefix=domainLock==='mdro'?'mdr-':'imp-';
+// Domain-locked component: load twice with data-domain="important" and data-domain="mdro".
 const main=document.querySelector('main');if(!main)return;
-const section=document.createElement('section');section.id='arFullPreview';section.className='panel ar-full-preview';
+const section=document.createElement('section');section.id=domainLock==='mdro'?'arMdroSection':'arImportantSection';section.className='panel ar-full-preview';
 section.innerHTML='<div class="ap-head"><div><div class="eyebrow">2024 TAIWAN AMR ANNUAL REPORT · INTERACTIVE PREVIEW</div><h2>重要菌種抗藥性與多重抗藥菌監測</h2><p>依正式年報圖型製作完整互動示意；模擬值不代表官方監測結果，正式資料匯入後可逐筆替換。</p></div><div class="ap-mode">完整示意版 · 非正式數值</div></div>'+
 '<div class="ap-controls-top" role="group" aria-label="選擇分析類型"><button type="button" data-ap-domain="important" aria-pressed="true">重要菌種抗藥性</button><button type="button" data-ap-domain="mdro" aria-pressed="false">多重抗藥菌（MDRO）趨勢</button></div>'+
 '<div class="ap-filter">'+
@@ -14,15 +17,29 @@ section.innerHTML='<div class="ap-head"><div><div class="eyebrow">2024 TAIWAN AM
 '<div class="ap-toolbar"><button type="button" id="apTableToggle" aria-expanded="false">查看資料表</button><button type="button" id="apCsvDownload">下載目前圖表 CSV</button><button type="button" id="apCopyLink">複製篩選連結</button><span id="apStatus" role="status" aria-live="polite">圖表載入中…</span></div>'+
 '<div id="apFigures"></div><div id="apSourceDetails" aria-live="polite" class="ap-info">將滑鼠移至色塊或資料點，或以 Tab／Enter 查看數值、資料品質與年報圖號。</div>'+
 '<div id="apTableWrap" hidden class="ap-table-wrap"></div><div class="ap-bottom"><strong>資料來源與限制</strong><p>圖型、分圖順序及配色參考《2024 年臺灣抗生素抗藥性監視年報》第三、四章。此處缺少正式數值的序列，先由示意模型產生，不能視為原報告測量結果。圖上不重建尚未取得的誤差線與 95% CI。</p></div>';
+section.querySelector('.ap-head h2').textContent=domainLock==='mdro'?'多重抗藥菌（MDRO）歷年趨勢':'重要菌種抗藥性百分比';
+section.querySelector('.ap-head p').textContent=domainLock==='mdro'?'依年報第 4 章呈現九類多重抗藥菌，分別切換 CO＋HO、CO 或 HO 的菌株數堆疊圖及抗藥率折線圖。':'依年報第 3 章呈現十二類重要菌種，（A）CO＋HO、（B）CO、（C）HO 及適用檢體分圖。';
+section.querySelector('.ap-controls-top')?.remove();
+section.querySelectorAll('[id]').forEach(el=>el.id=prefix+el.id);
 const anchor=document.getElementById('reportFigure21')||document.getElementById('chartTitle')?.closest('.panel');
-if(anchor)anchor.after(section);else main.append(section);
-const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\u0027':'&#39;'}[c]));
+if(domainLock==='mdro'){
+ const previous=document.getElementById('arImportantSection');
+ if(previous)previous.after(section);else if(anchor)anchor.after(section);else main.append(section);
+}else if(anchor)anchor.after(section);else main.append(section);
+const $=id=>document.getElementById(prefix+id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\u0027':'&#39;'}[c]));
 const mdros=[['CRAB','CRAB'],['CRE','CRE'],['CR_ECOLI','CR E. coli'],['CRKP','CRKP'],['CRPA','CRPA'],['MRSA','MRSA'],['VRE','VRE'],['VR_EFAECALIS','VR E. faecalis'],['VR_EFAECIUM','VR E. faecium']];
 const levels=['medical_center','regional_hospital','district_hospital'], allLevels=[...levels,'national'];
 const label={medical_center:'醫學中心',regional_hospital:'區域醫院',district_hospital:'地區醫院',national:'全國','CO+HO':'社區與醫療（CO＋HO）相關感染',CO:'社區相關感染（CO）',HO:'醫療相關感染（HO）',all:'全部檢體',blood:'血液檢體',urine:'尿液檢體',stool:'糞便檢體',wound:'膿或傷口檢體'};
 const lineColors={medical_center:'#4674b9',regional_hospital:'#df783e',district_hospital:'#979797',national:'#efb33b'};
 const stackColors={medical_center:['#95bcdc','#3f5994'],regional_hospital:['#ecaa8b','#b75d34'],district_hospital:['#aea9ab','#777578']};
-const refQuery=new URLSearchParams(location.search),state={domain:refQuery.get('previewDomain')==='mdro'?'mdro':'important',organism:refQuery.get('previewIndicator')||'',origin:refQuery.get('previewOnset')||'CO+HO',specimen:refQuery.get('previewSpecimen')||'all-panels',drug:refQuery.get('previewDrug')||'all',year:refQuery.get('previewYear')||'all'};
+const refQuery=new URLSearchParams(location.search),paramBase=domainLock==='mdro'?'mdro':'imp',state={
+ domain:domainLock,
+ organism:refQuery.get(paramBase+'Indicator')||(refQuery.get('previewDomain')===domainLock?refQuery.get('previewIndicator'):'')||'',
+ origin:refQuery.get('mdroOnset')||'CO+HO',
+ specimen:refQuery.get('impSpecimen')||'all-panels',
+ drug:refQuery.get('impDrug')||'all',
+ year:refQuery.get('mdroYear')||'all'
+};
 let data=[],species=[],currentRows=[],displayCharts=[],officialCount=0,pdfUrl=null;
 const fmtn=v=>Math.round(+v||0).toLocaleString('zh-TW');
 const fmtr=r=>r.precision==='not_reported_lt20'?'＊ 未呈現':r.domain==='mdro'&&r.component!=='R'?fmtn(r.isolates)+' 株':Number(r.resistance_pct).toFixed(1)+'%';
@@ -132,7 +149,7 @@ $('apPdfFile').onchange=()=>{
 };
 $('apPdfOpen').onclick=()=>{if(pdfUrl)window.open(pdfUrl+'#page='+(activePdfPrintedPage()+8),'_blank','noopener')};
 window.addEventListener('beforeunload',()=>{if(pdfUrl)URL.revokeObjectURL(pdfUrl)});
-function urlState(){const u=new URL(location.href);Object.entries({previewDomain:state.domain,previewIndicator:state.organism,previewOnset:state.origin,previewSpecimen:state.specimen,previewDrug:state.drug,previewYear:state.year}).forEach(([k,v])=>u.searchParams.set(k,v));history.replaceState({},'',u);return u.href}
+function urlState(){const u=new URL(location.href);const params=domainLock==='mdro'?{mdroIndicator:state.organism,mdroOnset:state.origin,mdroYear:state.year}:{impIndicator:state.organism,impSpecimen:state.specimen,impDrug:state.drug};Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));history.replaceState({},'',u);return u.href}
 function updateOptions(){
  const all=data.filter(r=>r.domain===state.domain),choices=state.domain==='important'?[...new Map(all.map(r=>[r.indicator,r.organism])).entries()]:mdros;
  const select=$('apOrganism');select.innerHTML=choices.map(([code,name])=>'<option value="'+esc(code)+'">'+esc(name)+'</option>').join('');
@@ -158,7 +175,7 @@ function fileDownload(data,name,type){const b=new Blob([data],{type}),url=URL.cr
 function png(svg,name){if(!svg)return;const src=new XMLSerializer().serializeToString(svg),url=URL.createObjectURL(new Blob([src],{type:'image/svg+xml;charset=utf-8'})),img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=Math.ceil(svg.viewBox.baseVal.width*2);c.height=Math.ceil(svg.viewBox.baseVal.height*2);const cx=c.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,c.width,c.height);cx.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(blob=>{if(blob)fileDownload(blob,name,'image/png')})};img.onerror=()=>{URL.revokeObjectURL(url);$('apStatus').textContent='圖片轉檔失敗，請使用 CSV 匯出'};img.src=url}
 function showInfo(el,x,y){const r=data[Number(el.dataset.apRow)];if(!r)return;$('apSourceDetails').textContent=metadata(r);const tip=$('apFloat');tip.textContent=metadata(r);tip.hidden=false;if(typeof x==='number'&&typeof y==='number'){const left=Math.max(10,Math.min(window.innerWidth-300,x+12));tip.style.left=left+'px';tip.style.top=Math.max(10,Math.min(window.innerHeight-100,y+12))+'px'}}
 function hideTip(){const tip=$('apFloat');if(tip)tip.hidden=true}
-let tooltip=document.createElement('div');tooltip.id='apFloat';tooltip.className='ap-floating-tip';tooltip.setAttribute('role','tooltip');tooltip.hidden=true;document.body.append(tooltip);
+let tooltip=document.createElement('div');tooltip.id=prefix+'apFloat';tooltip.className='ap-floating-tip';tooltip.setAttribute('role','tooltip');tooltip.hidden=true;document.body.append(tooltip);
 section.addEventListener('mouseover',e=>{const el=e.target.closest('[data-ap-row]');if(el)showInfo(el,e.clientX,e.clientY)});
 section.addEventListener('mousemove',e=>{const el=e.target.closest('[data-ap-row]');if(el)showInfo(el,e.clientX,e.clientY)});
 section.addEventListener('mouseout',e=>{if(e.target.closest('[data-ap-row]'))hideTip()});
@@ -196,7 +213,7 @@ Promise.all([
  data=parseCSV(demo);if(new Set(data.filter(r=>r.domain==='important').map(r=>r.indicator)).size!==12||new Set(data.filter(r=>r.domain==='mdro').map(r=>r.indicator)).size!==9)throw Error('重要菌種或MDRO資料不完整');
  if(official)importOfficial(parseCSV(official));
  species=[...new Map(data.filter(r=>r.domain==='important').map(r=>[r.indicator,r.organism])).entries()];
- if(state.domain==='mdro')section.querySelector('[data-ap-domain="mdro"]').click();else draw();
+ draw();
  if(officialCount)$('apStatus').textContent+='；已以 '+officialCount+' 筆正式核對資料覆寫示意值。';
 }).catch(e=>{$('apStatus').textContent='示意圖表資料讀取失敗：'+e.message});
 
