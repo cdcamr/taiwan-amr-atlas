@@ -46,3 +46,14 @@
 - 來源：2024 年版《臺灣抗生素抗藥性監視年報》頁 56（K. pneumoniae 血液及尿液之 ceftazidime、co-trimoxazole 抗藥率），頁 68（CRAB 108／113 年），頁 104（CRKP、CRPA 108／113 年）。
 - MDRO 僅呈現 108 與 113 年已核對端點，沒有補造 109–112 年值、沒有在缺漏年份間連線。重要菌種部分目前限 K. pneumoniae 兩種抗生素，並非第三章所有菌藥組合。
 - 回復方式：以歷程 HTML 覆蓋 `ar-explorer.html`；新增 JS/CSV 可保留但不會被頁面引用。原堆疊圖、Antibiogram 與原監測 CSV 未更改。
+
+## 2026-10-29：年報圖形樣式一致化試作（第三章與第四章）
+
+- 調整前備份：`history/ar-explorer-before-report-style-figures-20261029.html` 及 `history/ar-report-resistance-panels-before-replacement-20261029.js`。
+- 新增圖形程式：`js/ar-report-figures-fidelity.js`，替換原 `ar-explorer.html` 中引用的 `js/ar-report-resistance-panels.js`；既有報表、堆疊圖、Antibiogram 及原始 CSV 均不變。
+- 新增資料：`data/ar_2024_report_style_chart_estimates.csv`，124 筆來源標註（28 筆 A. baumannii 四面板、24 筆 CRAB 年度抗藥率、72 筆醫院層級 CO／HO 與 I+R／S 堆疊組成）。
+- 年報出處：2024 年報圖 3-2-1（列印頁 53）、圖 4-1-1-2、圖 4-1-1-1（列印頁 69）、圖 4-1-2-1（列印頁 70）。
+- **品質限制**：大多數值由年報原圖像色塊／折線定位估讀，為 `chart_estimate`，不等於完整正式原始數據；以圖上百分比約 0.1% 和菌株數 50 株為顯示粒度，亦非誤差保證。少數年報文字明載值標記為 `narrative_exact`。原圖誤差線未重建，不能據估讀值計算 CI 或做顯著性推論。
+- 前端支援年報式四分圖、四系列折線圖、兩種堆疊圖、懸浮／鍵盤數值提示、資料表、CSV 與逐圖 PNG。
+- **回復方式**：將上述備份 HTML 還原至根目錄 `ar-explorer.html` 即可回到先前頁面（原程式 `js/ar-report-resistance-panels.js` 沒有刪除）；新 JS、CSV 可留存但不再被引用。
+- GitHub 已確認檔案及語法；瀏覽器、RWD／AA、與原圖逐像素比對尚未完成。
