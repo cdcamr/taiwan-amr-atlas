@@ -9,7 +9,7 @@ section.innerHTML=
 '<p class="small" id="rscStatus" role="status" aria-live="polite">正在載入年報圖形資料…</p><div id="rscPlots"></div>'+
 '<div id="rscDetail" role="status" aria-live="polite" class="rsc-detail">移至圖形、點擊或使用 Tab 聚焦即可顯示數值與來源。</div>'+
 '<div id="rscTable" class="scroll" hidden></div><p class="small">資料來源：2024 年版《臺灣抗生素抗藥性監視年報》第 53、69、70 頁。抗藥性百分比為 R%，不同於 Antibiogram 的 S%；估讀值不得據以計算 95% CI。</p>';
-if(old)old.replaceWith(section);else root.append(section);
+if(old)old.replaceWith(section);else{const anchor=[...root.querySelectorAll('.panel')].find(el=>el.textContent.includes('進階分析'));if(anchor)anchor.before(section);else root.append(section)}
 const $=id=>document.getElementById(id),html=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const drugOrder=['Tigecycline','Minocycline','Gentamicin','Amikacin','Imipenem','Meropenem','Doripenem'];
 const levels=['medical_center','regional_hospital','district_hospital'];
@@ -21,7 +21,7 @@ function parse(txt){const a=txt.trim().split(/\r?\n/),h=a.shift().split(',');ret
 const fmt=r=>(r.precision==='chart_estimate'?'約 ':'')+(r.unit==='percent'?Number(r.value).toFixed(1)+'%':Number(r.value).toLocaleString('zh-TW')+' 株');
 function describe(r){return[r.indicator,r.year+'（民國'+(+r.year-1911)+'）',labels[r.hospital_level]||r.hospital_level,labels[r.onset]||r.onset,labels[r.specimen]||r.specimen,r.antibiotic||r.component,fmt(r),r.precision==='chart_estimate'?'圖形估讀，非精確值':'年報文字核對值','圖'+r.source_figure+'，第'+r.source_page+'頁'].filter(Boolean).join(' · ')}
 function mark(r){return ' class="rsc-mark" tabindex="0" data-point="'+points.indexOf(r)+'" aria-label="'+html(describe(r))+'"'}
-function card(title,subtitle,svg,source){return '<figure class="rsc-card"><h3>'+html(title)+'</h3><div class="rsc-subtitle">'+subtitle+'</div><div class="rsc-paper"><div class="rsc-scroll">'+svg+'</div></div><figcaption>2024 年報 '+source+'。圖形估讀值不代表精確資料。</figcaption></figure>'}
+function card(title,subtitle,svg,source){return '<figure class="rsc-card"><div class="rsc-card-head"><h3>'+html(title)+'</h3><button type="button" class="rsc-figure-png" aria-label="下載此圖 PNG">↓ PNG</button></div><div class="rsc-subtitle">'+subtitle+'</div><div class="rsc-paper"><div class="rsc-scroll">'+svg+'</div></div><figcaption>2024 年報 '+source+'。圖形估讀值不代表精確資料。</figcaption></figure>'}
 function horizontal(onset,spec,title,subtitle){
  const rows=drugOrder.map(d=>points.find(r=>r.section==='important'&&r.onset===onset&&r.specimen===spec&&r.antibiotic===d));
  const W=530,H=335,L=130,R=29,T=28,B=47,w=W-L-R,rowH=(H-T-B)/7;
@@ -82,11 +82,19 @@ function table(){
  const cols=['section','indicator','year','onset','specimen','hospital_level','antibiotic','component','value','unit','precision','source_figure','source_page'];
  $('rscTable').innerHTML='<table><caption>年報式圖表監測資料與來源／估讀註記</caption><thead><tr>'+cols.map(x=>'<th scope="col">'+x+'</th>').join('')+'</tr></thead><tbody>'+shown.map(r=>'<tr>'+cols.map(k=>'<td>'+html(k==='value'?fmt(r):r[k]||'—')+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
 }
-function render(){if(tab==='important')important();else mdro();$('rscCount').textContent='目前 '+shown.length+' 筆';table();addHover()}
+function render(){if(tab==='important')important();else mdro();$('rscCount').textContent='目前 '+shown.length+' 筆';table();addHover();section.querySelectorAll('.rsc-figure-png').forEach((b,i)=>b.onclick=()=>exportSvg(b.closest('figure').querySelector('svg'),'report-'+tab+'-figure-'+(i+1)+'.png'))}
 section.querySelectorAll('[data-rsc]').forEach(btn=>btn.onclick=()=>{tab=btn.dataset.rsc;section.querySelectorAll('[data-rsc]').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));render()});
 $('rscTableBtn').onclick=()=>{$('rscTable').hidden=!$('rscTable').hidden;$('rscTableBtn').textContent=$('rscTable').hidden?'資料表':'隱藏資料表'};
 function download(data,name,type){let a=document.createElement('a'),u=URL.createObjectURL(new Blob([data],{type}));a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}
 $('rscCsvBtn').onclick=()=>{const keys=['section','indicator','year','onset','specimen','hospital_level','antibiotic','component','value','unit','precision','source_figure','source_page'];download('\uFEFF'+keys.join(',')+'\n'+shown.map(r=>keys.map(k=>'"'+String(r[k]??'').replaceAll('"','""')+'"').join(',')).join('\n'),'report-'+tab+'-with-precision.csv','text/csv;charset=utf-8')};
-$('rscPngBtn').onclick=()=>{const s=$('rscPlots').querySelector('svg');if(!s)return;const u=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(s)],{type:'image/svg+xml'})),img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=s.viewBox.baseVal.width*2;c.height=s.viewBox.baseVal.height*2;const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>{if(!b)return;const a=document.createElement('a'),url=URL.createObjectURL(b);a.href=url;a.download='report-'+tab+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),1800)})};img.onerror=()=>{URL.revokeObjectURL(u);$('rscStatus').textContent='圖片下載失敗，請改用 CSV'};img.src=u};
+function exportSvg(svg,filename){
+ if(!svg){$('rscStatus').textContent='目前沒有可下載的圖表';return}
+ const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml;charset=utf-8'})),img=new Image();
+ img.onload=()=>{const c=document.createElement('canvas');c.width=svg.viewBox.baseVal.width*2;c.height=svg.viewBox.baseVal.height*2;const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(blob=>{if(!blob)return;const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(u),1800)})};
+ img.onerror=()=>{URL.revokeObjectURL(url);$('rscStatus').textContent='圖像匯出失敗，請改用 CSV'};
+ img.src=url;
+}
+$('rscPngBtn').textContent='第一張圖 PNG';
+$('rscPngBtn').onclick=()=>exportSvg($('rscPlots').querySelector('svg'),'report-'+tab+'-first-figure.png');
 fetch('./data/ar_2024_report_style_chart_estimates.csv',{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject(Error('HTTP '+r.status))).then(t=>{points=parse(t);if(points.length!==124)throw Error('資料列數不符 '+points.length);render()}).catch(e=>$('rscStatus').textContent='圖表資料載入失敗：'+e.message);
 })();
