@@ -96,6 +96,15 @@
       img.src=entry.src;
       img.alt=entry.alt||entry.caption||"圖片預覽";
       img.loading="lazy";
+      const issue=node("p");
+      issue.className="upload-warning";
+      issue.hidden=true;
+      img.addEventListener("error",()=>{
+        img.hidden=true;
+        issue.hidden=false;
+        issue.textContent="第 "+(index+1)+" 張圖片無法預覽；請移除後重新上傳。";
+        $("imageStatus").textContent=issue.textContent;
+      });
       const labelCaption=node("label","圖片說明（顯示於圖片下方）");
       const caption=node("input");
       caption.type="text";
@@ -117,7 +126,7 @@
       remove.onclick=()=>{images.splice(index,1);renderImages();$("imageStatus").textContent="已移除圖片 "+(index+1)+"。"};
       const capField=node("div");capField.className="field";capField.append(labelCaption,caption);
       const altField=node("div");altField.className="field";altField.append(labelAlt,alt);
-      box.append(title,img,capField,altField,remove);
+      box.append(title,img,issue,capField,altField,remove);
       list.append(box);
     });
   }
@@ -192,6 +201,10 @@
     $("status").value=a.status==="pending_approval"?"pending_approval":"draft";
     images=media.cleanImages(a.images,true);
     renderImages();
+    const originalImageCount=Array.isArray(a.images)?a.images.length:0;
+    if(originalImageCount>images.length){
+      $("imageStatus").textContent="有 "+(originalImageCount-images.length)+" 張舊圖片來源無法辨識，請重新選擇圖片並發布。";
+    }
     window.scrollTo({top:0,behavior:"smooth"});
     demoMessage("已載入「"+a.title+"」及其圖片，修改後可再次一鍵發布。");
   }
@@ -248,16 +261,31 @@
       actions.append(edit,state,remove);box.append(info,actions);list.append(box);
     });
   }
-  $("demoPublish").onclick=()=>{
+  async function verifyImageDecoding(){
+    for(let i=0;i<images.length;i++){
+      const src=media.normalizeSource(images[i].src,true);
+      if(!src)throw Error("第 "+(i+1)+" 張圖片的網址格式不正確，請重新上傳。");
+      await new Promise((resolve,reject)=>{
+        const image=new Image();
+        image.onload=resolve;
+        image.onerror=()=>reject(Error("第 "+(i+1)+" 張圖片無法載入，請移除並重新上傳。"));
+        image.src=src;
+      });
+    }
+  }
+  $("demoPublish").onclick=async()=>{
     if(importingImages)return;
     ensureId();
     const a=build("published"),err=validate(a,{dateLimit:true});
     if(err){demoMessage(err);return}
+    toggleBusy(true);
     try{
+      await verifyImageDecoding();
       store.upsert(a);
       refreshLocalList();
       demoMessage("已一鍵示意發布文章及 "+a.images.length+" 張圖片（僅此瀏覽器可見）。",a.id);
     }catch(e){demoMessage(e.message||"本機儲存失敗。")}
+    finally{toggleBusy(false)}
   };
 
   const encodeUTF8=s=>btoa(Array.from(new TextEncoder().encode(s),byte=>String.fromCharCode(byte)).join(""));
@@ -305,6 +333,7 @@
     if(!confirm("即將把文章「"+article.title+"」及 "+article.images.length+" 張圖片提交至公開 GitHub Pages，確認繼續？"))return;
     toggleBusy(true);
     try{
+      await verifyImageDecoding();
       const auth=headers(token);
       message("正在讀取網站發布清單…");
       const r=await fetch(GITHUB_REPO+MANIFEST+"?ref=main",{headers:auth,cache:"no-store"});
