@@ -1,0 +1,1 @@
+# Rollback\nRestore news-editor.html and js/news-editor.js from the two dated backup files in history/ or revert this PR merge commit. The public news manifest is not modified by this feature deployment.\n
