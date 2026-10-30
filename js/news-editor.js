@@ -33,3 +33,69 @@ $("githubToken").value="";
 }catch(err){msg(err.message||"發布失敗，請稍後重試。")}finally{btn.disabled=false}
 });
 })();
+
+
+/* Unauthenticated demonstration only: publishes into this browser's localStorage. */
+(() => {
+  const $=id=>document.getElementById(id);
+  const store=window.AMRNewsPreview;
+  const output=$("demoMessage"),list=$("demoList");
+  const today=()=>{const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)};
+  const node=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=String(text);return e};
+  const message=(text,link)=>{output.replaceChildren(document.createTextNode(text));if(link){const a=node("a"," 開啟前台查看 ↗");a.href="./news.html#article="+encodeURIComponent(link);a.target="_blank";a.rel="noopener";output.append(a)}};
+  function fromForm(){
+    let id=$("id").value.trim();
+    if(!id){id="demo-"+new Date().toISOString().replace(/[^0-9]/g,"").slice(0,14)+"-"+Math.random().toString(36).slice(2,7);$("id").value=id}
+    const article={
+      id,title:$("title").value.trim(),category:$("category").value,
+      summary:$("summary").value.trim(),body:$("body").value,
+      tags:$("tags").value.split(",").map(t=>t.trim()).filter(Boolean),
+      published_at:$("published_at").value||today(),event_date:$("event_date").value,
+      link_url:$("link_url").value.trim(),featured:$("featured").value==="true",
+      status:"published"
+    };
+    if(!/^[A-Za-z0-9_-]{3,100}$/.test(article.id))throw Error("文章代碼僅限英數、底線及連字號（3–100 字元）。");
+    if(!article.title||!article.summary)throw Error("請填寫標題及摘要。");
+    if(!["news","event","report","resource"].includes(article.category))throw Error("分類不正確。");
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(article.published_at)||article.published_at>today())throw Error("示意立即發布日期必須是今日或過去日期。");
+    if(article.link_url){try{if(new URL(article.link_url).protocol!=="https:")throw Error()}catch{throw Error("來源連結必須為有效 HTTPS 網址。")}}
+    return article;
+  }
+  function fill(article){
+    const keys=["id","title","category","summary","body","published_at","event_date","link_url"];
+    for(const key of keys)$(key).value=article[key]||"";
+    $("tags").value=Array.isArray(article.tags)?article.tags.join(", "):"";
+    $("featured").value=article.featured?"true":"false";
+    $("status").value="draft";
+    window.scrollTo({top:0,behavior:"smooth"});
+    message("已載入「"+article.title+"」；修改後點選一鍵發布即可更新本機示意內容。");
+  }
+  function refresh(){
+    list.replaceChildren();
+    const articles=store.list();
+    if(!articles.length){list.append(node("p","目前尚無本機示意文章。"));return}
+    for(const a of articles){
+      const item=node("div");item.className="demo-entry";
+      const info=node("div");info.append(node("h3",a.title||a.id));
+      const small=node("p",(a.published_at||"")+" · "+(a.status==="published"?"本機已發布":"已下架")+" · "+a.id);
+      small.className="small";small.style.margin="2px 0";info.append(small);
+      const actions=node("div");actions.className="actions";
+      const edit=node("button","編輯");edit.type="button";edit.onclick=()=>fill(a);
+      const state=node("button",a.status==="published"?"下架":"重新發布");state.type="button";
+      state.onclick=()=>{try{store.setStatus(a.id,a.status==="published"?"unpublished":"published");message("已更新「"+a.title+"」的示意發布狀態。");refresh()}catch(e){message(e.message)}};
+      const remove=node("button","刪除");remove.type="button";
+      remove.onclick=()=>{if(!confirm("確定刪除本機示意文章「"+a.title+"」？"))return;store.remove(a.id);message("已刪除本機示意文章。");refresh()};
+      actions.append(edit,state,remove);item.append(info,actions);list.append(item);
+    }
+  }
+  $("demoPublish").onclick=()=>{
+    try {
+      const article=fromForm();
+      store.upsert(article);
+      message("「"+article.title+"」已一鍵示意發布！只在此瀏覽器可見；GitHub 上的公開資料未變動。",article.id);
+      refresh();
+    } catch (e) {message(e.message||"本機示意發布失敗。")}
+  };
+  window.addEventListener("storage",e=>{if(e.key==="taiwan-amr-news-local-preview-v1")refresh()});
+  refresh();
+})();
