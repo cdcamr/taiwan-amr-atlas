@@ -1,5 +1,19 @@
 # Taiwan AMR Atlas
 
+## UI platform name and one-click NEWS & EVENTS demo (2026-10-30)
+
+Display title (the repository name and URLs remain unchanged):
+- zh-Hant: **防疫一體抗生素抗藥性監測視覺化整合平臺**
+- en: **Integrated One Health Antimicrobial Resistance Surveillance and Visualization Platform**
+- ja: **ワンヘルス薬剤耐性（AMR）サーベイランス・可視化統合プラットフォーム**
+
+Site title translations are centralised in `js/site-branding.js` and selected using the title-language dropdown. NEWS & EVENTS local one-click demonstration is implemented in `js/news-preview-store.js` and `js/news-editor.js`. It writes ONLY to the current browser's localStorage (key `taiwan-amr-news-local-preview-v1`), and the front-end news list displays it with a local-preview badge. No server, GitHub content, or other user sessions are updated. Articles can be edited, unpublished, republished, and deleted from that browser. Do not use personal or sensitive information.
+
+The separate GitHub sync/publish feature still requires an authorized fine-grained token and directly updates the public `data/news/manifest.json` on the main branch. The final institutional CMS requires authenticated server-side authorization, role-based access, approval workflow, and audit logging.
+
+Rollback reference: `history/ONE-CLICK-NEWS-AND-TITLE-ROLLBACK-20261030.md`.
+
+
 Interactive single-page public-health dashboard prototype sourced from Taiwan CDC Antimicrobial Resistance Surveillance Annual Reports 2022–2024, Table 2-1. This prototype reports national isolate counts, not resistance proportions. Cross-year differences can reflect participation and case-definition changes.
 
 ## GitHub Pages
