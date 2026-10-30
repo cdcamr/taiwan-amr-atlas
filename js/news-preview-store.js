@@ -2,7 +2,7 @@
 (() => {
   const KEY = "taiwan-amr-news-local-preview-v1";
   const MAX_ARTICLES = 100;
-  const MAX_LENGTH = 500000;
+  const MAX_LENGTH = 3200000;
   const read = () => {
     try {
       const raw=localStorage.getItem(KEY);
@@ -12,7 +12,7 @@
   };
   const write = items => {
     const text=JSON.stringify(items);
-    if(items.length>MAX_ARTICLES||text.length>MAX_LENGTH) throw Error("示意文章超過本機儲存容量，請先刪除舊文章。");
+    if(items.length>MAX_ARTICLES||text.length>MAX_LENGTH) throw Error("示意文章與圖片超過本機儲存容量，請移除部分圖片或舊文章。");
     try { localStorage.setItem(KEY,text); } catch (_) { throw Error("無法使用瀏覽器本機儲存，請確認隱私模式及儲存空間。"); }
     window.dispatchEvent(new Event("amr-news-local-changed"));
   };

@@ -10,3 +10,27 @@
 .demo-entry .actions{display:flex;gap:7px;flex-wrap:wrap}
 .demo-entry h3{margin:0;font-size:15px}
 .demo-entry button{font-size:12px;padding:5px 8px}
+
+
+/* News photo upload, image captions, and responsive media display */
+.media-panel{border:1px solid var(--border);background:var(--panel);padding:20px;border-radius:14px;margin-top:20px}
+.media-panel h2{margin:0 0 8px;font-size:22px}
+.media-heading-en{color:var(--muted);font-size:14px;font-weight:normal}
+.image-upload{display:inline-block;padding:9px 16px;border:1px solid var(--accent);border-radius:9px;color:var(--accent);cursor:pointer;margin:10px 0}
+.image-upload:hover,.image-upload:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#imageFiles{max-width:100%;width:100%;font-size:13px}
+.image-editor-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:12px}
+.image-editor-item{border:1px solid var(--border);border-radius:12px;padding:12px;min-width:0;display:grid;gap:9px}
+.image-editor-item img{max-width:100%;width:100%;height:180px;object-fit:contain;background:var(--bg);border-radius:7px}
+.image-editor-item .field{min-width:0}
+.image-editor-item .field label{font-size:13px}
+.image-editor-item .field input{width:100%}
+.image-editor-item .remove-photo{justify-self:start}
+.news-card-image{margin:12px -2px}
+.news-cover,.news-figure{margin:0}
+.news-cover img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:9px;border:1px solid var(--border)}
+.news-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:16px;margin:22px 0}
+.news-figure{background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.news-figure img{width:100%;max-height:440px;object-fit:contain;display:block}
+.news-figure figcaption{color:var(--muted);font-size:13px;line-height:1.7;padding:9px 12px;white-space:pre-wrap}
+@media(max-width:650px){.image-editor-list{grid-template-columns:1fr}.news-gallery{grid-template-columns:1fr}}

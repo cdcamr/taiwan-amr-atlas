@@ -20,6 +20,10 @@
     if(article.local_preview)body.append(element("span","tag demo-tag","本機示意"));
     body.append(element("h2","",article.title),element("p","meta",(article.published_at||"")+(article.featured?" · 精選":"")));
     body.append(element("p","",article.body||article.summary||""));
+    if(window.AMRNewsMedia&&Array.isArray(article.images)){
+      const gallery=window.AMRNewsMedia.gallery(article.images,{allowInline:!!article.local_preview});
+      if(gallery.children.length)body.append(gallery);
+    }
     if(article.event_date)body.append(element("p","meta","活動日期："+article.event_date));
     const link=url(article.link_url);
     if(link){const p=element("p"),a=element("a","","開啟相關資源 ↗");a.href=link;a.target="_blank";a.rel="noopener noreferrer";p.append(a);body.append(p)}
@@ -38,6 +42,10 @@
       if(article.local_preview)card.append(element("span","tag demo-tag","本機示意"));
       if(article.featured)card.append(element("span","tag","精選"));
       card.append(element("p","meta",article.published_at||""));
+      if(window.AMRNewsMedia&&Array.isArray(article.images)){
+        const cover=window.AMRNewsMedia.gallery(article.images,{allowInline:!!article.local_preview,cover:true});
+        if(cover.children.length)card.append(cover);
+      }
       const heading=element("h2"),a=element("a","",article.title);a.href="#article="+encodeURIComponent(article.id);
       a.onclick=e=>{e.preventDefault();showDetail(article)};
       heading.append(a);
