@@ -19,11 +19,12 @@
     body.append(element("span","tag",cats[article.category]||"消息"));
     if(article.local_preview)body.append(element("span","tag demo-tag","本機示意"));
     body.append(element("h2","",article.title),element("p","meta",(article.published_at||"")+(article.featured?" · 精選":"")));
-    body.append(element("p","",article.body||article.summary||""));
+    // Keep the gallery above long article text so it is visible immediately.
     if(window.AMRNewsMedia&&Array.isArray(article.images)){
       const gallery=window.AMRNewsMedia.gallery(article.images,{allowInline:!!article.local_preview});
       if(gallery.children.length)body.append(gallery);
     }
+    body.append(element("p","",article.body||article.summary||""));
     if(article.event_date)body.append(element("p","meta","活動日期："+article.event_date));
     const link=url(article.link_url);
     if(link){const p=element("p"),a=element("a","","開啟相關資源 ↗");a.href=link;a.target="_blank";a.rel="noopener noreferrer";p.append(a);body.append(p)}
