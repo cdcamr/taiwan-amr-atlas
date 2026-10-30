@@ -34,3 +34,12 @@
 .news-figure img{width:100%;max-height:440px;object-fit:contain;display:block}
 .news-figure figcaption{color:var(--muted);font-size:13px;line-height:1.7;padding:9px 12px;white-space:pre-wrap}
 @media(max-width:650px){.image-editor-list{grid-template-columns:1fr}.news-gallery{grid-template-columns:1fr}}
+
+
+/* Image failure diagnostics and accessibility */
+.news-cover img[hidden],.news-figure img[hidden]{display:none!important}
+.news-image-error{background:var(--bg);color:var(--muted);font-size:13px;line-height:1.7;border:1px dashed var(--border);border-radius:9px;padding:16px;margin:0;min-height:85px;display:flex;align-items:center;justify-content:center;text-align:center}
+.news-image-error[hidden]{display:none!important}
+.news-image-failed{min-height:95px}
+.news-image-failed .news-image-error{color:var(--text)}
+.image-editor-item .upload-warning{font-size:12px;color:#ffc18a}
