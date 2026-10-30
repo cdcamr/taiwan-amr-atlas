@@ -6,7 +6,7 @@ const $=id=>document.getElementById(id);
 const api="https://api.github.com/repos/cdcamr/taiwan-amr-atlas/contents/data/news/manifest.json";
 const msg=text=>{$("message").textContent=text};
 const b64=s=>btoa(Array.from(new TextEncoder().encode(s),b=>String.fromCharCode(b)).join(""));
-const fromB64=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\\s/g,"")),c=>c.charCodeAt(0)));
+const fromB64=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replaceAll("\n","")),c=>c.charCodeAt(0)));
 const today=()=>{const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)};
 const btn=$("directPublish");
 btn.addEventListener("click",async()=>{
@@ -26,7 +26,7 @@ const current=await res.json(),manifest=JSON.parse(fromB64(current.content));
 if(!Array.isArray(manifest.articles))throw Error("發布清單格式不正確。");
 const ix=manifest.articles.findIndex(a=>a.id===d.id);
 if(ix>=0)manifest.articles[ix]=d;else manifest.articles.unshift(d);
-const update=await fetch(api,{method:"PUT",headers:{...headers,"Content-Type":"application/json"},body:JSON.stringify({message:"content(news): publish "+d.id,content:b64(JSON.stringify(manifest,null,2)+"\\n"),sha:current.sha,branch:"main"})});
+const update=await fetch(api,{method:"PUT",headers:{...headers,"Content-Type":"application/json"},body:JSON.stringify({message:"content(news): publish "+d.id,content:b64(JSON.stringify(manifest,null,2)),sha:current.sha,branch:"main"})});
 if(!update.ok){if(update.status===409)throw Error("發布清單已由其他人修改，請重新點選發布以取得最新版本。");throw Error("GitHub 發布失敗（HTTP "+update.status+"），請確認權限或分支保護規則。")}
 msg("GitHub 提交成功，請在 Pages 部署完成後檢視 News & Events 前台。");
 $("githubToken").value="";
