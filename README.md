@@ -1,5 +1,16 @@
 # Taiwan AMR Atlas
 
+## NEWS & EVENTS: images and per-image captions (2026-10-30)
+
+The NEWS & EVENTS editor supports up to four photos per article (JPEG, PNG and WebP), a caption and image alternative text for each, preview and image removal. Images are compressed in the browser. The first image is used as the list cover; the full gallery, with captions, appears on the article detail page. Existing text-only articles remain supported.
+
+- **One-click local demo:** the images and article are stored in the current browser only. Other devices and visitors cannot see this preview; browser storage limits apply.
+- **GitHub-synced publishing:** uses a GitHub token with Contents write permission to upload compressed images to assets/news/images/<article-id>/<hash>.<extension>, and then updates data/news/manifest.json with image paths plus captions (not base64 image data). This change becomes public after GitHub Pages deployment.
+- **Security / compliance:** the current static prototype does not implement institutional login, access control, approval, media scanning, or audit workflow. Only authorized, non-sensitive images should be uploaded.
+
+Rollback instructions and pre-change file backups: history/NEWS-PHOTO-CAPTIONS-ROLLBACK-20261030.md.
+
+
 ## UI platform name and one-click NEWS & EVENTS demo (2026-10-30)
 
 Display title (the repository name and URLs remain unchanged):
