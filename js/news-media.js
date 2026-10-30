@@ -57,7 +57,6 @@
     error.hidden=true;
     if(src){
       const img=document.createElement("img");
-      img.src=src;
       img.alt=String(image.alt||image.caption||"消息配圖").slice(0,180);
       img.loading=mode==="cover"?"eager":"lazy";
       img.decoding="async";
@@ -77,6 +76,7 @@
         error.textContent=errorMessage(isInline,false);
         error.hidden=false;
       });
+      img.src=src;
       box.append(img);
     }else{
       box.classList.add("news-image-failed");
