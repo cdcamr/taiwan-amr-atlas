@@ -93,7 +93,6 @@
       box.className="image-editor-item";
       const title=node("strong",index===0?"圖片 "+(index+1)+" · 消息封面":"圖片 "+(index+1));
       const img=node("img");
-      img.src=entry.src;
       img.alt=entry.alt||entry.caption||"圖片預覽";
       img.loading="lazy";
       const issue=node("p");
@@ -105,6 +104,7 @@
         issue.textContent="第 "+(index+1)+" 張圖片無法預覽；請移除後重新上傳。";
         $("imageStatus").textContent=issue.textContent;
       });
+      img.src=entry.src;
       const labelCaption=node("label","圖片說明（顯示於圖片下方）");
       const caption=node("input");
       caption.type="text";
