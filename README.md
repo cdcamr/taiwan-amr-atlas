@@ -1,5 +1,11 @@
 # Taiwan AMR Atlas
 
+## NEWS & EVENTS image display reliability update (2026-10-30)
+
+The front-end news gallery now renders before article body text. Image source normalization accepts in-repository relative paths, same-origin absolute paths, and allowed browser-local image data. Invalid or missing images show actionable diagnostics instead of silently disappearing. CMS previews and publishing check actual image decoding, and news HTML links to versioned JavaScript/CSS assets to reduce stale-cache problems. This update does not publish any content.
+
+**Reminder:** News articles published in the browser-only one-click demo remain in that browser's localStorage. At the time of this update the shared GitHub news manifest has no articles and no synced images; users must use the authenticated GitHub sync workflow if they need cross-browser public availability. See `history/NEWS-IMAGE-DISPLAY-FIX-ROLLBACK-20261030.md` for backups and recovery.
+
 ## NEWS & EVENTS: images and per-image captions (2026-10-30)
 
 The NEWS & EVENTS editor supports up to four photos per article (JPEG, PNG and WebP), a caption and image alternative text for each, preview and image removal. Images are compressed in the browser. The first image is used as the list cover; the full gallery, with captions, appears on the article detail page. Existing text-only articles remain supported.
