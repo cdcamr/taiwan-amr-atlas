@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "description": "Only approved public articles. Drafts must not be added to this file without review.",
+  "articles": []
+}
