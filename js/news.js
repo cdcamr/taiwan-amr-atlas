@@ -17,7 +17,8 @@
     const body=$("detailBody");
     body.replaceChildren();
     body.append(element("span","tag",cats[article.category]||"消息"));
-    if(article.local_preview)body.append(element("span","tag demo-tag","本機示意"));
+    if(article.local_preview)body.append(element("span","tag demo-tag","僅本機預覽"));
+    if(article.public_pending)body.append(element("span","tag pending-tag","已提交共用網站，待部署"));
     body.append(element("h2","",article.title),element("p","meta",(article.published_at||"")+(article.featured?" · 精選":"")));
     // Keep the gallery above long article text so it is visible immediately.
     if(window.AMRNewsMedia&&Array.isArray(article.images)){
@@ -28,7 +29,8 @@
     if(article.event_date)body.append(element("p","meta","活動日期："+article.event_date));
     const link=url(article.link_url);
     if(link){const p=element("p"),a=element("a","","開啟相關資源 ↗");a.href=link;a.target="_blank";a.rel="noopener noreferrer";p.append(a);body.append(p)}
-    if(article.local_preview)body.append(element("p","small","本篇僅為此瀏覽器的示意發布，其他訪客無法看到。"));
+    if(article.local_preview)body.append(element("p","small","本篇仍僅存於此瀏覽器，手機無法查看。請於原後臺使用批次同步。"));
+    if(article.public_pending)body.append(element("p","small","本篇已提交共用網站，若手機尚未看到，請等待 GitHub Pages 部署完成後重新載入。"));
     history.replaceState(null,"","#article="+encodeURIComponent(article.id));
   }
   function showList(clearHash){
@@ -40,7 +42,8 @@
     for(const article of results){
       const card=element("article","item");
       card.append(element("span","tag",cats[article.category]||"消息"));
-      if(article.local_preview)card.append(element("span","tag demo-tag","本機示意"));
+      if(article.local_preview)card.append(element("span","tag demo-tag","僅本機預覽"));
+      if(article.public_pending)card.append(element("span","tag pending-tag","共用部署中"));
       if(article.featured)card.append(element("span","tag","精選"));
       card.append(element("p","meta",article.published_at||""));
       if(window.AMRNewsMedia&&Array.isArray(article.images)){
@@ -58,11 +61,23 @@
     if(clearHash)history.replaceState(null,"",location.pathname+location.search);
   }
   function sync(showHash){
-    const localPublished=local().filter(allowed).map(a=>({...a,local_preview:true}));
-    const ids=new Set(localPublished.map(a=>a.id));
-    entries=localPublished.concat(remoteEntries.filter(a=>!ids.has(a.id)));
+    const localPublished=local().filter(allowed).map(a=>({
+      ...a,local_preview:!a.public_synced_at,public_pending:!!a.public_synced_at
+    }));
+    const publiclyAvailable=new Set(remoteEntries.map(a=>a.id));
+    // A successfully migrated article should use the shared version once Pages serves it.
+    // Until then, retain a clearly marked local placeholder instead of hiding it.
+    const localVisible=localPublished.filter(a=>a.local_preview||!publiclyAvailable.has(a.id));
+    const ids=new Set(localVisible.map(a=>a.id));
+    entries=localVisible.concat(remoteEntries.filter(a=>!ids.has(a.id)));
     for(const k of Object.keys(cats))$("count-"+k).textContent=entries.filter(a=>a.category===k).length;
-    $("demoNotice").hidden=!localPublished.length;
+    const localOnly=localVisible.filter(a=>a.local_preview).length;
+    const awaiting=localVisible.filter(a=>a.public_pending).length;
+    $("demoNotice").hidden=!localOnly&&!awaiting;
+    $("demoNotice").textContent=[
+      localOnly?"有 "+localOnly+" 則消息仍僅存於此瀏覽器，請到後臺使用「一次同步既有已發布消息」，才可由手機查看。":"",
+      awaiting?"有 "+awaiting+" 則已提交共用網站，等待 GitHub Pages 部署；完成後手機可直接由此網址查閱。":""
+    ].filter(Boolean).join(" ");
     if(showHash){
       const hash=decodeURIComponent(location.hash.slice(1));
       if(hash.startsWith("article=")){

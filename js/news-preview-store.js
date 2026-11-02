@@ -26,6 +26,21 @@
       write(articles);
       return updated;
     },
+    markSynced(ids,commitSha="") {
+      const targets=new Set(ids.filter(id=>typeof id==="string"));
+      if(!targets.size)return;
+      const articles=read();
+      const time=new Date().toISOString();
+      let changed=0;
+      for(const article of articles){
+        if(targets.has(article.id) && article.status==="published"){
+          article.public_synced_at=time;
+          article.public_sync_commit=String(commitSha||"").slice(0,80);
+          changed++;
+        }
+      }
+      if(changed)write(articles);
+    },
     setStatus(id,status) {
       if(!["published","unpublished"].includes(status))throw Error("不支援的狀態。");
       const articles=read(),article=articles.find(a=>a.id===id);
