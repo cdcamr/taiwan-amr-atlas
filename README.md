@@ -1,5 +1,16 @@
 # Taiwan AMR Atlas
 
+## NEWS & EVENTS mobile sharing and legacy browser-post migration (2026-11-02)
+
+The public `news.html` page reads `data/news/manifest.json` and shared image files from GitHub Pages. Once published to the shared website, news and image captions are available on mobile and other devices using the same URL, without viewer login. **This is a public GitHub Pages site, not a private "only people with the URL" access control.**
+
+Earlier "one-click demonstration" posts were stored exclusively in the original browser's localStorage (`taiwan-amr-news-local-preview-v1`), so the server cannot retrieve those records automatically. The updated editor `news-editor.html` provides a **one-time batch migration** from the original browser: enter a repository-limited fine-grained GitHub token (Contents read/write), then choose "一次同步既有已發布消息". Eligible local published posts, photos, captions, original dates and tags are transferred in one batch and merged into the public manifest. Existing remote article IDs are skipped, not overwritten; invalid image records are reported and left in local storage. Successfully submitted local posts are marked with `public_synced_at`. After GitHub Pages deployment, the frontend prefers the published remote version instead of the old local preview. A link-copy button simplifies phone verification.
+
+New content: use "發布到共用網站（手機可查看）" with authorized GitHub access. "只在本機預覽發布" remains available but is **not** shared with other devices. The GitHub token is not committed or stored. Removing or unpublishing a locally backed-up post does **not** delete an already public post. This static prototype does not implement agency username/password login or publishing roles; add a server-side auth service for institutional deployment.
+
+Backups and recovery: `history/before-news-shared-publish-20261102/` and `history/NEWS-SHARED-MOBILE-ROLLBACK-20261102.md`.
+
+
 ## NEWS & EVENTS image display reliability update (2026-10-30)
 
 The front-end news gallery now renders before article body text. Image source normalization accepts in-repository relative paths, same-origin absolute paths, and allowed browser-local image data. Invalid or missing images show actionable diagnostics instead of silently disappearing. CMS previews and publishing check actual image decoding, and news HTML links to versioned JavaScript/CSS assets to reduce stale-cache problems. This update does not publish any content.
