@@ -67,7 +67,8 @@
     const publiclyAvailable=new Set(remoteEntries.map(a=>a.id));
     // A successfully migrated article should use the shared version once Pages serves it.
     // Until then, retain a clearly marked local placeholder instead of hiding it.
-    const localVisible=localPublished.filter(a=>a.local_preview||!publiclyAvailable.has(a.id));
+    // Once a shared article with the same ID is available, always use it instead of an older browser-local preview.
+    const localVisible=localPublished.filter(a=>!publiclyAvailable.has(a.id));
     const ids=new Set(localVisible.map(a=>a.id));
     entries=localVisible.concat(remoteEntries.filter(a=>!ids.has(a.id)));
     for(const k of Object.keys(cats))$("count-"+k).textContent=entries.filter(a=>a.category===k).length;
