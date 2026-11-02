@@ -79,7 +79,7 @@
   };
   const toggleBusy=busy=>{
     importingImages=busy;
-    ["demoPublish","directPublish","download","importBtn","imageFiles"].forEach(id=>{$(id).disabled=busy});
+    ["demoPublish","directPublish","migrateExisting","download","importBtn","imageFiles"].forEach(id=>{$(id).disabled=busy});
   };
   function renderImages(){
     const list=$("imageItems");
@@ -243,21 +243,29 @@
     const list=$("demoList");
     list.replaceChildren();
     const articles=store.list();
+    const pending=articles.filter(a=>a.status==="published"&&!a.public_synced_at);
+    $("legacyCount").textContent=articles.length
+      ? "目前瀏覽器保存 "+articles.length+" 則文章，其中 "+pending.length+" 則已發布示意消息尚未同步至共用網站。"
+      : "此瀏覽器沒有找到舊版發布資料；請回到最初發布消息的電腦及同一瀏覽器操作。";
+    $("migrateExisting").disabled=importingImages || pending.length===0;
     if(!articles.length){list.append(node("p","目前尚無本機示意文章。"));return}
     articles.forEach(a=>{
       const box=node("div");box.className="demo-entry";
       const info=node("div");
       const title=node("h3",a.title||a.id);
-      const badge=node("p",(a.published_at||"")+" · "+(a.status==="published"?"本機已發布":"已下架")+" · "+a.id+" · "+(a.images?.length||0)+" 張圖片");
+      const badge=node("p",(a.published_at||"")+" · "+(a.public_synced_at?"已提交共用網站":a.status==="published"?"已發布（僅本機）":"已下架（本機）")+" · "+a.id+" · "+(a.images?.length||0)+" 張圖片");
       badge.className="small";badge.style.margin="2px 0";
       info.append(title,badge);
       const actions=node("div");actions.className="actions";
       const edit=node("button","編輯");edit.type="button";edit.onclick=()=>fill(a);
-      const state=node("button",a.status==="published"?"下架":"重新發布");
+      const state=node("button",a.status==="published"?"本機下架":"本機重新發布");
       state.type="button";
-      state.onclick=()=>{try{store.setStatus(a.id,a.status==="published"?"unpublished":"published");demoMessage("文章狀態已更新。");refreshLocalList()}catch(e){demoMessage(e.message)}};
+      state.onclick=()=>{
+        if(a.public_synced_at&&!confirm("此文章已提交至共用網站。此處只會變更本機狀態，手機上已公開的文章不會下架。確定繼續？"))return;
+        try{store.setStatus(a.id,a.status==="published"?"unpublished":"published");demoMessage("本機狀態已更新；共用網站內容不受影響。");refreshLocalList()}catch(e){demoMessage(e.message)}
+      };
       const remove=node("button","刪除");remove.type="button";
-      remove.onclick=()=>{if(!confirm("確定刪除本機文章「"+a.title+"」及其圖片？"))return;store.remove(a.id);refreshLocalList();demoMessage("本機文章已刪除。")};
+      remove.onclick=()=>{if(!confirm("確定刪除本機文章「"+a.title+"」及其圖片？若已同步到共用網站，公開文章不會被刪除。"))return;store.remove(a.id);refreshLocalList();demoMessage("本機文章已刪除；共用網站內容不受影響。")};
       actions.append(edit,state,remove);box.append(info,actions);list.append(box);
     });
   }
@@ -364,11 +372,151 @@
         if(published.status===409)throw Error("發布清單同時有其他更新，請重新發布。已上傳圖片會保留供重試。");
         throw Error("GitHub 文章清單更新失敗（HTTP "+published.status+"）。已上傳圖片可能保留，請確認發布結果。");
       }
+      let commit="";
+      try{const response=await published.json();commit=response?.commit?.sha||""}catch(_){}
+      try{store.markSynced([article.id],commit)}catch(_){}
+      refreshLocalList();
       $("githubToken").value="";
-      message("GitHub 已提交文章及圖片；待 GitHub Pages 完成部署後可在 NEWS & EVENTS 查閱。",article.id);
+      message("已提交至共用網站；待 GitHub Pages 部署後，手機可直接開啟 NEWS & EVENTS 查看。",article.id);
     }catch(e){message(e.message||"GitHub 同步發布失敗。")}
     finally{toggleBusy(false)}
   });
+
+  function migrationStatus(text,link=false){
+    const container=$("migrationStatus");
+    container.replaceChildren(document.createTextNode(text));
+    if(link){
+      const a=node("a"," 開啟共用 NEWS & EVENTS ↗");
+      a.href="./news.html";a.target="_blank";a.rel="noopener noreferrer";
+      container.append(a);
+    }
+  }
+  const migrationCandidates=()=>store.list().filter(article=>article.status==="published"&&!article.public_synced_at);
+  function validateLegacy(article){
+    if(!article||typeof article!=="object")return "資料格式不正確";
+    if(!/^[A-Za-z0-9_-]{3,100}$/.test(article.id||""))return "文章代碼不符合規範";
+    if(typeof article.title!=="string"||!article.title.trim()||typeof article.summary!=="string"||!article.summary.trim())return "標題或摘要空白";
+    if(!CATEGORIES.includes(article.category))return "分類不正確";
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(article.published_at||"")||article.published_at>today())return "發布日期無效或尚未到期";
+    if(article.link_url){
+      try{if(new URL(article.link_url).protocol!=="https:")throw Error()}catch(_){return "外部連結非 HTTPS"}
+    }
+    if(article.images!==undefined&&!Array.isArray(article.images))return "圖片欄位格式不正確";
+    if((article.images||[]).length>MAX_IMAGES)return "圖片超過四張";
+    if(media.cleanImages(article.images||[],true).length!==(article.images||[]).length)return "圖片格式無效或資料遺失";
+    return "";
+  }
+  const validateLegacyImages=async(article)=>{
+    for(let i=0;i<article.images.length;i++){
+      const src=media.normalizeSource(article.images[i].src,true);
+      if(!src)throw Error("第 "+(i+1)+" 張圖片來源無效");
+      await new Promise((resolve,reject)=>{
+        const img=new Image();
+        img.onload=resolve;
+        img.onerror=()=>reject(Error("第 "+(i+1)+" 張圖片無法載入"));
+        img.src=src;
+      });
+    }
+  };
+  const getPublicManifest=async(auth)=>{
+    const response=await fetch(GITHUB_REPO+MANIFEST+"?ref=main",{headers:auth,cache:"no-store"});
+    if(!response.ok)throw Error("無法讀取共用消息清單（HTTP "+response.status+"）。請確認授權與網路。");
+    const info=await response.json();
+    const manifest=JSON.parse(decodeUTF8(info.content));
+    if(!Array.isArray(manifest.articles))throw Error("網站消息清單格式不正確。");
+    return {info,manifest};
+  };
+  $("migrateExisting").addEventListener("click",async()=>{
+    if(importingImages)return;
+    const originals=migrationCandidates();
+    if(!originals.length){migrationStatus("沒有需要轉移的舊消息。若以前用其他瀏覽器發布，請回到原瀏覽器。");return}
+    const token=$("githubToken").value.trim();
+    if(!token){migrationStatus("請先在上方輸入具有 GitHub Contents 寫入權限的授權權杖。");return}
+    if(!confirm("將一次同步這個瀏覽器中 "+originals.length+" 則既有已發布消息，以及其圖片與圖說到共用網站；手機和其他訪客都能看到。已在網站上有相同文章代碼者將略過，不會覆蓋。是否繼續？"))return;
+    toggleBusy(true);
+    const skipped=[];
+    const ready=[];
+    let duplicate=0;
+    let responseCommit="";
+    try{
+      const auth=headers(token);
+      migrationStatus("正在讀取共用消息清單…");
+      const initial=await getPublicManifest(auth);
+      const already=new Set(initial.manifest.articles.map(a=>a.id));
+      for(let i=0;i<originals.length;i++){
+        const original=originals[i];
+        if(already.has(original.id)){duplicate++;continue}
+        const err=validateLegacy(original);
+        if(err){skipped.push((original.title||original.id||"未命名消息")+"："+err);continue}
+        const images=media.cleanImages(original.images||[],true);
+        const article={
+          id:original.id,title:original.title,category:original.category,
+          summary:original.summary,body:String(original.body||""),
+          tags:Array.isArray(original.tags)?original.tags.filter(x=>typeof x==="string").slice(0,30):[],
+          published_at:original.published_at,event_date:String(original.event_date||""),
+          link_url:String(original.link_url||""),featured:!!original.featured,
+          status:"published",images:[]
+        };
+        migrationStatus("正在轉移第 "+(i+1)+"／"+originals.length+" 則：「"+article.title+"」及圖片…");
+        try{
+          await validateLegacyImages({...article,images});
+        }catch(error){skipped.push(article.title+"："+error.message);continue}
+        // GitHub API / network failures stop the batch, avoiding repeated bad uploads.
+        for(const image of images){
+          article.images.push(await publishPhoto(image,article.id,token));
+        }
+        ready.push(article);
+      }
+      if(!ready.length){
+        migrationStatus("沒有新消息可同步：網站已有相同代碼 "+duplicate+" 則；資料不完整 "+skipped.length+" 則。"+(skipped.length?" 請檢查："+skipped.slice(0,2).join("；"):""));
+        return;
+      }
+      // Refresh after uploads to reduce SHA conflicts and avoid overwriting
+      // articles published by other contributors during this migration.
+      let success=[],conflicts=0;
+      for(let attempt=0;attempt<2;attempt++){
+        const current=await getPublicManifest(auth);
+        const ids=new Set(current.manifest.articles.map(a=>a.id));
+        const additions=ready.filter(a=>!ids.has(a.id));
+        conflicts=ready.length-additions.length;
+        if(!additions.length)break;
+        current.manifest.articles.unshift(...additions);
+        migrationStatus("正在提交 "+additions.length+" 則消息至共用網站…");
+        const put=await fetch(GITHUB_REPO+MANIFEST,{
+          method:"PUT",
+          headers:{...auth,"Content-Type":"application/json"},
+          body:JSON.stringify({
+            message:"content(news): migrate "+additions.length+" existing local published posts",
+            content:encodeUTF8(JSON.stringify(current.manifest,null,2)+"\n"),
+            sha:current.info.sha,
+            branch:"main"
+          })
+        });
+        if(put.status===409 && attempt===0)continue;
+        if(!put.ok)throw Error("共用消息提交失敗（HTTP "+put.status+"）。上傳過的圖片會保留，重新點選可安全重試。");
+        success=additions.map(a=>a.id);
+        try{const commit=await put.json();responseCommit=commit?.commit?.sha||""}catch(_){}
+        break;
+      }
+      if(success.length){
+        try{store.markSynced(success,responseCommit)}
+        catch(_){migrationStatus("共用網站提交成功，但本機同步標記寫入失敗。請勿立即重複操作；可先在手機確認。",true);return}
+      }
+      const other=duplicate+conflicts;
+      let report="已提交 "+success.length+" 則舊消息及其圖片；"+(other?"跳過網站已有文章 "+other+" 則；":"")+(skipped.length?"資料有問題未轉移 "+skipped.length+" 則。":"");
+      if(skipped.length)report+=" 需檢查："+skipped.slice(0,3).join("；");
+      report+=" 待 GitHub Pages 完成部署，即可用手機網址查看。";
+      migrationStatus(report,true);
+      refreshLocalList();
+      if(success.length)$("githubToken").value="";
+    }catch(error){
+      migrationStatus("批次同步未完成："+(error.message||"發生未知錯誤")+"。尚未提交的舊消息仍保留在原瀏覽器。");
+    }finally{
+      toggleBusy(false);
+      refreshLocalList();
+    }
+  });
+
   window.addEventListener("storage",event=>{if(event.key==="taiwan-amr-news-local-preview-v1")refreshLocalList()});
   renderImages();
   refreshLocalList();
