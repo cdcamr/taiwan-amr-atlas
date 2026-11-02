@@ -598,7 +598,43 @@
       message("請複製此網址到手機："+url);
     }
   };
+
+  // When an existing browser-local article was published externally (e.g. through
+  // the authorized GitHub connector), reconcile exact matching public records.
+  // The user does not need to re-publish or re-enter a GitHub token.
+  const samePublicArticle=(local,remote)=>{
+    if(!local||!remote||local.id!==remote.id||remote.status!=="published")return false;
+    const fields=["title","category","summary","body","published_at","event_date","link_url","featured"];
+    if(!fields.every(key=>(local[key]||"")===(remote[key]||"")))return false;
+    const tagsA=Array.isArray(local.tags)?local.tags:[];
+    const tagsB=Array.isArray(remote.tags)?remote.tags:[];
+    if(JSON.stringify(tagsA)!==JSON.stringify(tagsB))return false;
+    const imagesA=Array.isArray(local.images)?local.images:[];
+    const imagesB=Array.isArray(remote.images)?remote.images:[];
+    if(imagesA.length!==imagesB.length)return false;
+    return imagesA.every((img,i)=>String(img.alt||"")===String(imagesB[i].alt||"")
+      &&String(img.caption||"")===String(imagesB[i].caption||""));
+  };
+  async function reconcileExistingSharedArticles(){
+    try{
+      const response=await fetch("./data/news/manifest.json",{cache:"no-store"});
+      if(!response.ok)return;
+      const current=await response.json();
+      if(!Array.isArray(current.articles))return;
+      const published=new Map(current.articles.map(article=>[article.id,article]));
+      const matches=store.list().filter(a=>a.status==="published"&&!a.public_synced_at
+        && samePublicArticle(a,published.get(a.id)));
+      if(!matches.length)return;
+      store.markSynced(matches.map(a=>a.id),"already-public");
+      refreshLocalList();
+      $("migrationStatus").textContent="已從共用網站確認 "+matches.length+" 則原本的消息已發布，無須重新同步。手機可直接開啟 NEWS & EVENTS 查看。";
+    }catch(_){
+      // Read-only reconciliation is best effort; do not alter local records on failure.
+    }
+  }
+
   window.addEventListener("storage",event=>{if(event.key==="taiwan-amr-news-local-preview-v1")refreshLocalList()});
   renderImages();
   refreshLocalList();
+  reconcileExistingSharedArticles();
 })();
