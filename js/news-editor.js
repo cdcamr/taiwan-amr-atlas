@@ -517,6 +517,15 @@
     }
   });
 
+  $("copyPublicLink").onclick=async()=>{
+    const url=new URL("./news.html",location.href).href;
+    try{
+      await navigator.clipboard.writeText(url);
+      message("已複製共用消息網址，可貼到手機開啟："+url);
+    }catch(_){
+      message("請複製此網址到手機："+url);
+    }
+  };
   window.addEventListener("storage",event=>{if(event.key==="taiwan-amr-news-local-preview-v1")refreshLocalList()});
   renderImages();
   refreshLocalList();
