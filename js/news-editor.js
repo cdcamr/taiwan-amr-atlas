@@ -321,7 +321,7 @@
     else if(limited)pieces.push("GitHub API 達到速率限制，請依 GitHub 提示稍後重試，勿連續點擊發布。");
     else if(status===403)pieces.push("建議點選上方「檢查 GitHub 授權」，確認是 cdcamr 帳號（或已有此儲存庫寫入權限的帳號），且 Token 已選 taiwan-amr-atlas，Contents 為 Read and write。");
     else if(status===404)pieces.push("請確認 Token 的授權儲存庫是 cdcamr/taiwan-amr-atlas，且沒有過期。");
-    return pieces.join("。").replace(/。{2,}/g,"。")+"。";
+    return pieces.join("。").replace(/。{2,}/g,"。");
   }
   $("checkGitHubAccess").onclick=async()=>{
     const output=$("githubAccessStatus");
