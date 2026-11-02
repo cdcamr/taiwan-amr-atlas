@@ -79,7 +79,7 @@
   };
   const toggleBusy=busy=>{
     importingImages=busy;
-    ["demoPublish","directPublish","migrateExisting","download","importBtn","imageFiles"].forEach(id=>{$(id).disabled=busy});
+    ["demoPublish","directPublish","migrateExisting","checkGitHubAccess","backupLegacy","download","importBtn","imageFiles"].forEach(id=>{$(id).disabled=busy});
   };
   function renderImages(){
     const list=$("imageItems");
@@ -303,6 +303,56 @@
     Authorization:"Bearer "+token,
     "X-GitHub-Api-Version":"2022-11-28"
   });
+
+  async function githubError(response,stage){
+    const status=response.status;
+    let responseMessage="";
+    try{
+      const info=await response.json();
+      responseMessage=String(info?.message||"").replace(/\s+/g," ").slice(0,260);
+    }catch(_){}
+    const permissions=response.headers?.get?.("X-Accepted-GitHub-Permissions")||"";
+    const remain=response.headers?.get?.("x-ratelimit-remaining")||"";
+    const limited=/(?:secondary |primary )?rate limit|abuse detection/i.test(responseMessage)||remain==="0"||status===429;
+    const pieces=[stage+"失敗（HTTP "+status+"）"];
+    if(responseMessage)pieces.push("GitHub 原因："+responseMessage);
+    if(permissions)pieces.push("該 API 所需權限："+permissions);
+    if(status===401)pieces.push("Token 可能無效、已過期或已撤銷；請重新登入 GitHub 檢查。");
+    else if(limited)pieces.push("GitHub API 達到速率限制，請依 GitHub 提示稍後重試，勿連續點擊發布。");
+    else if(status===403)pieces.push("建議點選上方「檢查 GitHub 授權」，確認是 cdcamr 帳號（或已有此儲存庫寫入權限的帳號），且 Token 已選 taiwan-amr-atlas，Contents 為 Read and write。");
+    else if(status===404)pieces.push("請確認 Token 的授權儲存庫是 cdcamr/taiwan-amr-atlas，且沒有過期。");
+    return pieces.join("。").replace(/。{2,}/g,"。");
+  }
+  $("checkGitHubAccess").onclick=async()=>{
+    const output=$("githubAccessStatus");
+    const token=$("githubToken").value.trim();
+    if(!token){output.textContent="請先輸入 Token，才能檢查其對應帳號與儲存庫權限。";return}
+    $("checkGitHubAccess").disabled=true;
+    output.textContent="正在檢查 Token 所屬帳號及儲存庫權限（不會修改檔案）…";
+    try{
+      const auth=headers(token);
+      const who=await fetch("https://api.github.com/user",{headers:auth,cache:"no-store"});
+      if(!who.ok)throw Error(await githubError(who,"GitHub 帳號驗證"));
+      const user=await who.json();
+      const account=String(user?.login||"").slice(0,80);
+      if(!account)throw Error("GitHub 未回傳帳號名稱。");
+      const response=await fetch("https://api.github.com/repos/cdcamr/taiwan-amr-atlas",{headers:auth,cache:"no-store"});
+      if(!response.ok)throw Error(await githubError(response,"儲存庫存取權限檢查"));
+      const repo=await response.json();
+      const permission=repo?.permissions;
+      const advice=[];
+      advice.push("Token 所屬帳號："+account+"。");
+      if(account.toLowerCase()!=="cdcamr")advice.push("此庫由 cdcamr 個人帳號持有；若目前帳號不是獲授權的協作者，請切換至 cdcamr 再建立 Token。");
+      if(permission?.push===false)advice.push("GitHub 未顯示此憑證具有儲存庫推送能力，請檢查帳號和 Token 的 Contents: Read and write 權限。");
+      else if(permission?.push===true)advice.push("帳號顯示具儲存庫推送能力，但仍須確認 Token 本身已授予 Contents: Read and write。");
+      else advice.push("GitHub 未提供推送權限明細，請在 Token 設定中確認 Resource owner、Repository access 及 Contents 寫入權限。");
+      advice.push("此檢查不會寫入檔案，因此不能完全保證圖片上傳成功。若再次出現 403，可提供錯誤中的「GitHub 原因」文字以利判讀；請勿提供 Token。");
+      output.textContent=advice.join(" ");
+    }catch(e){
+      output.textContent="權限檢查未通過："+(e.message||"無法連線至 GitHub API。");
+    }finally{$("checkGitHubAccess").disabled=false}
+  };
+
   async function publishPhoto(photo,articleId,token){
     if(!photo.src.startsWith("data:")){
       if(!media.validSource(photo.src,false))throw Error("圖片網址不是受允許的網站檔案。");
@@ -324,9 +374,9 @@
         headers:{...auth,"Content-Type":"application/json"},
         body:JSON.stringify({message:"content(news): upload photo "+articleId+"/"+hash,content:base64,branch:"main"})
       });
-      if(!put.ok)throw Error("圖片上傳失敗（HTTP "+put.status+"），請檢查 GitHub 權限或稍後重試。");
+      if(!put.ok)throw Error(await githubError(put,"圖片上傳"));
     }else if(!exists.ok){
-      throw Error("無法確認圖片版本（HTTP "+exists.status+"）。");
+      throw Error(await githubError(exists,"圖片檔案存取"));
     }
     return {src:"./"+path,alt:photo.alt,caption:photo.caption};
   }
@@ -345,7 +395,7 @@
       const auth=headers(token);
       message("正在讀取網站發布清單…");
       const r=await fetch(GITHUB_REPO+MANIFEST+"?ref=main",{headers:auth,cache:"no-store"});
-      if(!r.ok)throw Error("無法讀取 GitHub 文章清單（HTTP "+r.status+"）。");
+      if(!r.ok)throw Error(await githubError(r,"共用文章清單讀取"));
       const info=await r.json();
       const manifest=JSON.parse(decodeUTF8(info.content));
       if(!Array.isArray(manifest.articles))throw Error("GitHub 文章清單格式不正確。");
@@ -370,7 +420,7 @@
       });
       if(!published.ok){
         if(published.status===409)throw Error("發布清單同時有其他更新，請重新發布。已上傳圖片會保留供重試。");
-        throw Error("GitHub 文章清單更新失敗（HTTP "+published.status+"）。已上傳圖片可能保留，請確認發布結果。");
+        throw Error((await githubError(published,"共用文章清單發布"))+" 已上傳圖片可能保留，請確認發布結果。");
       }
       let commit="";
       try{const response=await published.json();commit=response?.commit?.sha||""}catch(_){}
@@ -391,6 +441,28 @@
       container.append(a);
     }
   }
+
+  $("backupLegacy").onclick=()=>{
+    const articles=store.list();
+    if(!articles.length){migrationStatus("此瀏覽器目前沒有可備份的舊消息。");return}
+    try{
+      const backup={
+        schema_version:1,
+        source:"taiwan-amr-atlas browser-local news backup",
+        exported_at:new Date().toISOString(),
+        articles
+      };
+      const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
+      const url=URL.createObjectURL(blob);
+      const link=node("a");
+      link.href=url;
+      link.download="taiwan-amr-news-local-backup-"+today()+".json";
+      link.click();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+      migrationStatus("已下載 "+articles.length+" 則本機消息與圖片的完整 JSON 備份。請妥善保管；檔案內可能包含文章及圖片資料，但不含 GitHub Token。");
+    }catch(e){migrationStatus("下載備份失敗："+(e.message||"瀏覽器無法建立檔案。"))}
+  };
+
   const migrationCandidates=()=>store.list().filter(article=>article.status==="published"&&!article.public_synced_at);
   function validateLegacy(article){
     if(!article||typeof article!=="object")return "資料格式不正確";
@@ -420,7 +492,7 @@
   };
   const getPublicManifest=async(auth)=>{
     const response=await fetch(GITHUB_REPO+MANIFEST+"?ref=main",{headers:auth,cache:"no-store"});
-    if(!response.ok)throw Error("無法讀取共用消息清單（HTTP "+response.status+"）。請確認授權與網路。");
+    if(!response.ok)throw Error(await githubError(response,"共用消息清單讀取"));
     const info=await response.json();
     const manifest=JSON.parse(decodeUTF8(info.content));
     if(!Array.isArray(manifest.articles))throw Error("網站消息清單格式不正確。");
@@ -493,7 +565,7 @@
           })
         });
         if(put.status===409 && attempt===0)continue;
-        if(!put.ok)throw Error("共用消息提交失敗（HTTP "+put.status+"）。上傳過的圖片會保留，重新點選可安全重試。");
+        if(!put.ok)throw Error((await githubError(put,"舊消息批次同步"))+" 上傳過的圖片會保留，重新點選可安全重試。");
         success=additions.map(a=>a.id);
         try{const commit=await put.json();responseCommit=commit?.commit?.sha||""}catch(_){}
         break;
