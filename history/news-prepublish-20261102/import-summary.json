@@ -1,0 +1,35 @@
+{
+  "imported_on": "2026-11-02",
+  "source": "user-supplied browser-local published posts backup",
+  "original_backup_sha256": "bcd567e7d4596b6e0a801ba4207ffc9d9c802df4d6205861f44c525d1e4a09a8",
+  "exported_at": "2026-11-02T05:56:24.985Z",
+  "source_article_count": 3,
+  "published_article_count": 3,
+  "notes": "Article titles, summary, body, tags, dates, image alt and captions retained. local_preview removed. Images published as lossless WebP blobs.",
+  "articles": [
+    {
+      "id": "demo-20261102034729-c3czw",
+      "title": "WHO bacterial priority pathogens list, 2024",
+      "category": "resource",
+      "published_at": "2026-11-02",
+      "image_path": "./assets/news/images/demo-20261102034729-c3czw/f5e4e5a236a95d2b.webp",
+      "git_blob_sha": "f5e4e5a236a95d2b5b0471f50448129113d2e2f7"
+    },
+    {
+      "id": "demo-20261102034232-08n6o",
+      "title": "2024年臺灣抗生素抗藥性監視年報",
+      "category": "report",
+      "published_at": "2026-11-02",
+      "image_path": "./assets/news/images/demo-20261102034232-08n6o/ab5bec596d18fb5a.webp",
+      "git_blob_sha": "ab5bec596d18fb5a59c397d67a23a4a236501f60"
+    },
+    {
+      "id": "demo-20261102033635-mfcxg",
+      "title": "2025世界抗生素周",
+      "category": "news",
+      "published_at": "2026-11-02",
+      "image_path": "./assets/news/images/demo-20261102033635-mfcxg/b2ce56f1b25ba078.webp",
+      "git_blob_sha": "b2ce56f1b25ba078fd1db83387a651f5d16d17c7"
+    }
+  ]
+}
