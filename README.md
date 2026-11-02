@@ -1,5 +1,14 @@
 # Taiwan AMR Atlas
 
+## NEWS & EVENTS: GitHub 403 image publishing diagnostics (2026-11-02)
+
+The public GitHub Pages frontend remains unchanged. The news editor now offers **檢查 GitHub 授權**, a read-only check of the token's authenticated GitHub account and repository permission metadata. It also surfaces the original GitHub API error message and required endpoint permissions after failed uploads. A second button, **下載本機消息及圖片備份**, exports local browser articles and embedded photos as JSON for backup (never includes the GitHub token). This change neither publishes existing browser-local articles nor changes `data/news/manifest.json`.
+
+For this repository, the owner is the **personal GitHub account `cdcamr`**, not a GitHub organization, the main branch is not protected, and there are no repository rulesets. To write files via REST Contents API, a fine-grained personal access token requires `Contents: Read and write` on `cdcamr/taiwan-amr-atlas`, and the token's user must have repository write privileges. Authenticated `GET /user` and `GET /repos` can help diagnose account mismatch, but **successful read-only diagnostics do not guarantee write access**. GitHub 403 may also mean API rate limiting, so preserve the returned API message and headers for troubleshooting.
+
+Rollback and pre-change backups: `history/NEWS-GITHUB-403-DIAGNOSTIC-ROLLBACK-20261102.md`.
+
+
 ## NEWS & EVENTS mobile sharing and legacy browser-post migration (2026-11-02)
 
 The public `news.html` page reads `data/news/manifest.json` and shared image files from GitHub Pages. Once published to the shared website, news and image captions are available on mobile and other devices using the same URL, without viewer login. **This is a public GitHub Pages site, not a private "only people with the URL" access control.**
