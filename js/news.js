@@ -8,9 +8,7 @@
   const url=source=>{try{const u=new URL(source,location.href);return u.protocol==="https:"?u.href:null}catch{return null}};
   const local=()=>window.AMRNewsPreview?window.AMRNewsPreview.list().filter(a=>a.status==="published"): [];
   const allowed=a=>a && a.status==="published" && Object.hasOwn(cats,a.category) && /^[A-Za-z0-9_-]{3,100}$/.test(a.id||"") && /^\d{4}-\d{2}-\d{2}$/.test(a.published_at||"") && a.published_at<=today() && typeof a.title==="string";
-  const setTheme=()=>{document.body.classList.toggle("light");try{localStorage.setItem("amr-news-theme",document.body.classList.contains("light")?"light":"dark")}catch(_){}};
-  try {if(localStorage.getItem("amr-news-theme")==="light")document.body.classList.add("light")}catch(_){}
-  $("themeToggle").onclick=setTheme;
+  // Shared js/site-preferences.js restores theme, and site-branding.js owns its toggle.
   function showDetail(article){
     $("articles").hidden=true;
     $("articleDetail").hidden=false;
