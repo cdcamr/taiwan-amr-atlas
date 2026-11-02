@@ -1,5 +1,18 @@
 # Taiwan AMR Atlas
 
+## Shared language and background settings (2026-11-02)
+
+All ten website pages now use `js/site-preferences.js` immediately after `<body>` to restore language and light/dark background from localStorage before visible page content renders. The common `js/site-branding.js` manages a shared language selector and background toggle on the homepage, AR/AU/HAI explorers, Antibiogram, One Health Lab, News & Events, its publisher, and data management pages. Pages without a theme button (such as News Publisher) receive a toggle automatically.
+
+- Language setting: `taiwan-amr-platform-language`, supporting `zh` / `en` / `ja`.
+- Background setting: `taiwan-amr-platform-theme`, supporting `dark` / `light`.
+- Legacy News setting `amr-news-theme` is migrated when the new global theme setting has not yet been saved.
+- Preferences are stored for this website origin in the same browser, maintained through navigation and reload, and synchronized between open tabs by localStorage events.
+- The homepage retains its existing multilingual dashboard labels. Other pages preserve their existing translation coverage; the selected interface language and platform title are still consistent across pages.
+- Browser private modes or cleared site data may reset preferences.
+- Historical full-file backups and rollback instructions: `history/preferences-before-20261102/` and `history/NEWS-SITE-PREFERENCES-ROLLBACK-20261102.md`.
+
+
 ## NEWS & EVENTS: GitHub 403 image publishing diagnostics (2026-11-02)
 
 The public GitHub Pages frontend remains unchanged. The news editor now offers **檢查 GitHub 授權**, a read-only check of the token's authenticated GitHub account and repository permission metadata. It also surfaces the original GitHub API error message and required endpoint permissions after failed uploads. A second button, **下載本機消息及圖片備份**, exports local browser articles and embedded photos as JSON for backup (never includes the GitHub token). This change neither publishes existing browser-local articles nor changes `data/news/manifest.json`.
