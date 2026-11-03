@@ -1,5 +1,16 @@
 # Taiwan AMR Atlas
 
+## 2024 AU/HAI annual report presentation mapping (2026-11-03)
+
+AU and HAI now begin with **report-themed navigation**. The AU explorer separates nationwide DID, inpatient DID, national Access, inpatient Access, ATC ranking, hospital/facility comparisons and AMU–AMR correlation topics. Only officially verified number series are charted; missing numeric series show an explicit unavailable state instead of incorrect proxy graphs. Annual-report figures are redrawn on a consistent white scientific-plot surface in both dark and light site themes. For the nationwide Access chart, the declared 70% international reference threshold is drawn as a labeled horizontal guide.
+
+The HAI explorer separates the **2024 regional/medical-center report** and the **2024 district-hospital report** in its selection interface, and limits hospital tiers appropriately. It presents yearly infection-site density, ICU-subtype density, device-associated density, device utilization and device-related share from the original 2008–2023 open-data aggregates. Hospital categories are not combined into one falsely comparable total. Official 2024 PDF links are included beside data sources.
+
+**Scope limitation:** this update maps report topics and uses an annual-report-like figure treatment. It does *not* claim exact figure-number, page-by-page or pixel matching with the three 2024 report PDFs: direct renderable access to the source pages was not available for complete diagram verification. AU currently has 16 verified summary values; the available HAI series ends in 2023. Do not label the charts as complete 2024 annual report reproduction.
+
+Report mapping, screenshot verification limitations and provenance: `data/AU_HAI_2024_REPORT_PRESENTATION_MAP.md`. Original HTML/CSS/JS/data copies: `history/au-hai-before-yearbook-layout-20261103/`. Recovery guide: `history/AU-HAI-YEARBOOK-LAYOUT-ROLLBACK-20261103.md`.
+
+
 ## AU / HAI annual-report-style interactive dashboards (2026-11-03)
 
 The previous empty AU and HAI explorers now have multi-year line charts, grouped bars, numeric tables, tooltips (including numerator/denominator for HAI), report-style filters, CSV export and shareable URLs. Both preserve the shared language/title and light/dark theme.
