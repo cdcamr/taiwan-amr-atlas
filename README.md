@@ -1,5 +1,16 @@
 # Taiwan AMR Atlas
 
+## AU / HAI annual-report-style interactive dashboards (2026-11-03)
+
+The previous empty AU and HAI explorers now have multi-year line charts, grouped bars, numeric tables, tooltips (including numerator/denominator for HAI), report-style filters, CSV export and shareable URLs. Both preserve the shared language/title and light/dark theme.
+
+- **AU:** `au-explorer.html` reads `data/au/au_report_verified_2013_2024.json`: 16 individually verifiable figures extracted from official 2013/2014/2021/2023/2024 surveillance report notices, including DID, AWaRe Access share and 2024 ATC ranked lists. **This is a verified excerpt, not the entire AU 2024 report.** Missing years are not interpolated and inpatient/population DID denominators are not combined.
+- **HAI:** `hai-explorer.html` reads `data/hai/hai_open_2008_2023.json`: four historical CDC official ICU open-data aggregates (930 deduplicated source rows, 2008–2023), producing rate-based annual trends by hospital tier, ICU subtype, infection site and invasive medical device. **2024 HAI report detailed numeric figures are not yet imported.** No 2024 estimate is displayed.
+- **Reference and reconciliation:** `data/AU_HAI_REPORT_INTEGRATION_README.md` documents official-source URLs, Git object SHAs of source CSVs, calculations, deduplication, limits and QA.
+- **Restore:** `history/au-hai-before-report-20261103/` retains original AU/HAI HTML and existing published dataset manifest; `history/AU-HAI-REPORT-ROLLBACK-20261103.md` provides rollback.
+- The existing curated `data/published/manifest.json` and AR datasets are unchanged. Do not treat these exploratory historical datasets as a new formally approved national reporting release.
+
+
 ## Shared language and background settings (2026-11-02)
 
 All ten website pages now use `js/site-preferences.js` immediately after `<body>` to restore language and light/dark background from localStorage before visible page content renders. The common `js/site-branding.js` manages a shared language selector and background toggle on the homepage, AR/AU/HAI explorers, Antibiogram, One Health Lab, News & Events, its publisher, and data management pages. Pages without a theme button (such as News Publisher) receive a toggle automatically.
