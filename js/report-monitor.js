@@ -288,8 +288,17 @@
   }
   function sources(){
     const host=$("sources");host.replaceChildren();
-    const urls=domain==="AU"?[["疾管署抗生素使用量年報",source.official_report_url],...source.sources.map(x=>[x.report_year+" 年年報公告",x.url])]:
-      [["疾管署 2024 年 HAI 年報下載頁",source.annual_report_2024_url],...Object.values(source.collections).map(x=>[x.title,x.official_dataset_url])];
+    const urls=domain==="AU"?
+      [
+        ["2024 年 AU 年報 PDF（官方原件）",source.report_style_reference?.official_pdf_url],
+        ["疾管署 AU 年報發布索引",source.report_style_reference?.index_url||source.official_report_url],
+        ...source.sources.map(x=>[x.report_year+" 年 AU 年報公告摘述",x.url])
+      ]:
+      [
+        ...(source.report_style_references||[]).map(x=>[x.report_title+" PDF（官方原件）",x.official_pdf_url]),
+        ["疾管署 HAI 年報下載索引",source.annual_report_2024_url],
+        ...Object.values(source.collections).map(x=>[x.title+"（開放資料）",x.official_dataset_url])
+      ];
     urls.forEach(([label,url])=>{try{if(new URL(url).protocol!=="https:")return;const a=node("a",label+" ↗");a.href=url;a.target="_blank";a.rel="noopener noreferrer";host.append(a);}catch(_){}});
     $("sourceFootnote").textContent=domain==="AU"
       ?"年報公告可核對的年度與指標節錄；缺少年度不內插。DID 每千人口人日與每千住院人日的分母不同，禁止直接合併。"
