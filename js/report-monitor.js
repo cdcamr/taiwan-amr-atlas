@@ -53,34 +53,173 @@
   }
   const normalizeAU=data=>data.records.filter(r=>Number.isFinite(Number(r.value))).map(r=>({metric:r.metric,year:Number(r.year),level:r.setting,condition:r.setting,icu:"不適用",numerator:null,denominator:null,value:Number(r.value),unit:r.unit,origin:"official_notice",precision:r.precision,source_url:r.source_url,atc:r.atc}));
   let source=null,all=[],years=[],chosenLevels=new Set(levels),visible=[];
+
+  // Organize pages by verified annual-report themes, rather than a single
+  // generic chart selector. No figure numbers are asserted without source PDFs.
+  const sectionDefinitions={
+    AU:[
+      {id:"national",title:"全國門住診使用量",sub:"總體 DID 趨勢",metric:"did",scope:"全國門住診",note:"年報整體使用情形；每千人口人日 DID，2024 年為 21.2。中間缺少年份不插補。"},
+      {id:"inpatient",title:"住院使用量",sub:"住院 DID 趨勢",metric:"did",scope:"住院",note:"住院使用量以每千住院人日 DID 呈現，不與每千人口人日資料合併。"},
+      {id:"aware",title:"AWaRe 合理使用",sub:"Access 占比",metric:"access_pct",scope:"全國門住診",note:"全國門住診 Access 百分比；2024 年 73%，年報公告提及 70% 參考目標。"},
+      {id:"aware-ward",title:"住院 AWaRe",sub:"住院 Access 占比",metric:"access_pct",scope:"住院",note:"住院 Access 百分比依年呈現；Watch 與 Reserve 完整原始百分比尚待匯入。"},
+      {id:"atc",title:"ATC 類別排名",sub:"2024 年已公告順序",note:"保留年報公告的 ATC 順序。因尚無各類完整 DID 數值，不以長條高度假裝精確用量。"},
+      {id:"facility",title:"醫療院所層級別",sub:"門住診與診所比較",note:"2024 年報公告新增院所層級 Access 分析；缺少逐院層、逐年度精確圖表表格，暫不繪製比較值。"},
+      {id:"correlation",title:"使用量與抗藥性",sub:"CRAB／CRE／VRE 相關性",note:"年報公告描述 Carbapenems 與 CRAB、CRE 及 Glycopeptides 與 VRE 的相關趨勢；配對觀察值尚未匯入，不以估計值重製相關圖。"}
+    ],
+    HAI:[
+      {id:"sites",title:"ICU 感染部位",sub:"感染部位別密度",metric:"site_density",scope:"感染部位合計",note:"以感染部位／住院人日分母呈現。可再選血流、肺炎、泌尿道與其他部位。"},
+      {id:"icu",title:"ICU 類型別",sub:"內外科與其他 ICU",metric:"icu_density",scope:"全部ICU",note:"依 ICU 類型比較，全部 ICU 數值由各 ICU 分子分母加總後計算。"},
+      {id:"device",title:"裝置相關感染",sub:"CLABSI／VAP／CAUTI",metric:"device_density",scope:"中心導管相關血流感染",note:"以裝置相關感染人次除以相應裝置使用人日計算密度。"},
+      {id:"utilization",title:"醫療裝置使用",sub:"中心導管／呼吸器／導尿管",metric:"device_utilization",scope:"中心導管",note:"裝置使用人日除以住院人日，以百分比呈現。"},
+      {id:"association",title:"裝置相關感染比例",sub:"感染部位別占比",metric:"device_share",scope:"血流",note:"裝置相關感染人次／同部位全部感染人次；不同於裝置相關感染密度。"}
+    ]
+  };
+  let activeSection=null;
+  let reportEdition=domain==="HAI"&&qs.get("report")==="district"?"district":"above";
+  let tierCheckboxes=[];
+  let sectionButtons=[];
+  let editionButtons=[];
+  const permittedLevel=level=>domain!=="HAI"||(reportEdition==="district"?level==="地區醫院":level==="醫學中心"||level==="區域醫院");
+  const currentConfig=()=>sectionDefinitions[domain].find(x=>x.id===activeSection)||null;
+  function syncSectionButtons(){
+    for(const {button,config} of sectionButtons){
+      const selected=config.id===activeSection;
+      button.setAttribute("aria-pressed",String(selected));
+      button.setAttribute("aria-current",selected?"true":"false");
+    }
+  }
+  function syncEditionButtons(){
+    for(const {button,edition} of editionButtons)button.setAttribute("aria-pressed",String(reportEdition===edition));
+    for(const {input,level} of tierCheckboxes){
+      input.disabled=!permittedLevel(level);
+      input.checked=permittedLevel(level)&&chosenLevels.has(level);
+    }
+  }
+  function chooseEdition(edition,shouldDraw=true){
+    if(domain!=="HAI")return;
+    reportEdition=edition==="district"?"district":"above";
+    if(shouldDraw){
+      chosenLevels=new Set(reportEdition==="district"?["地區醫院"]:["醫學中心","區域醫院"]);
+    }else{
+      chosenLevels=new Set([...chosenLevels].filter(permittedLevel));
+      if(!chosenLevels.size)chosenLevels=new Set(reportEdition==="district"?["地區醫院"]:["醫學中心","區域醫院"]);
+    }
+    syncEditionButtons();
+    if(shouldDraw){
+      scopesForMetric(false);
+      draw();
+    }
+  }
+  function chooseSection(id,shouldDraw=true){
+    const config=sectionDefinitions[domain].find(x=>x.id===id);
+    if(!config)return;
+    activeSection=config.id;
+    if(config.metric){
+      $("metric").value=config.metric;
+      scopesForMetric(false);
+      $("scope").value=config.scope;
+      if(["device_density","device_utilization"].includes(config.metric))$("icuType").value="全部ICU";
+    }
+    syncSectionButtons();
+    if(shouldDraw)draw();
+  }
+  function reportTopicSummary(){
+    const selected=currentConfig(),title=selected?.title||"自行調整的篩選條件";
+    const base=selected?.note||"使用下方篩選器調整年報式監測圖表。";
+    const additional=domain==="HAI"
+      ?"（"+(reportEdition==="above"?"區域級以上醫院：醫學中心／區域醫院":"地區醫院")+"；此頁可用數值截至 2023 年，非 2024 年報原始圖值。）"
+      :"（已核對公告值節錄，非 2024 年報完整逐圖原始資料。）";
+    $("reportStatus").textContent=title+"："+base+additional;
+    $("figureContext").textContent="對應分析主題："+title+"。"+(domain==="HAI"?"報告對象："+(reportEdition==="above"?"區域級以上醫院":"地區醫院")+"。":"使用年報發布公告已明列的年度與分母。");
+  }
+  function setupReportTopics(){
+    const host=$("reportSections");
+    host.replaceChildren();
+    sectionButtons=[];
+    sectionDefinitions[domain].forEach((config,index)=>{
+      const button=node("button",undefined,"report-section");
+      button.type="button";
+      const number=node("span",String(index+1).padStart(2,"0"),"section-number");
+      const words=node("span",undefined,"section-text");
+      words.append(node("strong",config.title),node("small",config.sub));
+      button.append(number,words);
+      button.addEventListener("click",()=>chooseSection(config.id));
+      host.append(button);
+      sectionButtons.push({button,config});
+    });
+    if(domain==="HAI"){
+      const editions=[
+        ["above","2024 區域級以上醫院年報"],
+        ["district","2024 地區醫院年報"]
+      ];
+      const editionHost=$("reportEdition");editionHost.replaceChildren();
+      editions.forEach(([edition,title])=>{
+        const button=node("button",title);
+        button.type="button";
+        button.addEventListener("click",()=>chooseEdition(edition));
+        editionHost.append(button);
+        editionButtons.push({button,edition});
+      });
+      chooseEdition(reportEdition,false);
+    }
+    const requested=qs.get("section");
+    if(sectionDefinitions[domain].some(x=>x.id===requested))chooseSection(requested,false);
+    else if(qs.has("metric")){activeSection=null;syncSectionButtons();}
+    else chooseSection(sectionDefinitions[domain][0].id,false);
+    syncEditionButtons();
+    reportTopicSummary();
+  }
+
   function populate(id,values,wanted){
     const element=$(id);element.replaceChildren();
     values.forEach(([v,label])=>{const option=node("option",label);option.value=String(v);element.append(option);});
     element.value=values.some(x=>String(x[0])===String(wanted))?String(wanted):String(values[0]?.[0]??"");
   }
   function scopesForMetric(initial){
-    const metric=$("metric").value,candidates=domain==="AU"?["全國門住診","住院"]:scopes[metric];
+    const metric=$("metric").value;
+    let candidates=domain==="AU"?["全國門住診","住院"]:scopes[metric];
+    if(domain==="HAI"&&metric==="icu_density"){
+      candidates=candidates.filter(scope=>scope==="全部ICU"||
+        all.some(r=>r.metric===metric&&r.condition===scope&&permittedLevel(r.level)));
+    }
     populate("scope",candidates.map(x=>[x,x]),initial?qs.get("scope"):$("scope").value);
     const device=["device_density","device_utilization"].includes(metric);
     $("icuField").hidden=!device;
-    if(device){const types=["全部ICU",...new Set(all.filter(r=>r.metric===metric&&r.icu!=="全部ICU").map(r=>r.icu))];populate("icuType",types.map(x=>[x,x]),initial?qs.get("icu"):"全部ICU");}
+    if(device){const types=["全部ICU",...new Set(all.filter(r=>r.metric===metric&&r.icu!=="全部ICU"&&permittedLevel(r.level)).map(r=>r.icu))];populate("icuType",types.map(x=>[x,x]),initial?qs.get("icu"):"全部ICU");}
   }
   function setup(){
     const metrics=domain==="AU"?namesAU:namesHAI;
     populate("metric",Object.entries(metrics),qs.get("metric"));
     if(domain==="AU")$("hospitalOptions").hidden=true;
     else{
-      if(qs.has("levels")){const target=new Set(qs.get("levels").split(",").filter(x=>levels.includes(x)));if(target.size)chosenLevels=target;}
+      chosenLevels=new Set(reportEdition==="district"?["地區醫院"]:["醫學中心","區域醫院"]);
+      if(qs.has("levels")){
+        const wanted=new Set(qs.get("levels").split(",").filter(x=>levels.includes(x)&&permittedLevel(x)));
+        if(wanted.size)chosenLevels=wanted;
+      }
       const box=$("hospitalOptions");box.replaceChildren();
-      levels.forEach((level,i)=>{const label=node("label"),check=node("input");check.type="checkbox";check.checked=chosenLevels.has(level);check.addEventListener("change",()=>{if(check.checked)chosenLevels.add(level);else chosenLevels.delete(level);draw();});label.style.color=colors[i];label.append(check,node("span",level));box.append(label);});
+      tierCheckboxes=[];
+      levels.forEach((level,i)=>{
+        const label=node("label"),check=node("input");
+        check.type="checkbox";check.checked=chosenLevels.has(level);check.disabled=!permittedLevel(level);
+        check.addEventListener("change",()=>{
+          if(check.disabled)return;
+          if(check.checked)chosenLevels.add(level);else chosenLevels.delete(level);
+          draw();
+        });
+        label.style.color=colors[i];
+        label.append(check,node("span",level));box.append(label);
+        tierCheckboxes.push({input:check,level});
+      });
     }
     const nums=Array.from({length:Math.max(...years)-Math.min(...years)+1},(_,i)=>Math.min(...years)+i);
     populate("startYear",nums.map(y=>[y,y]),qs.get("start")||(domain==="AU"?2013:2017));
     populate("endYear",nums.map(y=>[y,y]),qs.get("end")||Math.max(...years));
     if(["line","bar","table"].includes(qs.get("view")))$("view").value=qs.get("view");
     scopesForMetric(true);
-    $("metric").addEventListener("change",()=>{scopesForMetric(false);draw();});
-    ["scope","icuType","startYear","endYear","view"].forEach(id=>$(id).addEventListener("change",draw));
+    $("metric").addEventListener("change",()=>{activeSection=null;syncSectionButtons();scopesForMetric(false);draw();});
+    ["scope","icuType"].forEach(id=>$(id).addEventListener("change",()=>{activeSection=null;syncSectionButtons();draw();}));
+    ["startYear","endYear","view"].forEach(id=>$(id).addEventListener("change",draw));
     $("download").addEventListener("click",download);
     $("copyLink").addEventListener("click",share);
   }
@@ -88,7 +227,7 @@
     const metric=$("metric").value,scope=$("scope").value,start=Number($("startYear").value),end=Number($("endYear").value),icu=$("icuType").value;
     if(start>end)return [];
     return all.filter(r=>r.metric===metric&&r.condition===scope&&r.year>=start&&r.year<=end
-      &&(domain==="AU"||chosenLevels.has(r.level))
+      &&(domain==="AU"||(permittedLevel(r.level)&&chosenLevels.has(r.level)))
       &&(domain==="AU"||!["device_density","device_utilization"].includes(metric)||r.icu===icu))
       .sort((a,b)=>a.year-b.year||a.level.localeCompare(b.level,"zh-TW"));
   }
@@ -109,7 +248,14 @@
     const top=isPercent?Math.max(10,Math.min(100,Math.ceil(max/10)*10)):Math.max(1,Math.ceil(max*1.17*10)/10);
     const y=value=>T+PH-(value/top)*PH;
     const root=shape("svg",{viewBox:"0 0 "+W+" "+H,role:"img","aria-label":$("chartTitle").textContent+" 共 "+records.length+" 筆資料"});
+    // Keep the figure a legible, white scientific-report surface in both themes.
+    root.append(shape("rect",{x:0,y:0,width:W,height:H,fill:"#fff"}));
     for(let k=0;k<=5;k++){const v=top*k/5,yy=y(v);root.append(shape("line",{x1:L,x2:L+PW,y1:yy,y2:yy,class:"gridline"}),shape("text",{x:L-8,y:yy+4,"text-anchor":"end",class:"axis-label"},Number(v.toFixed(2)).toLocaleString("zh-TW")));}
+    if(domain==="AU"&&$("metric").value==="access_pct"&&$("scope").value==="全國門住診"&&top>=70){
+      const limitY=y(70);
+      root.append(shape("line",{x1:L,x2:W-R,y1:limitY,y2:limitY,class:"report-threshold"}));
+      root.append(shape("text",{x:W-R-5,y:limitY-7,"text-anchor":"end",class:"threshold-label"},"Access 70% 參考目標"));
+    }
     const stride=Math.max(1,Math.ceil((end-start+1)/10));
     for(let year=start;year<=end;year++)if((year-start)%stride===0||year===end)root.append(shape("text",{x:x(year),y:H-B+22,"text-anchor":"middle",class:"axis-label"},year));
     root.append(shape("text",{x:W/2,y:H-8,"text-anchor":"middle",class:"axis-label"},"監測年度"));
@@ -150,8 +296,17 @@
   }
   function sources(){
     const host=$("sources");host.replaceChildren();
-    const urls=domain==="AU"?[["疾管署抗生素使用量年報",source.official_report_url],...source.sources.map(x=>[x.report_year+" 年年報公告",x.url])]:
-      [["疾管署 2024 年 HAI 年報下載頁",source.annual_report_2024_url],...Object.values(source.collections).map(x=>[x.title,x.official_dataset_url])];
+    const urls=domain==="AU"?
+      [
+        ["2024 年 AU 年報 PDF（官方原件）",source.report_style_reference?.official_pdf_url],
+        ["疾管署 AU 年報發布索引",source.report_style_reference?.index_url||source.official_report_url],
+        ...source.sources.map(x=>[x.report_year+" 年 AU 年報公告摘述",x.url])
+      ]:
+      [
+        ...(source.report_style_references||[]).map(x=>[x.report_title+" PDF（官方原件）",x.official_pdf_url]),
+        ["疾管署 HAI 年報下載索引",source.annual_report_2024_url],
+        ...Object.values(source.collections).map(x=>[x.title+"（開放資料）",x.official_dataset_url])
+      ];
     urls.forEach(([label,url])=>{try{if(new URL(url).protocol!=="https:")return;const a=node("a",label+" ↗");a.href=url;a.target="_blank";a.rel="noopener noreferrer";host.append(a);}catch(_){}});
     $("sourceFootnote").textContent=domain==="AU"
       ?"年報公告可核對的年度與指標節錄；缺少年度不內插。DID 每千人口人日與每千住院人日的分母不同，禁止直接合併。"
@@ -159,12 +314,36 @@
   }
   function draw(){
     if(!source)return;
+    const config=currentConfig();
+    if(config&&!config.metric){
+      visible=[];
+      $("chartTitle").textContent=config.title+" · 年報分析主題";
+      $("chartSubtitle").textContent="2024 年年報索引；本頁尚未匯入此主題的完整精確資料";
+      $("dataBadge").textContent="項目已列入 · 數值待核對";
+      $("status").textContent=config.title+"：尚未取得可重繪的逐項原始精確數值；未以示意值代替。";
+      $("chart").replaceChildren(node("div","此主題尚無完整精確資料可重繪，請參考下方來源年報；目前不以估讀值產生圖表。","figure-not-ready"));
+      $("legend").replaceChildren();
+      $("pointDetails").textContent="本主題目前僅呈現年報公告可確認的分析方向，沒有可用作圖的數值。";
+      $("figureCaption").textContent="對應："+config.title+"；待完整原始資料核對後加入年報圖表。";
+      $("chartNote").textContent=config.note;
+      renderTable([]);summary([]);
+      $("rankingPanel").hidden=domain!=="AU"||config.id!=="atc";
+      $("download").disabled=true;
+      reportTopicSummary();
+      return;
+    }
+    $("download").disabled=false;
+    $("rankingPanel").hidden=true;
     visible=filter();const metric=$("metric").value,names=domain==="AU"?namesAU:namesHAI;
     $("chartTitle").textContent=names[metric]+" · "+$("scope").value;
     $("chartSubtitle").textContent=$("startYear").value+"–"+$("endYear").value+"年 · "+(visible[0]?.unit||unit[metric])+(domain==="HAI"&&["device_density","device_utilization"].includes(metric)?" · "+$("icuType").value:"");
     $("dataBadge").textContent=domain==="AU"?"公告精確數值節錄":"CDC 開放資料 · 2008–2023";
     $("status").textContent="目前篩選 "+visible.length+" 筆資料，"+(domain==="AU"?"僅呈現官方公告可核對年份。":"以原始分子分母計算密度與比例。");
     $("chartNote").textContent=domain==="AU"?"僅相鄰的已知年份連線；缺值年度不內插、不補零，跨分母使用量不可混用。":"年度值依 CDC 開放資料計算，不代表 2024 年監視年報的全部圖表與全院病房結果。";
+    $("figureCaption").textContent="年報式重繪｜"+names[metric]+" · "+$("scope").value+"；"+
+      $("startYear").value+"–"+$("endYear").value+" 年。"+(domain==="HAI"?"對象："+(reportEdition==="above"?"區域級以上醫院":"地區醫院")+"。":"")+
+      "以網站可核對資料製圖，非年報原圖；缺值不補估。";
+    reportTopicSummary();
     graph(visible);renderTable(visible);summary(visible);
   }
   function download(){
@@ -176,7 +355,7 @@
   }
   async function share(){
     const url=new URL(location.href);
-    const args={metric:$("metric").value,scope:$("scope").value,icu:$("icuType").value,start:$("startYear").value,end:$("endYear").value,view:$("view").value,levels:[...chosenLevels].join(",")};
+    const args={metric:$("metric").value,scope:$("scope").value,icu:$("icuType").value,start:$("startYear").value,end:$("endYear").value,view:$("view").value,levels:[...chosenLevels].join(","),section:activeSection||"",report:domain==="HAI"?reportEdition:""};
     Object.entries(args).forEach(([k,v])=>url.searchParams.set(k,v));
     try{await navigator.clipboard.writeText(url.href);$("status").textContent="已複製篩選網址："+url.href;}catch(_){$("status").textContent="可複製此篩選網址："+url.href;}
   }
@@ -190,7 +369,7 @@
       all=domain==="AU"?normalizeAU(source):normalizeHAI(source);
       if(!all.length||all.some(r=>!Number.isFinite(r.value)||r.value<0))throw Error("資料缺漏或數值格式異常");
       years=[...new Set(all.map(r=>r.year))].sort((a,b)=>a-b);
-      setup();ranking();sources();draw();
+      setup();ranking();sources();setupReportTopics();draw();
       if(window.__AMR_REPORT_TEST__)window.__AMR_REPORT_TEST__.ready={all,visible,source};
     }catch(err){$("status").textContent="讀取失敗："+err.message;$("chart").replaceChildren(node("div","正式資料尚無法讀取，暫不顯示估計數值。","empty"));}
   }
