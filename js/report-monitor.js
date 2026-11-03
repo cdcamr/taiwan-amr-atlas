@@ -98,7 +98,12 @@
   function chooseEdition(edition,shouldDraw=true){
     if(domain!=="HAI")return;
     reportEdition=edition==="district"?"district":"above";
-    chosenLevels=new Set(reportEdition==="district"?["地區醫院"]:["醫學中心","區域醫院"]);
+    if(shouldDraw){
+      chosenLevels=new Set(reportEdition==="district"?["地區醫院"]:["醫學中心","區域醫院"]);
+    }else{
+      chosenLevels=new Set([...chosenLevels].filter(permittedLevel));
+      if(!chosenLevels.size)chosenLevels=new Set(reportEdition==="district"?["地區醫院"]:["醫學中心","區域醫院"]);
+    }
     syncEditionButtons();
     if(shouldDraw)draw();
   }
@@ -205,7 +210,8 @@
     if(["line","bar","table"].includes(qs.get("view")))$("view").value=qs.get("view");
     scopesForMetric(true);
     $("metric").addEventListener("change",()=>{activeSection=null;syncSectionButtons();scopesForMetric(false);draw();});
-    ["scope","icuType","startYear","endYear","view"].forEach(id=>$(id).addEventListener("change",draw));
+    ["scope","icuType"].forEach(id=>$(id).addEventListener("change",()=>{activeSection=null;syncSectionButtons();draw();}));
+    ["startYear","endYear","view"].forEach(id=>$(id).addEventListener("change",draw));
     $("download").addEventListener("click",download);
     $("copyLink").addEventListener("click",share);
   }
