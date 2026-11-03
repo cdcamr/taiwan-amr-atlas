@@ -105,7 +105,10 @@
       if(!chosenLevels.size)chosenLevels=new Set(reportEdition==="district"?["地區醫院"]:["醫學中心","區域醫院"]);
     }
     syncEditionButtons();
-    if(shouldDraw)draw();
+    if(shouldDraw){
+      scopesForMetric(false);
+      draw();
+    }
   }
   function chooseSection(id,shouldDraw=true){
     const config=sectionDefinitions[domain].find(x=>x.id===id);
@@ -173,11 +176,16 @@
     element.value=values.some(x=>String(x[0])===String(wanted))?String(wanted):String(values[0]?.[0]??"");
   }
   function scopesForMetric(initial){
-    const metric=$("metric").value,candidates=domain==="AU"?["全國門住診","住院"]:scopes[metric];
+    const metric=$("metric").value;
+    let candidates=domain==="AU"?["全國門住診","住院"]:scopes[metric];
+    if(domain==="HAI"&&metric==="icu_density"){
+      candidates=candidates.filter(scope=>scope==="全部ICU"||
+        all.some(r=>r.metric===metric&&r.condition===scope&&permittedLevel(r.level)));
+    }
     populate("scope",candidates.map(x=>[x,x]),initial?qs.get("scope"):$("scope").value);
     const device=["device_density","device_utilization"].includes(metric);
     $("icuField").hidden=!device;
-    if(device){const types=["全部ICU",...new Set(all.filter(r=>r.metric===metric&&r.icu!=="全部ICU").map(r=>r.icu))];populate("icuType",types.map(x=>[x,x]),initial?qs.get("icu"):"全部ICU");}
+    if(device){const types=["全部ICU",...new Set(all.filter(r=>r.metric===metric&&r.icu!=="全部ICU"&&permittedLevel(r.level)).map(r=>r.icu))];populate("icuType",types.map(x=>[x,x]),initial?qs.get("icu"):"全部ICU");}
   }
   function setup(){
     const metrics=domain==="AU"?namesAU:namesHAI;
