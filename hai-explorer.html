@@ -2,13 +2,13 @@
 <html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HAI 醫療照護相關感染年報探索｜防疫一體抗生素抗藥性監測視覺化整合平臺</title>
 <meta name="description" content="以疾管署加護病房監測開放資料，呈現感染密度、導管相關感染密度、導管使用比率與逐年比較。">
-<link rel="stylesheet" href="./css/report-monitor.css?v=20261103-yearbook"><link rel="stylesheet" href="./css/responsive-accessibility.css"></head>
+<link rel="stylesheet" href="./css/report-monitor.css?v=20261104-estimates"><link rel="stylesheet" href="./css/responsive-accessibility.css"></head>
 <body data-report-domain="HAI"><script src="./js/site-preferences.js?v=20261102-prefs"></script>
 <header><strong>◈ 防疫一體抗生素抗藥性監測視覺化整合平臺 · HAI</strong>
 <div class="row"><a href="./">← 監測總覽</a><a href="./ar-explorer.html">AR</a><a href="./au-explorer.html">AU</a><a href="./dataset-admin.html">資料版本</a><button id="theme">◐ 主題</button></div></header>
 <main><div class="eyebrow">ANNUAL REPORT · INTERACTIVE SURVEILLANCE · HAI</div>
 <h1>HAI 醫療照護相關感染年報探索</h1><p>以疾管署加護病房監測開放資料，呈現感染密度、導管相關感染密度、導管使用比率與逐年比較。</p>
-<div class="note">目前匯入疾管署開放資料的 2008–2023 年 ICU 彙總數據。<strong>2024 年 HAI 年報已公布，但其精確逐圖數值尚未匯入</strong>。此頁不將 2023 資料冒稱為 2024 年報。</div>
+<div class="note">保留疾管署 2008–2023 年 ICU 開放資料的精確計數結果，另加入以 2022–2023 年趨勢推算的<strong>2024 年示意估計點</strong>。此點<strong>不是 2024 年報圖形估讀或正式統計值</strong>，僅供年報式頁面測試；可關閉示意估計。</div>
 <section class="panel report-contents" aria-label="HAI 年報主題導覽">
 <div class="report-kicker">2024 年醫療照護相關感染監視年報 · 主題導覽</div>
 <h2>先選年報對象，再選分析主題</h2>
@@ -26,10 +26,14 @@
 <label>結束年度<select id="endYear" aria-label="結束年度"></select></label>
 <label>呈現方式<select id="view"><option value="line">年報折線圖</option><option value="bar">分組柱狀圖</option><option value="table">詳細數值表</option></select></label>
 </div><p class="small" id="levelHelp">醫院層級選項依上方選擇的年報對象限制，以避免不適當的跨報告比較。</p><div class="hospital-options" id="hospitalOptions" role="group" aria-label="醫院層級比較"></div>
-<div class="quick-actions"><button class="primary" id="download">↓ 下載目前篩選 CSV</button><button id="copyLink">↗ 複製篩選網址</button><span class="badge" id="dataBadge">載入中…</span></div>
+<div class="estimate-toggle" id="estimateControls">
+  <label><input id="includeEstimates" type="checkbox" checked> 顯示示意估計值（非正式統計）</label>
+  <span id="estimateLegend" class="small">實心點＝已核對數值；<span class="sample-dash">┄ ○ ┄</span>＝估計值</span>
+ </div>
+ <div class="quick-actions"><button class="primary" id="download">↓ 下載目前篩選 CSV</button><button id="copyLink">↗ 複製篩選網址</button><span class="badge" id="dataBadge">載入中…</span></div>
 <p class="small" id="status" aria-live="polite">正在載入正式來源資料…</p></section>
 <section class="panel"><h2 id="chartTitle">年報趨勢圖</h2><p class="small" id="chartSubtitle"></p><p id="figureContext" class="figure-context" aria-live="polite"></p><div id="legend" class="legend" aria-label="圖例"></div><div class="chart-scroll"><div id="chart" class="chart-inner"></div></div><div id="pointDetails" class="point-details" role="status" aria-live="polite">選取或將游標移至圖上的資料點，可查看精確數值、分子、分母及來源。</div><p id="figureCaption" class="figure-caption"></p><p class="quality-note" id="chartNote"></p></section>
 <section class="panel"><h2>數值與分析說明</h2><div id="summaryCards" class="cards"></div><div id="tableBox" class="table-scroll"></div></section>
 <section class="panel" id="rankingPanel" hidden><h2>2024 年 ATC 類別使用量排名</h2><p class="small">僅呈現年報公告明列的名次，不假設排名間距或產生未公告的 DID 數值。</p><div id="rankings" class="rankings"></div></section>
 <section class="panel"><h2>年報及原始資料來源</h2><div class="source-links" id="sources"></div><p class="small" id="sourceFootnote"></p><p class="small">以正式來源已核對的分子與分母計算感染密度及比例；不同分析對象或單位不直接合併。若遇到尚未發布的年度、ICU 類型或項目，會顯示缺值而非補估。</p></section>
-</main><script src="./js/report-monitor.js?v=20261103-yearbook" defer></script><script src="./js/accessibility-enhancements.js" defer></script><script src="./js/site-branding.js?v=20261102-prefs" defer></script></body></html>
+</main><script src="./js/report-monitor.js?v=20261104-estimates" defer></script><script src="./js/accessibility-enhancements.js" defer></script><script src="./js/site-branding.js?v=20261102-prefs" defer></script></body></html>
