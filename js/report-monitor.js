@@ -4,10 +4,10 @@
   if(!["AU","HAI"].includes(domain))return;
   const $=id=>document.getElementById(id),NS="http://www.w3.org/2000/svg",qs=new URLSearchParams(location.search);
   const levels=["醫學中心","區域醫院","地區醫院"],colors=["#2b98ce","#f19c47","#9aaab6"];
-  const namesAU={did:"抗生素使用量密度（DID）",access_pct:"AWaRe Access 使用占比"};
+  const namesAU={did:"抗生素使用量密度（DID）",access_pct:"AWaRe Access 使用占比",facility_access_pct:"院所層級別 AWaRe Access 占比"};
   const namesHAI={site_density:"感染部位別感染密度",icu_density:"加護病房種類別感染密度",device_density:"侵入性醫療裝置相關感染密度",device_utilization:"侵入性醫療裝置使用比率",device_share:"感染個案之裝置相關比例"};
   const scopes={site_density:["感染部位合計","血流感染","肺炎","泌尿道感染","其他部位"],icu_density:["全部ICU","內科ICU","外科ICU","心臟科ICU","兒科ICU","綜合科ICU","<10床",">=10床"],device_density:["中心導管相關血流感染","呼吸器相關肺炎","導尿管相關泌尿道感染"],device_utilization:["中心導管","呼吸器","導尿管"],device_share:["血流","肺炎","泌尿道"]};
-  const unit={did:"DID",access_pct:"%",site_density:"感染人次／千住院人日",icu_density:"感染人次／千住院人日",device_density:"感染人次／千導管使用人日",device_utilization:"%",device_share:"%"};
+  const unit={did:"DID",access_pct:"%",facility_access_pct:"%",site_density:"感染人次／千住院人日",icu_density:"感染人次／千住院人日",device_density:"感染人次／千導管使用人日",device_utilization:"%",device_share:"%"};
   const node=(tag,label,cls)=>{const n=document.createElement(tag);if(label!==undefined)n.textContent=String(label);if(cls)n.className=cls;return n;};
   const shape=(tag,attrs,text)=>{const n=document.createElementNS(NS,tag);Object.entries(attrs||{}).forEach(([k,v])=>n.setAttribute(k,String(v)));if(text!==undefined)n.textContent=String(text);return n;};
   const num=x=>{if(x===undefined||x===null||x==="")return null;const n=Number(String(x).replaceAll(",",""));return Number.isFinite(n)?n:null;};
@@ -52,18 +52,32 @@
     return result;
   }
   const normalizeAU=data=>data.records.filter(r=>Number.isFinite(Number(r.value))).map(r=>({metric:r.metric,year:Number(r.year),level:r.setting,condition:r.setting,icu:"不適用",numerator:null,denominator:null,value:Number(r.value),unit:r.unit,origin:"official_notice",precision:r.precision,source_url:r.source_url,atc:r.atc}));
-  let source=null,all=[],years=[],chosenLevels=new Set(levels),visible=[];
+  let source=null,all=[],years=[],chosenLevels=new Set(levels),visible=[],estimateRecords=[],modelLoadError="";
+  const estimated = r => !!(r&&typeof r.precision==="string"&&r.precision.startsWith("illustrative_"));
+  const qualityLabel = r => estimated(r)
+    ? (domain==="AU"?"示意估計（官方錨點間插補／趨勢假設）":"2024 示意推估（2022–2023 趨勢外推）")
+    : (domain==="AU"?"年報公告已核對值":"CDC 開放資料計算值");
+  const normalizePreview = data => {
+    if(!data||data.domain!==domain||!Array.isArray(data.records))throw Error("示意資料格式不正確");
+    return data.records.map(r=>({
+      metric:r.metric,year:Number(r.year),level:domain==="AU"?r.setting:r.level,
+      condition:domain==="AU"?r.setting:r.condition,icu:domain==="AU"?"不適用":r.icu,
+      numerator:null,denominator:null,value:Number(r.value),unit:r.unit,
+      origin:estimated(r)?"illustrative_estimate":"official_notice",precision:r.precision,
+      source_url:r.source_url||data.official_notice_url||"",method:r.method||r.rule||"",model_years:r.from_years
+    })).filter(r=>Number.isFinite(r.value)&&r.value>=0&&Number.isInteger(r.year));
+  };
 
   // Organize pages by verified annual-report themes, rather than a single
   // generic chart selector. No figure numbers are asserted without source PDFs.
   const sectionDefinitions={
     AU:[
-      {id:"national",title:"全國門住診使用量",sub:"總體 DID 趨勢",metric:"did",scope:"全國門住診",note:"年報整體使用情形；每千人口人日 DID，2024 年為 21.2。中間缺少年份不插補。"},
+      {id:"national",title:"全國門住診使用量",sub:"總體 DID 趨勢",metric:"did",scope:"全國門住診",note:"2014=15.0、2023=19.5、2024=21.2 為官方明列值；其餘部分年度為依發布函敘述之示意估計。"},
       {id:"inpatient",title:"住院使用量",sub:"住院 DID 趨勢",metric:"did",scope:"住院",note:"住院使用量以每千住院人日 DID 呈現，不與每千人口人日資料合併。"},
       {id:"aware",title:"AWaRe 合理使用",sub:"Access 占比",metric:"access_pct",scope:"全國門住診",note:"全國門住診 Access 百分比；2024 年 73%，年報公告提及 70% 參考目標。"},
       {id:"aware-ward",title:"住院 AWaRe",sub:"住院 Access 占比",metric:"access_pct",scope:"住院",note:"住院 Access 百分比依年呈現；Watch 與 Reserve 完整原始百分比尚待匯入。"},
       {id:"atc",title:"ATC 類別排名",sub:"2024 年已公告順序",note:"保留年報公告的 ATC 順序。因尚無各類完整 DID 數值，不以長條高度假裝精確用量。"},
-      {id:"facility",title:"醫療院所層級別",sub:"門住診與診所比較",note:"2024 年報公告新增院所層級 Access 分析；缺少逐院層、逐年度精確圖表表格，暫不繪製比較值。"},
+      {id:"facility",title:"醫療院所層級別",sub:"醫學中心／診所 Access",metric:"facility_access_pct",scope:"醫學中心",note:"發布函明列醫學中心 2014 年 58%、2024 年 52%，診所 2024 年 83%；醫學中心中間年份為示意插補，其餘院所精確資料待匯入。"},
       {id:"correlation",title:"使用量與抗藥性",sub:"CRAB／CRE／VRE 相關性",note:"年報公告描述 Carbapenems 與 CRAB、CRE 及 Glycopeptides 與 VRE 的相關趨勢；配對觀察值尚未匯入，不以估計值重製相關圖。"}
     ],
     HAI:[
@@ -127,8 +141,8 @@
     const selected=currentConfig(),title=selected?.title||"自行調整的篩選條件";
     const base=selected?.note||"使用下方篩選器調整年報式監測圖表。";
     const additional=domain==="HAI"
-      ?"（"+(reportEdition==="above"?"區域級以上醫院：醫學中心／區域醫院":"地區醫院")+"；此頁可用數值截至 2023 年，非 2024 年報原始圖值。）"
-      :"（已核對公告值節錄，非 2024 年報完整逐圖原始資料。）";
+      ?"（"+(reportEdition==="above"?"區域級以上醫院：醫學中心／區域醫院":"地區醫院")+"；截至 2023 年為 CDC 開放資料；2024 年若勾選為歷史趨勢示意外推，非年報原圖估讀。）"
+      :"（正式公告已核對值與示意插補分開標示；未讀取 PDF 原圖，不可視為逐圖精確估讀。）";
     $("reportStatus").textContent=title+"："+base+additional;
     $("figureContext").textContent="對應分析主題："+title+"。"+(domain==="HAI"?"報告對象："+(reportEdition==="above"?"區域級以上醫院":"地區醫院")+"。":"使用年報發布公告已明列的年度與分母。");
   }
@@ -177,7 +191,7 @@
   }
   function scopesForMetric(initial){
     const metric=$("metric").value;
-    let candidates=domain==="AU"?["全國門住診","住院"]:scopes[metric];
+    let candidates=domain==="AU"?(metric==="facility_access_pct"?["醫學中心","診所"]:["全國門住診","住院"]):scopes[metric];
     if(domain==="HAI"&&metric==="icu_density"){
       candidates=candidates.filter(scope=>scope==="全部ICU"||
         all.some(r=>r.metric===metric&&r.condition===scope&&permittedLevel(r.level)));
@@ -220,21 +234,26 @@
     $("metric").addEventListener("change",()=>{activeSection=null;syncSectionButtons();scopesForMetric(false);draw();});
     ["scope","icuType"].forEach(id=>$(id).addEventListener("change",()=>{activeSection=null;syncSectionButtons();draw();}));
     ["startYear","endYear","view"].forEach(id=>$(id).addEventListener("change",draw));
+    $("includeEstimates").checked=qs.get("estimates")!=="0"&&estimateRecords.some(estimated);
+    $("includeEstimates").disabled=!estimateRecords.some(estimated);
+    $("includeEstimates").addEventListener("change",draw);
     $("download").addEventListener("click",download);
     $("copyLink").addEventListener("click",share);
   }
   function filter(){
     const metric=$("metric").value,scope=$("scope").value,start=Number($("startYear").value),end=Number($("endYear").value),icu=$("icuType").value;
     if(start>end)return [];
-    return all.filter(r=>r.metric===metric&&r.condition===scope&&r.year>=start&&r.year<=end
+    return all.filter(r=>(!estimated(r)||$("includeEstimates").checked)&&r.metric===metric&&r.condition===scope&&r.year>=start&&r.year<=end
       &&(domain==="AU"||(permittedLevel(r.level)&&chosenLevels.has(r.level)))
       &&(domain==="AU"||!["device_density","device_utilization"].includes(metric)||r.icu===icu))
       .sort((a,b)=>a.year-b.year||a.level.localeCompare(b.level,"zh-TW"));
   }
-  const color=level=>domain==="AU"?(level==="全國門住診"?colors[0]:colors[1]):colors[levels.indexOf(level)]||colors[0];
-  const detail=r=>r.year+"年／"+r.level+"／"+r.condition+"："+fmt(r.value)+" "+r.unit
-    +(r.numerator!==null?"；分子 "+fmt(r.numerator)+"；分母 "+fmt(r.denominator):"；年報公告明列值")
-    +(r.icu!=="全部ICU"&&r.icu!=="不適用"?"；"+r.icu:"");
+  const color=level=>domain==="AU"?(level==="全國門住診"?colors[0]:level==="醫學中心"?"#2b98ce":level==="診所"?"#f19c47":colors[1]):colors[levels.indexOf(level)]||colors[0];
+  const detail=r=>r.year+"年／"+r.level+"／"+r.condition+"："+fmt(r.value)+" "+r.unit+
+    "【"+qualityLabel(r)+"】"+
+    (r.numerator!==null?"；分子 "+fmt(r.numerator)+"；分母 "+fmt(r.denominator):"；沒有本資料點的公開分子／分母")+
+    (r.icu!=="全部ICU"&&r.icu!=="不適用"?"；"+r.icu:"")+
+    (estimated(r)?"；"+(domain==="AU"?"依公告值及趨勢假設插補，不是原圖估讀":"由 2022–2023 歷史資料趨勢推算，非年報報告值"):"");
   function graph(records){
     const chart=$("chart");chart.replaceChildren();
     const legend=$("legend");legend.replaceChildren();
