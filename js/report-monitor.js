@@ -281,22 +281,59 @@
     const display=r=>{$("pointDetails").textContent=detail(r);};
     if($("view").value==="line"){
       for(const group of groups){
-        let path="",previous=null;
         const subset=records.filter(r=>r.level===group).sort((a,b)=>a.year-b.year);
-        for(const r of subset){path+=(previous&&r.year-previous.year===1?"L":"M")+x(r.year).toFixed(2)+" "+y(r.value).toFixed(2)+" ";previous=r;}
-        root.append(shape("path",{d:path,stroke:color(group),"stroke-width":3,"stroke-linecap":"round",fill:"none"}));
-        for(const r of subset){const c=shape("circle",{cx:x(r.year),cy:y(r.value),r:5.5,fill:color(group),stroke:"#fff","stroke-width":1.3,tabindex:0,role:"button","aria-label":detail(r),class:"point"});c.append(shape("title",{},detail(r)));["mouseenter","focus","click"].forEach(ev=>c.addEventListener(ev,()=>display(r)));root.append(c);}
+        // An estimated endpoint makes the connecting segment dashed;
+        // verified-to-verified consecutive segments remain solid.
+        let previous=null;
+        for(const r of subset){
+          if(previous&&r.year-previous.year===1){
+            const synthetic=estimated(previous)||estimated(r);
+            root.append(shape("line",{
+              x1:x(previous.year),y1:y(previous.value),x2:x(r.year),y2:y(r.value),
+              stroke:color(group),"stroke-width":synthetic?2:3,
+              ...(synthetic?{"stroke-dasharray":"6 5"}:{})
+            }));
+          }
+          previous=r;
+        }
+        for(const r of subset){
+          const synthetic=estimated(r);
+          const c=shape("circle",{
+            cx:x(r.year),cy:y(r.value),r:synthetic?6.5:5.5,
+            fill:synthetic?"#fff":color(group),
+            stroke:synthetic?color(group):"#fff","stroke-width":synthetic?2.6:1.3,
+            tabindex:0,role:"button","aria-label":detail(r),
+            class:synthetic?"point estimated-circle":"point official-circle"
+          });
+          c.append(shape("title",{},detail(r)));
+          ["mouseenter","focus","click"].forEach(ev=>c.addEventListener(ev,()=>display(r)));
+          root.append(c);
+        }
       }
     }else{
       const barW=Math.max(2,Math.min(19,PW/(end-start+1)/Math.max(1,groups.length)-2));
-      for(const r of records){const left=x(r.year)+groups.indexOf(r.level)*barW-groups.length*barW/2,yy=y(r.value);const rect=shape("rect",{x:left,y:yy,width:barW-1,height:T+PH-yy,fill:color(r.level),tabindex:0,role:"button","aria-label":detail(r)});rect.append(shape("title",{},detail(r)));["mouseenter","focus","click"].forEach(ev=>rect.addEventListener(ev,()=>display(r)));root.append(rect);}
+      for(const r of records){
+        const left=x(r.year)+groups.indexOf(r.level)*barW-groups.length*barW/2,yy=y(r.value),synthetic=estimated(r);
+        const rect=shape("rect",{
+          x:left,y:yy,width:barW-1,height:T+PH-yy,
+          fill:synthetic?"#fff":color(r.level),stroke:synthetic?color(r.level):"none",
+          "stroke-width":synthetic?2.5:0,
+          tabindex:0,role:"button","aria-label":detail(r)
+        });
+        rect.append(shape("title",{},detail(r)));
+        ["mouseenter","focus","click"].forEach(ev=>rect.addEventListener(ev,()=>display(r)));
+        root.append(rect);
+      }
+    }
+    if(records.some(estimated)){
+      root.append(shape("text",{x:L+3,y:T+14,class:"estimate-key"},"○ 虛線／空心點：示意估計，非年報原始數值"));
     }
     chart.append(root);
   }
   function renderTable(rows){
     const host=$("tableBox");host.replaceChildren();
     if(!rows.length){host.append(node("div","尚無符合條件的數值。","empty"));return;}
-    const fields=[["年度",r=>r.year],["層級／對象",r=>r.level],["分析項目",r=>r.condition],["ICU類型",r=>r.icu],["數值",r=>fmt(r.value)],["單位",r=>r.unit],["分子",r=>r.numerator===null?"—":fmt(r.numerator)],["分母",r=>r.denominator===null?"—":fmt(r.denominator)]];
+    const fields=[["年度",r=>r.year],["層級／對象",r=>r.level],["分析項目",r=>r.condition],["ICU類型",r=>r.icu],["數值",r=>fmt(r.value)],["單位",r=>r.unit],["分子",r=>r.numerator===null?"—":fmt(r.numerator)],["分母",r=>r.denominator===null?"—":fmt(r.denominator)],["資料性質",r=>qualityLabel(r)]];
     const table=node("table"),thead=node("thead"),tr=node("tr");
     fields.forEach(([name])=>tr.append(node("th",name)));thead.append(tr);table.append(thead);
     const tbody=node("tbody");[...rows].sort((a,b)=>b.year-a.year).forEach(r=>{const row=node("tr");fields.forEach(([name,fn],i)=>{const cell=node("td",fn(r));if([4,6,7].includes(i))cell.className="numeric";row.append(cell);});tbody.append(row);});
@@ -305,7 +342,7 @@
   function summary(rows){
     const host=$("summaryCards");host.replaceChildren();
     if(!rows.length){host.append(node("div","沒有已核實資料","empty"));return;}
-    for(const level of new Set(rows.map(r=>r.level))){const last=rows.filter(r=>r.level===level).sort((a,b)=>b.year-a.year)[0],card=node("div",undefined,"metric-card");card.append(node("small",level+"／"+last.year+"年"),node("strong",fmt(last.value)),node("small",last.unit));host.append(card);}
+    for(const level of new Set(rows.map(r=>r.level))){const last=rows.filter(r=>r.level===level).sort((a,b)=>b.year-a.year)[0],card=node("div",undefined,"metric-card");card.append(node("small",level+"／"+last.year+"年"),node("strong",fmt(last.value)),node("small",last.unit+" · "+qualityLabel(last)));host.append(card);}
   }
   function ranking(){
     if(domain!=="AU")return;
