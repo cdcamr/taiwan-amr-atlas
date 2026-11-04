@@ -393,25 +393,33 @@
     visible=filter();const metric=$("metric").value,names=domain==="AU"?namesAU:namesHAI;
     $("chartTitle").textContent=names[metric]+" · "+$("scope").value;
     $("chartSubtitle").textContent=$("startYear").value+"–"+$("endYear").value+"年 · "+(visible[0]?.unit||unit[metric])+(domain==="HAI"&&["device_density","device_utilization"].includes(metric)?" · "+$("icuType").value:"");
-    $("dataBadge").textContent=domain==="AU"?"公告精確數值節錄":"CDC 開放資料 · 2008–2023";
-    $("status").textContent="目前篩選 "+visible.length+" 筆資料，"+(domain==="AU"?"僅呈現官方公告可核對年份。":"以原始分子分母計算密度與比例。");
-    $("chartNote").textContent=domain==="AU"?"僅相鄰的已知年份連線；缺值年度不內插、不補零，跨分母使用量不可混用。":"年度值依 CDC 開放資料計算，不代表 2024 年監視年報的全部圖表與全院病房結果。";
-    $("figureCaption").textContent="年報式重繪｜"+names[metric]+" · "+$("scope").value+"；"+
+    const estimatesInView=visible.filter(estimated).length;
+    const verifiedInView=visible.length-estimatesInView;
+    $("dataBadge").textContent=domain==="AU"
+      ?"年報公告錨點"+(estimatesInView?"＋"+estimatesInView+"個示意估計":"")
+      :"CDC 開放資料 2008–2023"+(estimatesInView?"＋"+estimatesInView+"個2024示意推估":"");
+    $("status").textContent="目前篩選 "+visible.length+" 筆資料（已核對 "+verifiedInView+"、示意估計 "+estimatesInView+"）。"+
+      (estimatesInView?" 估計值僅供頁面設計與趨勢展示，非年報正式統計。":" 目前未包含示意估計。")+
+      (modelLoadError?" 示意資料載入提醒："+modelLoadError:"");
+    $("chartNote").textContent=domain==="AU"
+      ?"實心點為官方公布錨點；虛線、空心點為由錨點及公布趨勢設計的示意數值，未讀取 PDF 圖形，非逐圖估讀；不同 DID 分母不能混算。"
+      :"截至 2023 年為 CDC 開放資料分子分母計算值；2024 年空心點為由 2022–2023 趨勢外推且年變動上限 8% 的示意值，非 2024 年報估讀或正式數據。";
+    $("figureCaption").textContent="監測年報參考示意圖｜"+names[metric]+" · "+$("scope").value+"；"+
       $("startYear").value+"–"+$("endYear").value+" 年。"+(domain==="HAI"?"對象："+(reportEdition==="above"?"區域級以上醫院":"地區醫院")+"。":"")+
-      "以網站可核對資料製圖，非年報原圖；缺值不補估。";
+      " 已核對數值 "+verifiedInView+" 筆，示意估計 "+estimatesInView+" 筆；非年報原圖。";
     reportTopicSummary();
     graph(visible);renderTable(visible);summary(visible);
   }
   function download(){
     if(!visible.length)return;
-    const fields=["year","level","metric","condition","icu","value","unit","numerator","denominator","precision","origin"];
+    const fields=["year","level","metric","condition","icu","value","unit","numerator","denominator","precision","origin","method","source_url"];
     const safe=value=>{let s=String(value??"");if(/^[=+@]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';};
     const csv="\ufeff"+fields.join(",")+"\r\n"+visible.map(r=>fields.map(k=>safe(r[k])).join(",")).join("\r\n");
     const u=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"})),a=node("a");a.href=u;a.download=domain.toLowerCase()+"-annual-data.csv";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);
   }
   async function share(){
     const url=new URL(location.href);
-    const args={metric:$("metric").value,scope:$("scope").value,icu:$("icuType").value,start:$("startYear").value,end:$("endYear").value,view:$("view").value,levels:[...chosenLevels].join(","),section:activeSection||"",report:domain==="HAI"?reportEdition:""};
+    const args={metric:$("metric").value,scope:$("scope").value,icu:$("icuType").value,start:$("startYear").value,end:$("endYear").value,view:$("view").value,levels:[...chosenLevels].join(","),section:activeSection||"",report:domain==="HAI"?reportEdition:"",estimates:$("includeEstimates").checked?"1":"0"};
     Object.entries(args).forEach(([k,v])=>url.searchParams.set(k,v));
     try{await navigator.clipboard.writeText(url.href);$("status").textContent="已複製篩選網址："+url.href;}catch(_){$("status").textContent="可複製此篩選網址："+url.href;}
   }
@@ -424,10 +432,28 @@
       if(source.domain!==domain)throw Error("資料集領域不符");
       all=domain==="AU"?normalizeAU(source):normalizeHAI(source);
       if(!all.length||all.some(r=>!Number.isFinite(r.value)||r.value<0))throw Error("資料缺漏或數值格式異常");
+      // Preview points are a separate dataset and never overwrite official
+      // historical data. The public source remains usable if model loading fails.
+      const previewFile=domain==="AU"
+        ?"./data/au/au_2024_illustrative_estimates.json"
+        :"./data/hai/hai_2024_illustrative_estimates.json";
+      try{
+        const previewResponse=await fetch(previewFile,{cache:"no-store"});
+        if(!previewResponse.ok)throw Error("HTTP "+previewResponse.status);
+        estimateRecords=normalizePreview(await previewResponse.json());
+        const originalKeys=new Set(all.map(r=>[r.metric,r.year,r.level,r.condition,r.icu].join("|")));
+        const seen=new Set();
+        estimateRecords=estimateRecords.filter(r=>{
+          const key=[r.metric,r.year,r.level,r.condition,r.icu].join("|");
+          if(originalKeys.has(key)||seen.has(key))return false;
+          seen.add(key);return true;
+        });
+        all.push(...estimateRecords);
+      }catch(error){modelLoadError=String(error.message||error);estimateRecords=[];}
       years=[...new Set(all.map(r=>r.year))].sort((a,b)=>a-b);
       setup();ranking();sources();setupReportTopics();draw();
       if(window.__AMR_REPORT_TEST__)window.__AMR_REPORT_TEST__.ready={all,visible,source};
-    }catch(err){$("status").textContent="讀取失敗："+err.message;$("chart").replaceChildren(node("div","正式資料尚無法讀取，暫不顯示估計數值。","empty"));}
+    }catch(err){$("status").textContent="讀取失敗："+err.message;$("chart").replaceChildren(node("div","來源資料無法讀取，網站不會以示意估計值取代所有正式數值。","empty"));}
   }
   if(window.__AMR_REPORT_TEST__)window.__AMR_REPORT_TEST__.helpers={normalizeHAI,normalizeAU,rate,filter};
   init();
