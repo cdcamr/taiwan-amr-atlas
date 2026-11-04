@@ -365,8 +365,8 @@
       ];
     urls.forEach(([label,url])=>{try{if(new URL(url).protocol!=="https:")return;const a=node("a",label+" ↗");a.href=url;a.target="_blank";a.rel="noopener noreferrer";host.append(a);}catch(_){}});
     $("sourceFootnote").textContent=domain==="AU"
-      ?"年報公告可核對的年度與指標節錄；缺少年度不內插。DID 每千人口人日與每千住院人日的分母不同，禁止直接合併。"
-      :"疾管署官方開放資料的原始年度計數，截至 2023 年；精確率值由分子／分母計算。2024 年年報已發布，但逐圖數值尚待正式匯入。";
+      ?"2024 AU 年報原件已提供連結。官方發布函直接列明的 DID／AWaRe 錨點與中間年度「示意估計」以不同符號標示；示意值不是年報 PDF 原圖估讀或正式數值。DID 每千人口人日與每千住院人日分母不可混用。"
+      :"2024 HAI 兩份官方年報 PDF 已提供連結。2008–2023 年為疾管署開放資料實際分子、分母計算值；2024 年若顯示空心點，僅為依 2022–2023 歷史趨勢產生的模型示意，並非從 PDF 年報圖形擷取。";
   }
   function draw(){
     if(!source)return;
