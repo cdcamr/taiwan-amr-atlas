@@ -1,5 +1,17 @@
 # Taiwan AMR Atlas
 
+## AU / HAI annual-report inspired illustrative trends (2026-11-04)
+
+The 2024 AU and HAI annual reports are indexed on the official Taiwan CDC website, with the original links retained in the existing dashboard data files. In this execution environment, the Taiwan CDC `File/Get` endpoint could not return full usable PDF pages. To support the requested interactive preview **without inventing official figures**, new synthetic/model-assisted points live in separate datasets and are prominently marked as non-official.
+
+- **AU** `data/au/au_2024_illustrative_estimates.json`: 33 illustrative intermediate-year points plus 3 separately confirmed facility Access endpoint values from the Taiwan CDC annual report release letter; original 16 validated AU values remain untouched.
+- **HAI** `data/hai/hai_2024_illustrative_estimates.json`: 129 illustrative 2024 rates projected from verified 2022–2023 CDC ICU open aggregates; these are **not measurements from the 2024 PDF report** and not true 2024 surveillance statistics. Historical 2008–2023 values remain untouched.
+- Both pages default to showing estimates, with an explicit on/off toggle. Estimated segments use dashed lines and hollow circles; officially verified points remain solid. Tooltips, numeric tables, CSV exports, and shareable filter URLs all preserve data-quality labels.
+- Full source audit, assumptions, disclaimers and formulas: `data/AU_HAI_2024_ILLUSTRATIVE_METHOD.md`. Rollback: `history/AU-HAI-ILLUSTRATIVE-ROLLBACK-20261104.md`, plus original files at `history/au-hai-before-illustrative-20261104/`.
+
+**Never cite the model-estimated values as official Taiwan CDC annual report statistics.** Replace them with chart-digitized readings only after the three real annual-report PDFs can be visually inspected and their figure labels verified.
+
+
 ## 2024 AU/HAI annual report presentation mapping (2026-11-03)
 
 AU and HAI now begin with **report-themed navigation**. The AU explorer separates nationwide DID, inpatient DID, national Access, inpatient Access, ATC ranking, hospital/facility comparisons and AMU–AMR correlation topics. Only officially verified number series are charted; missing numeric series show an explicit unavailable state instead of incorrect proxy graphs. Annual-report figures are redrawn on a consistent white scientific-plot surface in both dark and light site themes. For the nationwide Access chart, the declared 70% international reference threshold is drawn as a labeled horizontal guide.

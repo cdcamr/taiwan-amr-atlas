@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "domain": "AU",
+  "title": "臺灣抗生素使用量監視年報－已核對數值節錄",
+  "status": "official_summary_points_not_full_table",
+  "year_report": 2024,
+  "official_report_url": "https://www.cdc.gov.tw/Category/Page/tx7G1t-G3lyodZ8m8uoYMA",
+  "source_notes": "以疾管署年報公告之明確數值建立節錄；尚未取得完整 2024 年報圖表資料。不同年報版本與抗生素範圍須依每筆來源確認；圖中不推估缺少年度。",
+  "sources": [
+    {
+      "report_year": 2024,
+      "type": "年報公告摘述",
+      "url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275"
+    },
+    {
+      "report_year": 2023,
+      "type": "疾管署年報函文摘述",
+      "url": "https://www.nurse.org.tw/filecenter/B/8DD2E74708B84C5100/%E8%A1%9B%E7%94%9F%E7%A6%8F%E5%88%A9%E9%83%A8%E7%96%BE%E7%97%85%E7%AE%A1%E5%88%B6%E7%BD%B2%E5%87%BD%E6%9C%89%E9%97%9C%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E4%BD%BF%E7%94%A8%E9%87%8F%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%E5%8F%8A%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E6%8A%97%E8%97%A5%E6%80%A7%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%EF%BC%8C%E5%B7%B2%E5%85%AC%E5%B8%83%E6%96%BC%E6%9C%AC%E7%BD%B2%E5%85%A8%E7%90%83%E8%B3%87%E8%A8%8A%E7%B6%B2%EF%BC%8C%E8%A9%B3%E5%A6%82%E8%AA%AA%E6%98%8E%EF%BC%8C%E8%AB%8B%E8%BD%89%E7%9F%A5%E6%89%80%E8%BD%84%E9%86%AB%E7%99%82%E9%99%A2%E6%89%80%E5%8F%83%E8%80%83.pdf"
+    },
+    {
+      "report_year": 2021,
+      "type": "疾管署年報函文摘述",
+      "url": "https://www.doctor.org.tw/image_upload/document/65962366165e047f85ae53.pdf"
+    }
+  ],
+  "metrics": {
+    "did": "抗生素使用量密度 DID",
+    "access_pct": "AWaRe Access 使用占比"
+  },
+  "records": [
+    {
+      "metric": "did",
+      "setting": "全國門住診",
+      "year": 2013,
+      "value": 14.9,
+      "unit": "DID／千人口人日",
+      "atc": "J01+A07AA+P01AB",
+      "source_report_year": 2023,
+      "source_url": "https://www.nurse.org.tw/filecenter/B/8DD2E74708B84C5100/%E8%A1%9B%E7%94%9F%E7%A6%8F%E5%88%A9%E9%83%A8%E7%96%BE%E7%97%85%E7%AE%A1%E5%88%B6%E7%BD%B2%E5%87%BD%E6%9C%89%E9%97%9C%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E4%BD%BF%E7%94%A8%E9%87%8F%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%E5%8F%8A%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E6%8A%97%E8%97%A5%E6%80%A7%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%EF%BC%8C%E5%B7%B2%E5%85%AC%E5%B8%83%E6%96%BC%E6%9C%AC%E7%BD%B2%E5%85%A8%E7%90%83%E8%B3%87%E8%A8%8A%E7%B6%B2%EF%BC%8C%E8%A9%B3%E5%A6%82%E8%AA%AA%E6%98%8E%EF%BC%8C%E8%AB%8B%E8%BD%89%E7%9F%A5%E6%89%80%E8%BD%84%E9%86%AB%E7%99%82%E9%99%A2%E6%89%80%E5%8F%83%E8%80%83.pdf",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "did",
+      "setting": "全國門住診",
+      "year": 2014,
+      "value": 15,
+      "unit": "DID／千人口人日",
+      "atc": "J01+A07AA+P01AB",
+      "source_report_year": 2024,
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "did",
+      "setting": "全國門住診",
+      "year": 2023,
+      "value": 19.5,
+      "unit": "DID／千人口人日",
+      "atc": "J01+A07AA+P01AB",
+      "source_report_year": 2023,
+      "source_url": "https://www.nurse.org.tw/filecenter/B/8DD2E74708B84C5100/%E8%A1%9B%E7%94%9F%E7%A6%8F%E5%88%A9%E9%83%A8%E7%96%BE%E7%97%85%E7%AE%A1%E5%88%B6%E7%BD%B2%E5%87%BD%E6%9C%89%E9%97%9C%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E4%BD%BF%E7%94%A8%E9%87%8F%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%E5%8F%8A%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E6%8A%97%E8%97%A5%E6%80%A7%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%EF%BC%8C%E5%B7%B2%E5%85%AC%E5%B8%83%E6%96%BC%E6%9C%AC%E7%BD%B2%E5%85%A8%E7%90%83%E8%B3%87%E8%A8%8A%E7%B6%B2%EF%BC%8C%E8%A9%B3%E5%A6%82%E8%AA%AA%E6%98%8E%EF%BC%8C%E8%AB%8B%E8%BD%89%E7%9F%A5%E6%89%80%E8%BD%84%E9%86%AB%E7%99%82%E9%99%A2%E6%89%80%E5%8F%83%E8%80%83.pdf",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "did",
+      "setting": "全國門住診",
+      "year": 2024,
+      "value": 21.2,
+      "unit": "DID／千人口人日",
+      "atc": "J01+A07AA+P01AB",
+      "source_report_year": 2024,
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "did",
+      "setting": "住院",
+      "year": 2013,
+      "value": 616.7,
+      "unit": "DID／千住院人日",
+      "atc": "J01",
+      "source_report_year": 2023,
+      "source_url": "https://www.nurse.org.tw/filecenter/B/8DD2E74708B84C5100/%E8%A1%9B%E7%94%9F%E7%A6%8F%E5%88%A9%E9%83%A8%E7%96%BE%E7%97%85%E7%AE%A1%E5%88%B6%E7%BD%B2%E5%87%BD%E6%9C%89%E9%97%9C%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E4%BD%BF%E7%94%A8%E9%87%8F%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%E5%8F%8A%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E6%8A%97%E8%97%A5%E6%80%A7%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%EF%BC%8C%E5%B7%B2%E5%85%AC%E5%B8%83%E6%96%BC%E6%9C%AC%E7%BD%B2%E5%85%A8%E7%90%83%E8%B3%87%E8%A8%8A%E7%B6%B2%EF%BC%8C%E8%A9%B3%E5%A6%82%E8%AA%AA%E6%98%8E%EF%BC%8C%E8%AB%8B%E8%BD%89%E7%9F%A5%E6%89%80%E8%BD%84%E9%86%AB%E7%99%82%E9%99%A2%E6%89%80%E5%8F%83%E8%80%83.pdf",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "did",
+      "setting": "住院",
+      "year": 2014,
+      "value": 625,
+      "unit": "DID／千住院人日",
+      "atc": "J01",
+      "source_report_year": 2024,
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "did",
+      "setting": "住院",
+      "year": 2021,
+      "value": 684.4,
+      "unit": "DID／千住院人日",
+      "atc": "J01",
+      "source_report_year": 2021,
+      "source_url": "https://www.doctor.org.tw/image_upload/document/65962366165e047f85ae53.pdf",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "did",
+      "setting": "住院",
+      "year": 2023,
+      "value": 724.8,
+      "unit": "DID／千住院人日",
+      "atc": "J01",
+      "source_report_year": 2023,
+      "source_url": "https://www.nurse.org.tw/filecenter/B/8DD2E74708B84C5100/%E8%A1%9B%E7%94%9F%E7%A6%8F%E5%88%A9%E9%83%A8%E7%96%BE%E7%97%85%E7%AE%A1%E5%88%B6%E7%BD%B2%E5%87%BD%E6%9C%89%E9%97%9C%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E4%BD%BF%E7%94%A8%E9%87%8F%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%E5%8F%8A%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E6%8A%97%E8%97%A5%E6%80%A7%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%EF%BC%8C%E5%B7%B2%E5%85%AC%E5%B8%83%E6%96%BC%E6%9C%AC%E7%BD%B2%E5%85%A8%E7%90%83%E8%B3%87%E8%A8%8A%E7%B6%B2%EF%BC%8C%E8%A9%B3%E5%A6%82%E8%AA%AA%E6%98%8E%EF%BC%8C%E8%AB%8B%E8%BD%89%E7%9F%A5%E6%89%80%E8%BD%84%E9%86%AB%E7%99%82%E9%99%A2%E6%89%80%E5%8F%83%E8%80%83.pdf",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "did",
+      "setting": "住院",
+      "year": 2024,
+      "value": 749,
+      "unit": "DID／千住院人日",
+      "atc": "J01",
+      "source_report_year": 2024,
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "access_pct",
+      "setting": "全國門住診",
+      "year": 2021,
+      "value": 76,
+      "unit": "%",
+      "atc": "AWaRe Access",
+      "source_report_year": 2021,
+      "source_url": "https://www.doctor.org.tw/image_upload/document/65962366165e047f85ae53.pdf",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "access_pct",
+      "setting": "全國門住診",
+      "year": 2023,
+      "value": 73,
+      "unit": "%",
+      "atc": "AWaRe Access",
+      "source_report_year": 2023,
+      "source_url": "https://www.nurse.org.tw/filecenter/B/8DD2E74708B84C5100/%E8%A1%9B%E7%94%9F%E7%A6%8F%E5%88%A9%E9%83%A8%E7%96%BE%E7%97%85%E7%AE%A1%E5%88%B6%E7%BD%B2%E5%87%BD%E6%9C%89%E9%97%9C%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E4%BD%BF%E7%94%A8%E9%87%8F%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%E5%8F%8A%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E6%8A%97%E8%97%A5%E6%80%A7%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%EF%BC%8C%E5%B7%B2%E5%85%AC%E5%B8%83%E6%96%BC%E6%9C%AC%E7%BD%B2%E5%85%A8%E7%90%83%E8%B3%87%E8%A8%8A%E7%B6%B2%EF%BC%8C%E8%A9%B3%E5%A6%82%E8%AA%AA%E6%98%8E%EF%BC%8C%E8%AB%8B%E8%BD%89%E7%9F%A5%E6%89%80%E8%BD%84%E9%86%AB%E7%99%82%E9%99%A2%E6%89%80%E5%8F%83%E8%80%83.pdf",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "access_pct",
+      "setting": "全國門住診",
+      "year": 2024,
+      "value": 73,
+      "unit": "%",
+      "atc": "AWaRe Access",
+      "source_report_year": 2024,
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "access_pct",
+      "setting": "住院",
+      "year": 2013,
+      "value": 52,
+      "unit": "%",
+      "atc": "AWaRe Access",
+      "source_report_year": 2023,
+      "source_url": "https://www.nurse.org.tw/filecenter/B/8DD2E74708B84C5100/%E8%A1%9B%E7%94%9F%E7%A6%8F%E5%88%A9%E9%83%A8%E7%96%BE%E7%97%85%E7%AE%A1%E5%88%B6%E7%BD%B2%E5%87%BD%E6%9C%89%E9%97%9C%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E4%BD%BF%E7%94%A8%E9%87%8F%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%E5%8F%8A%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E6%8A%97%E8%97%A5%E6%80%A7%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%EF%BC%8C%E5%B7%B2%E5%85%AC%E5%B8%83%E6%96%BC%E6%9C%AC%E7%BD%B2%E5%85%A8%E7%90%83%E8%B3%87%E8%A8%8A%E7%B6%B2%EF%BC%8C%E8%A9%B3%E5%A6%82%E8%AA%AA%E6%98%8E%EF%BC%8C%E8%AB%8B%E8%BD%89%E7%9F%A5%E6%89%80%E8%BD%84%E9%86%AB%E7%99%82%E9%99%A2%E6%89%80%E5%8F%83%E8%80%83.pdf",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "access_pct",
+      "setting": "住院",
+      "year": 2014,
+      "value": 50,
+      "unit": "%",
+      "atc": "AWaRe Access",
+      "source_report_year": 2024,
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "access_pct",
+      "setting": "住院",
+      "year": 2023,
+      "value": 40,
+      "unit": "%",
+      "atc": "AWaRe Access",
+      "source_report_year": 2023,
+      "source_url": "https://www.nurse.org.tw/filecenter/B/8DD2E74708B84C5100/%E8%A1%9B%E7%94%9F%E7%A6%8F%E5%88%A9%E9%83%A8%E7%96%BE%E7%97%85%E7%AE%A1%E5%88%B6%E7%BD%B2%E5%87%BD%E6%9C%89%E9%97%9C%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E4%BD%BF%E7%94%A8%E9%87%8F%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%E5%8F%8A%E3%80%8C112%E5%B9%B4%E8%87%BA%E7%81%A3%E6%8A%97%E7%94%9F%E7%B4%A0%E6%8A%97%E8%97%A5%E6%80%A7%E7%9B%A3%E8%A6%96%E5%B9%B4%E5%A0%B1%E3%80%8D%EF%BC%8C%E5%B7%B2%E5%85%AC%E5%B8%83%E6%96%BC%E6%9C%AC%E7%BD%B2%E5%85%A8%E7%90%83%E8%B3%87%E8%A8%8A%E7%B6%B2%EF%BC%8C%E8%A9%B3%E5%A6%82%E8%AA%AA%E6%98%8E%EF%BC%8C%E8%AB%8B%E8%BD%89%E7%9F%A5%E6%89%80%E8%BD%84%E9%86%AB%E7%99%82%E9%99%A2%E6%89%80%E5%8F%83%E8%80%83.pdf",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    },
+    {
+      "metric": "access_pct",
+      "setting": "住院",
+      "year": 2024,
+      "value": 40,
+      "unit": "%",
+      "atc": "AWaRe Access",
+      "source_report_year": 2024,
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275",
+      "precision": "official_notice_exact",
+      "notes": "依疾管署年報發布通知明列之數值；未列出的年度保持缺值，不內插。"
+    }
+  ],
+  "atc_rankings": [
+    {
+      "year": 2024,
+      "setting": "全國門住診",
+      "classes": [
+        "J01C",
+        "J01D",
+        "J01A",
+        "J01F",
+        "J01M"
+      ],
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275"
+    },
+    {
+      "year": 2024,
+      "setting": "住院",
+      "classes": [
+        "J01D",
+        "J01C",
+        "J01M",
+        "J01X",
+        "J01A"
+      ],
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275"
+    },
+    {
+      "year": 2024,
+      "setting": "西醫診所",
+      "classes": [
+        "J01C",
+        "J01A",
+        "J01D",
+        "J01F",
+        "J01M"
+      ],
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275"
+    },
+    {
+      "year": 2024,
+      "setting": "牙醫診所",
+      "classes": [
+        "J01C",
+        "J01D",
+        "J01F",
+        "J01A"
+      ],
+      "source_url": "https://www.ntcma.org.tw/portal_b1_page.php?button_num=b1&cnt_id=10933&owner_num=b1_57275"
+    }
+  ],
+  "report_style_reference": {
+    "year": 2024,
+    "report_title": "臺灣抗生素使用量監視年報（2024年）",
+    "official_pdf_url": "https://www.cdc.gov.tw/File/Get?q=t9WnCInvvVMS9kUboNEwG-xa-PQCBgR1RoZm8VYiwZGvxtxVxZalrcV_OOxYlo12jOZNdHlbEk18OT4iQjAzTBzdgidl-roT69wpauhjeO-fQwq9zBqMtMNscQC1Q-Ayd1y3gCIE27mMKRbcTd_zlg",
+    "index_url": "https://www.cdc.gov.tw/Category/Page/tx7G1t-G3lyodZ8m8uoYMA",
+    "citation_scope": "官方年報索引與年報發布函摘要；原 PDF 圖型、頁碼及完整圖數尚未逐一核對。",
+    "not_an_exact_figure_replica": true
+  }
+}

@@ -53,3 +53,22 @@ input[type=checkbox]{cursor:pointer}
 .hospital-options label:has(input:disabled){opacity:.42}
 @media(max-width:640px){.report-section-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.report-section{padding:11px;min-height:80px}.report-edition{flex-direction:column}.report-edition button{min-width:0}}
 @media(max-width:400px){.report-section-grid{grid-template-columns:1fr}}
+
+
+/* Model estimate visibility and visual separation from certified surveillance data */
+.estimate-toggle{display:flex;align-items:center;gap:10px 22px;flex-wrap:wrap;margin:18px 0 6px;padding:13px 16px;border:1px dashed var(--line);border-radius:10px;background:var(--bg)}
+.estimate-toggle label{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--text);font-weight:700;cursor:pointer}
+.estimate-toggle input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent)}
+.estimate-toggle .sample-dash{font-weight:800;letter-spacing:.07em;color:#bf7c24}
+.estimate-toggle .small{font-size:12px}
+.legend-estimate{font-weight:700;color:var(--text);font-size:12px}
+.graph-disclaimer{font-size:12px;color:var(--mute);margin:10px 0}
+.estimated-value{color:#a15c19;font-weight:700}
+.chart-inner svg .estimate-guide{stroke:#bd7b2b;stroke-dasharray:5 5;stroke-width:2}
+.chart-inner svg .estimated-circle{fill:#fff;stroke:#b46e22;stroke-width:2.5}
+.chart-inner svg .official-circle{stroke:#fff;stroke-width:1.5}
+.chart-inner svg .estimate-key{fill:#a15c19;font-size:12px}
+.estimated-tag{display:inline-flex;border:1px solid #c18a48;color:#9b5b19;border-radius:12px;font-size:11px;padding:1px 7px;margin-left:7px}
+body:not(.light) .estimated-value{color:#f2bd76}
+body:not(.light) .estimated-tag{color:#f2bd76}
+@media(max-width:650px){.estimate-toggle{display:block}.estimate-toggle .small{display:block;margin-top:8px}}
