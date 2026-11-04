@@ -1,0 +1,2478 @@
+{
+  "schema_version": 1,
+  "domain": "HAI",
+  "base_year": 2023,
+  "display_year": 2024,
+  "reference_yearbook": "2024 年區域級以上醫院／地區醫院 HAI 年報",
+  "reference_links": [
+    {
+      "report_group": "above",
+      "year": 2024,
+      "report_title": "2024年區域級以上醫院醫療照護相關感染監視年報",
+      "official_pdf_url": "https://www.cdc.gov.tw/File/Get?q=t9WnCInvvVMS9kUboNEwG8vW5ZdX02sv07TS-cL8kH_D_20Ie-YNxemxJTESEeuYqTTrB7q8tEZ8HGfxwF9r1d1yrZsJH3kjtC-OCDkyPu8Nb1wBLFJRXBjM5uo_RiW58iVY-srRX7KnwAG_HOOOs6LSnk-eknyF2Bzj4o5t3jLGS9XWeBVbSqAwTtPFS2pU"
+    },
+    {
+      "report_group": "district",
+      "year": 2024,
+      "report_title": "2024年地區醫院醫療照護相關感染監視年報",
+      "official_pdf_url": "https://www.cdc.gov.tw/File/Get?q=t9WnCInvvVMS9kUboNEwGzsVbL24Pwb38HTfB5rD4QGDju1-KXn44VOBWqDUQgKj3u5SjEpGhRu9b0-gc40B-gMMoIQdWGlTVsWsiM2n17Qb-nCwFSUWSPzVn8YV7nZO4teS7BzWUGGQ-eWVdU23U9ueQ2f-IYLF8X5tATXLXqQ"
+    }
+  ],
+  "method": "2022–2023 officially published ICU aggregate rates extrapolated with half the latest annual change, capped at 8% of 2023 levels; visualization mock-up only",
+  "note": "These are model-generated illustration points using existing Taiwan CDC historical public data, NOT visual readings of figures from the 2024 HAI annual report or official 2024 surveillance statistics. Never combine them with official yearbook statistics.",
+  "original_source": "./data/hai/hai_open_2008_2023.json",
+  "anchor_counts": "2022 and 2023 data from Taiwan CDC ICU open aggregates",
+  "records": [
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "血流感染",
+      "icu": "全部ICU",
+      "value": 3.093,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.07468,
+      "anchor_2023": 3.08659,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "肺炎",
+      "icu": "全部ICU",
+      "value": 0.585,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.4071,
+      "anchor_2023": 0.54122,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "泌尿道感染",
+      "icu": "全部ICU",
+      "value": 2.27,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.10692,
+      "anchor_2023": 2.21577,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "其他部位",
+      "icu": "全部ICU",
+      "value": 0.723,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.61898,
+      "anchor_2023": 0.68809,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "感染部位合計",
+      "icu": "全部ICU",
+      "value": 6.694,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 6.20768,
+      "anchor_2023": 6.53168,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "血流感染",
+      "icu": "全部ICU",
+      "value": 1.79,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.75669,
+      "anchor_2023": 1.77882,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "肺炎",
+      "icu": "全部ICU",
+      "value": 0.496,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.47931,
+      "anchor_2023": 0.49036,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "泌尿道感染",
+      "icu": "全部ICU",
+      "value": 1.852,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.64888,
+      "anchor_2023": 1.78446,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "其他部位",
+      "icu": "全部ICU",
+      "value": 0.374,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.30352,
+      "anchor_2023": 0.35058,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "感染部位合計",
+      "icu": "全部ICU",
+      "value": 4.512,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 4.18841,
+      "anchor_2023": 4.40422,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "血流感染",
+      "icu": "全部ICU",
+      "value": 1.738,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.40609,
+      "anchor_2023": 1.62724,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "肺炎",
+      "icu": "全部ICU",
+      "value": 0.78,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.85275,
+      "anchor_2023": 0.80427,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "泌尿道感染",
+      "icu": "全部ICU",
+      "value": 1.241,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.33408,
+      "anchor_2023": 1.27187,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "其他部位",
+      "icu": "全部ICU",
+      "value": 0.275,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.20466,
+      "anchor_2023": 0.25437,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "site_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "感染部位合計",
+      "icu": "全部ICU",
+      "value": 4.038,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.79758,
+      "anchor_2023": 3.95776,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "內科ICU",
+      "icu": "內科ICU",
+      "value": 9.283,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 7.55844,
+      "anchor_2023": 8.70827,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "外科ICU",
+      "icu": "外科ICU",
+      "value": 7.482,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 6.97796,
+      "anchor_2023": 7.3138,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "心臟科ICU",
+      "icu": "心臟科ICU",
+      "value": 6.879,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 7.26992,
+      "anchor_2023": 7.00917,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "兒科ICU",
+      "icu": "兒科ICU",
+      "value": 2.248,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.19656,
+      "anchor_2023": 2.23102,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "綜合科ICU",
+      "icu": "綜合科ICU",
+      "value": 6.596,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 7.23304,
+      "anchor_2023": 6.80824,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "內科ICU",
+      "icu": "內科ICU",
+      "value": 4.924,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 4.78386,
+      "anchor_2023": 4.87746,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "外科ICU",
+      "icu": "外科ICU",
+      "value": 5.336,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 4.73043,
+      "anchor_2023": 5.13429,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "心臟科ICU",
+      "icu": "心臟科ICU",
+      "value": 5.411,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.36384,
+      "anchor_2023": 5.00981,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "兒科ICU",
+      "icu": "兒科ICU",
+      "value": 1.033,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.19617,
+      "anchor_2023": 1.08734,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "綜合科ICU",
+      "icu": "綜合科ICU",
+      "value": 4.195,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 4.05613,
+      "anchor_2023": 4.14898,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "<10床",
+      "icu": "<10床",
+      "value": 3.64,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.98041,
+      "anchor_2023": 3.75361,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": ">=10床",
+      "icu": ">=10床",
+      "value": 4.176,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.73588,
+      "anchor_2023": 4.02953,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管相關血流感染",
+      "icu": "內科ICU",
+      "value": 5.103,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 4.50062,
+      "anchor_2023": 4.90239,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管",
+      "icu": "內科ICU",
+      "value": 68.599,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 62.79859,
+      "anchor_2023": 66.66556,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管相關血流感染",
+      "icu": "外科ICU",
+      "value": 4.365,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 4.69965,
+      "anchor_2023": 4.47686,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管",
+      "icu": "外科ICU",
+      "value": 66.331,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 62.01904,
+      "anchor_2023": 64.89375,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管相關血流感染",
+      "icu": "心臟科ICU",
+      "value": 4.251,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 5.08338,
+      "anchor_2023": 4.52848,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管",
+      "icu": "心臟科ICU",
+      "value": 61.634,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 56.1736,
+      "anchor_2023": 59.81412,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管相關血流感染",
+      "icu": "兒科ICU",
+      "value": 1.445,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.23704,
+      "anchor_2023": 1.57025,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管",
+      "icu": "兒科ICU",
+      "value": 43.234,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 40.35582,
+      "anchor_2023": 42.27452,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管相關血流感染",
+      "icu": "綜合科ICU",
+      "value": 3.393,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 4.2538,
+      "anchor_2023": 3.67999,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管",
+      "icu": "綜合科ICU",
+      "value": 63.879,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 61.10707,
+      "anchor_2023": 62.95507,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管相關血流感染",
+      "icu": "內科ICU",
+      "value": 2.727,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.32515,
+      "anchor_2023": 2.9266,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管",
+      "icu": "內科ICU",
+      "value": 50.321,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 49.95564,
+      "anchor_2023": 50.19892,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管相關血流感染",
+      "icu": "外科ICU",
+      "value": 2.604,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.71838,
+      "anchor_2023": 2.64208,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管",
+      "icu": "外科ICU",
+      "value": 51.974,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 51.99192,
+      "anchor_2023": 51.97976,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管相關血流感染",
+      "icu": "心臟科ICU",
+      "value": 3.592,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.17754,
+      "anchor_2023": 3.32571,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管",
+      "icu": "心臟科ICU",
+      "value": 48.91,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 56.28308,
+      "anchor_2023": 51.36802,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管相關血流感染",
+      "icu": "兒科ICU",
+      "value": 1.562,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.05105,
+      "anchor_2023": 1.6982,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管",
+      "icu": "兒科ICU",
+      "value": 15.56,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 18.12849,
+      "anchor_2023": 16.41642,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管相關血流感染",
+      "icu": "綜合科ICU",
+      "value": 2.364,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.2892,
+      "anchor_2023": 2.33923,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管",
+      "icu": "綜合科ICU",
+      "value": 49.246,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 49.1351,
+      "anchor_2023": 49.20875,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "中心導管相關血流感染",
+      "icu": "<10床",
+      "value": 1.74,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.29286,
+      "anchor_2023": 1.61133,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "中心導管",
+      "icu": "<10床",
+      "value": 36.413,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 32.68845,
+      "anchor_2023": 35.17121,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "中心導管相關血流感染",
+      "icu": ">=10床",
+      "value": 3.038,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.59688,
+      "anchor_2023": 2.89068,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "中心導管",
+      "icu": ">=10床",
+      "value": 43.758,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 42.55866,
+      "anchor_2023": 43.35827,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器相關肺炎",
+      "icu": "內科ICU",
+      "value": 0.477,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.33515,
+      "anchor_2023": 0.44192,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器",
+      "icu": "內科ICU",
+      "value": 69.919,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 63.91447,
+      "anchor_2023": 67.91781,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器相關肺炎",
+      "icu": "外科ICU",
+      "value": 0.972,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.62324,
+      "anchor_2023": 0.89957,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器",
+      "icu": "外科ICU",
+      "value": 57.198,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 56.34141,
+      "anchor_2023": 56.91236,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器相關肺炎",
+      "icu": "心臟科ICU",
+      "value": 0.367,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.30764,
+      "anchor_2023": 0.34693,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器",
+      "icu": "心臟科ICU",
+      "value": 48.475,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 47.35792,
+      "anchor_2023": 48.10265,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器相關肺炎",
+      "icu": "兒科ICU",
+      "value": 0.81,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.53066,
+      "anchor_2023": 0.74997,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器",
+      "icu": "兒科ICU",
+      "value": 20.959,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 21.6718,
+      "anchor_2023": 21.19631,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器相關肺炎",
+      "icu": "綜合科ICU",
+      "value": 0.629,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.50409,
+      "anchor_2023": 0.58724,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器",
+      "icu": "綜合科ICU",
+      "value": 66.666,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 60.8544,
+      "anchor_2023": 64.72894,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器相關肺炎",
+      "icu": "內科ICU",
+      "value": 0.21,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.37436,
+      "anchor_2023": 0.22784,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器",
+      "icu": "內科ICU",
+      "value": 51.055,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 47.98836,
+      "anchor_2023": 50.03293,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器相關肺炎",
+      "icu": "外科ICU",
+      "value": 0.634,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.51107,
+      "anchor_2023": 0.59313,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器",
+      "icu": "外科ICU",
+      "value": 53.898,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 53.18207,
+      "anchor_2023": 53.65951,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器相關肺炎",
+      "icu": "心臟科ICU",
+      "value": 0.167,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.0679,
+      "anchor_2023": 0.15424,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器",
+      "icu": "心臟科ICU",
+      "value": 32.141,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 38.40257,
+      "anchor_2023": 34.22817,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器相關肺炎",
+      "icu": "兒科ICU",
+      "value": 0.216,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.92885,
+      "anchor_2023": 0.23518,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器",
+      "icu": "兒科ICU",
+      "value": 7.791,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 11.10172,
+      "anchor_2023": 8.4686,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器相關肺炎",
+      "icu": "綜合科ICU",
+      "value": 0.582,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.79872,
+      "anchor_2023": 0.63227,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器",
+      "icu": "綜合科ICU",
+      "value": 47.353,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 48.17252,
+      "anchor_2023": 47.626,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "呼吸器相關肺炎",
+      "icu": "<10床",
+      "value": 0.589,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.08016,
+      "anchor_2023": 0.64036,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "呼吸器",
+      "icu": "<10床",
+      "value": 38.506,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 34.77805,
+      "anchor_2023": 37.26362,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "呼吸器相關肺炎",
+      "icu": ">=10床",
+      "value": 1.025,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.74857,
+      "anchor_2023": 0.94905,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "呼吸器",
+      "icu": ">=10床",
+      "value": 42.958,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 40.08372,
+      "anchor_2023": 42.00018,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "內科ICU",
+      "value": 4.549,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.63157,
+      "anchor_2023": 4.24295,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管",
+      "icu": "內科ICU",
+      "value": 75.012,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 69.85512,
+      "anchor_2023": 73.29326,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "外科ICU",
+      "value": 2.787,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.54622,
+      "anchor_2023": 2.70653,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管",
+      "icu": "外科ICU",
+      "value": 79.962,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 76.52478,
+      "anchor_2023": 78.81638,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "心臟科ICU",
+      "value": 3.147,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 4.11742,
+      "anchor_2023": 3.42051,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管",
+      "icu": "心臟科ICU",
+      "value": 60.13,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 57.63484,
+      "anchor_2023": 59.29806,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "兒科ICU",
+      "value": 1.981,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.18942,
+      "anchor_2023": 2.05036,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管",
+      "icu": "兒科ICU",
+      "value": 8.762,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 8.14166,
+      "anchor_2023": 8.55516,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "綜合科ICU",
+      "value": 2.548,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.1733,
+      "anchor_2023": 2.7567,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管",
+      "icu": "綜合科ICU",
+      "value": 76.689,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 72.75582,
+      "anchor_2023": 75.378,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "內科ICU",
+      "value": 2.511,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.40265,
+      "anchor_2023": 2.47493,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管",
+      "icu": "內科ICU",
+      "value": 68.897,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 68.38207,
+      "anchor_2023": 68.72567,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "外科ICU",
+      "value": 2.654,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.38086,
+      "anchor_2023": 2.56308,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管",
+      "icu": "外科ICU",
+      "value": 74.619,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 78.37515,
+      "anchor_2023": 75.87088,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "心臟科ICU",
+      "value": 2.964,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.45494,
+      "anchor_2023": 2.74478,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管",
+      "icu": "心臟科ICU",
+      "value": 57.76,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 62.72915,
+      "anchor_2023": 59.41611,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "兒科ICU",
+      "value": 0.824,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.3587,
+      "anchor_2023": 0.89606,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管",
+      "icu": "兒科ICU",
+      "value": 2.046,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.0395,
+      "anchor_2023": 2.22382,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "綜合科ICU",
+      "value": 2.262,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.03442,
+      "anchor_2023": 2.18638,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管",
+      "icu": "綜合科ICU",
+      "value": 73.045,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 73.07942,
+      "anchor_2023": 73.05645,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "<10床",
+      "value": 1.334,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.63582,
+      "anchor_2023": 1.4343,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "導尿管",
+      "icu": "<10床",
+      "value": 67.766,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 64.10907,
+      "anchor_2023": 66.54686,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": ">=10床",
+      "value": 1.631,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.73957,
+      "anchor_2023": 1.66712,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "導尿管",
+      "icu": ">=10床",
+      "value": 68.331,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 69.85757,
+      "anchor_2023": 68.83997,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_share",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "血流",
+      "icu": "全部ICU",
+      "value": 78.975,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 78.91078,
+      "anchor_2023": 78.95327,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_share",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "肺炎",
+      "icu": "全部ICU",
+      "value": 61.879,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 59.18367,
+      "anchor_2023": 60.98081,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_share",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "泌尿道",
+      "icu": "全部ICU",
+      "value": 90.026,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 87.01299,
+      "anchor_2023": 89.02185,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_share",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "血流",
+      "icu": "全部ICU",
+      "value": 71.545,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 73.502,
+      "anchor_2023": 72.19759,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_share",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "肺炎",
+      "icu": "全部ICU",
+      "value": 49.718,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 57.80488,
+      "anchor_2023": 52.41379,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_share",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "泌尿道",
+      "icu": "全部ICU",
+      "value": 90.113,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 91.76136,
+      "anchor_2023": 90.66246,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_share",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "血流",
+      "icu": "全部ICU",
+      "value": 65.542,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 66.84636,
+      "anchor_2023": 65.97701,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_share",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "肺炎",
+      "icu": "全部ICU",
+      "value": 49.5,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 37.33333,
+      "anchor_2023": 45.83333,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_share",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "泌尿道",
+      "icu": "全部ICU",
+      "value": 84.789,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 88.06818,
+      "anchor_2023": 85.88235,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "全部ICU",
+      "icu": "全部ICU",
+      "value": 6.694,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 6.20768,
+      "anchor_2023": 6.53168,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "全部ICU",
+      "icu": "全部ICU",
+      "value": 4.512,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 4.18841,
+      "anchor_2023": 4.40422,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "icu_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "全部ICU",
+      "icu": "全部ICU",
+      "value": 4.038,
+      "unit": "感染人次／千住院人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.79758,
+      "anchor_2023": 3.95776,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管相關血流感染",
+      "icu": "全部ICU",
+      "value": 3.979,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 4.23939,
+      "anchor_2023": 4.06594,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管相關血流感染",
+      "icu": "全部ICU",
+      "value": 2.572,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.65351,
+      "anchor_2023": 2.59889,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "中心導管相關血流感染",
+      "icu": "全部ICU",
+      "value": 2.754,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.33993,
+      "anchor_2023": 2.6157,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器相關肺炎",
+      "icu": "全部ICU",
+      "value": 0.675,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.47234,
+      "anchor_2023": 0.62533,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器相關肺炎",
+      "icu": "全部ICU",
+      "value": 0.448,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.59013,
+      "anchor_2023": 0.48684,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "呼吸器相關肺炎",
+      "icu": "全部ICU",
+      "value": 0.906,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 0.82054,
+      "anchor_2023": 0.87778,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "全部ICU",
+      "value": 3.351,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 3.13121,
+      "anchor_2023": 3.27745,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "全部ICU",
+      "value": 2.457,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 2.18619,
+      "anchor_2023": 2.36689,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_density",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "導尿管相關泌尿道感染",
+      "icu": "全部ICU",
+      "value": 1.557,
+      "unit": "感染人次／千導管使用人日",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 1.71604,
+      "anchor_2023": 1.60984,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "中心導管",
+      "icu": "全部ICU",
+      "value": 61.278,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 57.11818,
+      "anchor_2023": 59.89134,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "中心導管",
+      "icu": "全部ICU",
+      "value": 48.099,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 48.46519,
+      "anchor_2023": 48.2209,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "中心導管",
+      "icu": "全部ICU",
+      "value": 41.854,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 40.16873,
+      "anchor_2023": 41.29234,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "呼吸器",
+      "icu": "全部ICU",
+      "value": 53.481,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 51.15797,
+      "anchor_2023": 52.70698,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "呼吸器",
+      "icu": "全部ICU",
+      "value": 46.694,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 46.54209,
+      "anchor_2023": 46.64364,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "呼吸器",
+      "icu": "全部ICU",
+      "value": 41.805,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 38.79902,
+      "anchor_2023": 40.80281,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "醫學中心",
+      "condition": "導尿管",
+      "icu": "全部ICU",
+      "value": 61.145,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 58.40582,
+      "anchor_2023": 60.23205,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "區域醫院",
+      "condition": "導尿管",
+      "icu": "全部ICU",
+      "value": 67.509,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 68.36712,
+      "anchor_2023": 67.79501,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    },
+    {
+      "metric": "device_utilization",
+      "year": 2024,
+      "level": "地區醫院",
+      "condition": "導尿管",
+      "icu": "全部ICU",
+      "value": 68.159,
+      "unit": "%",
+      "precision": "illustrative_projection_not_report_digitization",
+      "from_years": [
+        2022,
+        2023
+      ],
+      "anchor_2022": 68.46565,
+      "anchor_2023": 68.26133,
+      "rule": "2023 rate + 0.5*(2023 rate - 2022 rate), annual change capped at ±8% of 2023 rate; percentages capped at 100",
+      "source_status": "not_from_2024_pdf",
+      "label": "2024 示意推估（非年報估讀）"
+    }
+  ]
+}
