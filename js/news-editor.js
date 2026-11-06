@@ -3,6 +3,25 @@
   const $ = id => document.getElementById(id);
   const store = window.AMRNewsPreview;
   const media = window.AMRNewsMedia;
+  const i18n = window.AMRNewsI18n;
+  const LOCALES = ["en","ja"];
+  let imageTranslations={en:[],ja:[]};
+  const translationsFromForm=()=>i18n.cleanTranslations(Object.fromEntries(LOCALES.map(lang=>[
+    lang,{title:$("title_"+lang).value,summary:$("summary_"+lang).value,
+      body:$("body_"+lang).value,images:imageTranslations[lang]}
+  ])),images.length);
+  function translationStatus(){
+    for(const lang of LOCALES){
+      const title=$("title_"+lang).value.trim();
+      const summary=$("summary_"+lang).value.trim();
+      const hasImage=imageTranslations[lang].some(img=>img?.alt||img?.caption);
+      $("translationStatus_"+lang).textContent=title&&summary?"已有標題與摘要"
+        :title||summary||$("body_"+lang).value.trim()||hasImage?"部分譯文":"未填寫";
+    }
+  }
+  for(const lang of LOCALES){
+    ["title","summary","body"].forEach(key=>$(key+"_"+lang).addEventListener("input",translationStatus));
+  }
   const CATEGORIES = ["news","event","report","resource"];
   const MAX_IMAGES = 4;
   const MAX_UPLOAD = 8 * 1024 * 1024;
@@ -57,7 +76,8 @@
     link_url:$("link_url").value.trim(),
     featured:$("featured").value==="true",
     status,
-    images:media.cleanImages(images,true)
+    images:media.cleanImages(images,true),
+    translations:translationsFromForm()
   });
   const ensureId=()=>{
     if(!$("id").value.trim()){
@@ -75,17 +95,50 @@
       catch(_) {return "來源／報名網址須為有效的 HTTPS 連結。";}
     }
     if(images.length>MAX_IMAGES||a.images.length!==images.length)return "圖片數量或格式不符，請先移除不支援的圖片。";
+    for(const locale of LOCALES){
+      const entry=a.translations?.[locale];
+      if(entry&&(!entry.title||!entry.summary))
+        return (locale==="en"?"英文":"日文")+"譯文若有填寫，至少須提供標題與摘要；尚未翻譯可全部留白。";
+    }
     return "";
   };
   const toggleBusy=busy=>{
     importingImages=busy;
-    ["demoPublish","directPublish","migrateExisting","checkGitHubAccess","backupLegacy","download","importBtn","imageFiles"].forEach(id=>{$(id).disabled=busy});
+    ["demoPublish","directPublish","migrateExisting","checkGitHubAccess","backupLegacy","download","importBtn","imageFiles","loadPublicPosts"].forEach(id=>{$(id).disabled=busy});
   };
+  function renderTranslatedImageInputs(){
+    for(const lang of LOCALES){
+      const list=$("images_"+lang);
+      list.replaceChildren();
+      if(!images.length){list.append(node("p","尚未上傳圖片；無須填寫圖片譯文。"));continue}
+      for(let index=0;index<images.length;index++){
+        const entry=imageTranslations[lang][index]||{alt:"",caption:""};
+        imageTranslations[lang][index]=entry;
+        const box=node("div");box.className="translation-photo";
+        box.append(node("strong","圖片 "+(index+1)+" · "+(lang==="en"?"English":"日本語")));
+        for(const [field,label,max] of [
+          ["alt","替代文字（Alt text）",180],
+          ["caption","圖片說明（Caption）",300]
+        ]){
+          const wrap=node("div");wrap.className="field";
+          const title=node("label",label),input=node("input");
+          input.type="text";input.maxLength=max;input.value=entry[field]||"";
+          input.setAttribute("aria-label",(lang==="en"?"英文":"日文")+"圖片 "+(index+1)+" "+label);
+          input.addEventListener("input",()=>{entry[field]=input.value;translationStatus()});
+          wrap.append(title,input);box.append(wrap);
+        }
+        list.append(box);
+      }
+    }
+    translationStatus();
+  }
+
   function renderImages(){
     const list=$("imageItems");
     list.replaceChildren();
     if(!images.length){
       list.append(node("p","目前未加入圖片，可直接發布純文字消息。"));
+      renderTranslatedImageInputs();
       return;
     }
     images.forEach((entry,index)=>{
@@ -123,12 +176,18 @@
       const remove=node("button","移除此圖片");
       remove.type="button";
       remove.className="remove-photo";
-      remove.onclick=()=>{images.splice(index,1);renderImages();$("imageStatus").textContent="已移除圖片 "+(index+1)+"。"};
+      remove.onclick=()=>{
+        images.splice(index,1);
+        LOCALES.forEach(lang=>imageTranslations[lang].splice(index,1));
+        renderImages();
+        $("imageStatus").textContent="已移除圖片 "+(index+1)+"。";
+      };
       const capField=node("div");capField.className="field";capField.append(labelCaption,caption);
       const altField=node("div");altField.className="field";altField.append(labelAlt,alt);
       box.append(title,img,issue,capField,altField,remove);
       list.append(box);
     });
+    renderTranslatedImageInputs();
   }
   async function compress(file){
     if(!["image/jpeg","image/png","image/webp"].includes(file.type))throw Error("僅支援 JPEG、PNG 或 WebP 圖片。");
@@ -185,14 +244,17 @@
     }finally{toggleBusy(false);event.target.value=""}
   });
   function preview(){
-    const a=build("draft"),area=$("previewArea");
+    const base=build("draft"),code=$("previewLang").value;
+    const a=i18n.localize(base,code),area=$("previewArea");
     area.replaceChildren(node("h2",a.title||"未命名文章"));
-    const meta=node("p",a.published_at+" · "+a.category);
+    const meta=node("p",a.published_at+" · "+a.category+" · "+({zh:"繁體中文",en:"English",ja:"日本語"}[code]||""));
     meta.className="meta";
-    area.append(meta,node("p",a.summary),node("p",a.body));
+    area.append(meta,node("p",a.summary));
+    if(a.body)area.append(node("p",a.body));
+    if(a.translationFallback)area.append(node("p","部分內容尚無譯文，已顯示原文。"));
     const gallery=media.gallery(a.images,{allowInline:true});
     if(gallery.children.length)area.append(gallery);
-    message("已更新圖片與文章預覽，尚未正式發布。");
+    message("已更新 "+({zh:"繁體中文",en:"英文",ja:"日文"}[code]||"")+"圖文預覽，尚未正式發布。");
   }
   function fill(a){
     ["id","title","category","summary","body","published_at","event_date","link_url"].forEach(k=>{$(k).value=a[k]||""});
@@ -200,7 +262,14 @@
     $("featured").value=a.featured?"true":"false";
     $("status").value=a.status==="pending_approval"?"pending_approval":"draft";
     images=media.cleanImages(a.images,true);
+    const saved=i18n.cleanTranslations(a.translations,images.length);
+    for(const lang of LOCALES){
+      const text=saved[lang]||{};
+      ["title","summary","body"].forEach(field=>{$(field+"_"+lang).value=text[field]||""});
+      imageTranslations[lang]=Array.isArray(text.images)?text.images.map(i=>({...i})):[];
+    }
     renderImages();
+    translationStatus();
     const originalImageCount=Array.isArray(a.images)?a.images.length:0;
     if(originalImageCount>images.length){
       $("imageStatus").textContent="有 "+(originalImageCount-images.length)+" 張舊圖片來源無法辨識，請重新選擇圖片並發布。";
