@@ -66,3 +66,32 @@ button[disabled]{opacity:.5;cursor:not-allowed}
 .migration-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .migration-actions button{max-width:100%}
 @media(max-width:600px){.migration-actions button{width:100%}}
+
+
+/* Multilingual published articles and manual translation workspace */
+.translation-panel{border:1px solid var(--border);border-radius:14px;background:var(--panel);padding:20px;margin:20px 0}
+.translation-panel h2{margin:0 0 5px;font-size:22px}
+.translation-panel .small{line-height:1.75}
+.translation-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:14px}
+.translation-locale{border:1px solid var(--border);border-radius:11px;background:var(--bg);padding:12px;min-width:0}
+.translation-locale summary{cursor:pointer;font-weight:800;min-height:30px}
+.translation-locale summary small{font-size:11px;font-weight:500;margin-left:5px;color:var(--muted)}
+.translation-locale .field{margin-top:13px;min-width:0}
+.translation-locale .field label{font-size:13px;color:var(--muted)}
+.translation-locale input,.translation-locale textarea{width:100%;max-width:100%}
+.translation-locale textarea{min-height:115px}
+.translation-locale #summary_en,.translation-locale #summary_ja{min-height:150px}
+.translation-image-fields{display:grid;gap:9px;margin-top:12px}
+.translation-image-fields>p{font-size:12px;color:var(--muted)}
+.translation-photo{border:1px dashed var(--border);padding:11px;border-radius:9px}
+.translation-photo>strong{font-size:13px;color:var(--text)}
+.translation-photo .field{margin-top:8px}
+.preview-locale-label{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted)}
+.preview-locale-label select{max-width:140px}
+.translation-note{padding:8px 10px;font-size:12px;color:var(--muted);border-left:3px solid #d7a15c;background:var(--bg);border-radius:3px;line-height:1.6}
+.article-content{white-space:pre-wrap;overflow-wrap:anywhere}
+.item>.muted{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;white-space:normal}
+#publicPosts{display:grid;gap:7px;margin-top:12px}
+.public-editor-row{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--border);padding:10px 0}
+.public-editor-row span{flex:1;min-width:170px;overflow-wrap:anywhere}
+@media(max-width:740px){.translation-grid{grid-template-columns:1fr}.translation-panel{padding:15px}}

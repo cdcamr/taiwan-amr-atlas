@@ -4,9 +4,9 @@
   "articles": [
     {
       "id": "demo-20261102034729-c3czw",
-      "title": "WHO bacterial priority pathogens list, 2024",
+      "title": "世界衛生組織2024年細菌優先病原體清單",
       "category": "resource",
-      "summary": "WHO bacterial priority pathogens list, 2024: Bacterial pathogens of public health importance to guide research, development and strategies to prevent and control antimicrobial resistance",
+      "summary": "世界衛生組織《2024年細菌優先病原體清單》：盤點具有公共衛生重要性的細菌病原體，作為抗生素抗藥性研究開發，以及預防與控制策略優先排序的參考。",
       "body": "",
       "tags": [],
       "published_at": "2026-11-02",
@@ -17,10 +17,34 @@
       "images": [
         {
           "src": "./assets/news/images/demo-20261102034729-c3czw/f5e4e5a236a95d2b.webp",
-          "alt": "2026-11-02 11 47 08",
+          "alt": "世界衛生組織2024年細菌優先病原體清單相關圖片",
           "caption": ""
         }
-      ]
+      ],
+      "translations": {
+        "en": {
+          "title": "WHO bacterial priority pathogens list, 2024",
+          "summary": "WHO bacterial priority pathogens list, 2024: Bacterial pathogens of public health importance to guide research, development and strategies to prevent and control antimicrobial resistance",
+          "body": "",
+          "images": [
+            {
+              "alt": "Image accompanying the WHO Bacterial Priority Pathogens List, 2024",
+              "caption": ""
+            }
+          ]
+        },
+        "ja": {
+          "title": "WHO細菌優先病原体リスト2024",
+          "summary": "世界保健機関（WHO）の「細菌優先病原体リスト2024」は、公衆衛生上重要な細菌病原体を示し、薬剤耐性（AMR）の予防・管理に向けた研究開発や対策の優先順位を検討するための資料です。",
+          "body": "",
+          "images": [
+            {
+              "alt": "WHO「細菌優先病原体リスト2024」の関連画像",
+              "caption": ""
+            }
+          ]
+        }
+      }
     },
     {
       "id": "demo-20261102034232-08n6o",
@@ -40,7 +64,31 @@
           "alt": "2026-11-02 11 44 06",
           "caption": ""
         }
-      ]
+      ],
+      "translations": {
+        "en": {
+          "title": "Taiwan Antimicrobial Resistance Surveillance Report (2024)",
+          "summary": "Taiwan Antimicrobial Resistance Surveillance Report",
+          "body": "",
+          "images": [
+            {
+              "alt": "Image accompanying the Taiwan Antimicrobial Resistance Surveillance Report (2024)",
+              "caption": ""
+            }
+          ]
+        },
+        "ja": {
+          "title": "台湾の抗菌薬耐性（AMR）サーベイランス年報（2024年）",
+          "summary": "台湾における抗菌薬耐性（AMR）のサーベイランス年報です。",
+          "body": "",
+          "images": [
+            {
+              "alt": "台湾の抗菌薬耐性（AMR）サーベイランス年報（2024年）の関連画像",
+              "caption": ""
+            }
+          ]
+        }
+      }
     },
     {
       "id": "demo-20261102033635-mfcxg",
@@ -60,7 +108,31 @@
           "alt": "消息配圖",
           "caption": ""
         }
-      ]
+      ],
+      "translations": {
+        "en": {
+          "title": "World AMR Awareness Week 2025",
+          "summary": "Antimicrobial resistance (AMR) is a major global public health issue that requires cross-sector collaboration to advance the United Nations Sustainable Development Goals. In 2019, the World Health Organization (WHO) identified AMR as one of the ten leading threats to global health. To raise awareness of antimicrobial stewardship, WHO observes World AMR Awareness Week each year from 18 to 24 November.\n\nTo mark World AMR Awareness Week, Taiwan CDC joins government agencies responsible for agriculture, healthcare and food safety, together with healthcare institutions across Taiwan. Guided by the One Health approach, they pledge to work together to strengthen antimicrobial stewardship and infection prevention and control. Healthcare institutions are also encouraged to conduct educational activities through videos and other communication channels to help the public understand the importance of preventing AMR and protecting public health.\n\nAMR threatens humans, animals, plants and the environment, and it can affect everyone. To slow the development and spread of resistance, improve the quality of healthcare and protect patient safety, Taiwan CDC will continue cross-ministerial collaboration on a national One Health AMR action plan. Taiwan CDC encourages the public to maintain healthy habits, practice hand hygiene, receive recommended vaccinations and use antibiotics appropriately to prevent drug-resistant infections. Healthcare professionals and the wider community are invited to work together to preserve the effectiveness of antibiotics.",
+          "body": "",
+          "images": [
+            {
+              "alt": "Illustration accompanying World AMR Awareness Week 2025",
+              "caption": ""
+            }
+          ]
+        },
+        "ja": {
+          "title": "2025年世界AMR啓発週間",
+          "summary": "薬剤耐性（Antimicrobial Resistance：AMR）は、世界の公衆衛生における重要な課題です。国連の持続可能な開発目標（SDGs）の達成に向け、分野を超えた協力が求められています。世界保健機関（WHO）は2019年、AMRを世界の健康に対する10の主要な脅威の一つに挙げました。抗菌薬の適正使用に関する認識と関心を高めるため、WHOは毎年11月18日から24日までを「世界AMR啓発週間（World AMR Awareness Week）」としています。\n\n世界AMR啓発週間に合わせ、台湾疾病管制署は農業、医療、食品に関係する行政機関や台湾各地の医療機関と連携し、「ワンヘルス（One Health）」の考え方に基づいて、抗菌薬の適正使用と感染予防・管理に共同で取り組む姿勢を示しています。また、医療機関に対し、動画や多様な方法を用いた啓発活動の実施を呼びかけ、AMRの予防の重要性を広く伝えることを目指しています。\n\nAMRは人、動物、植物、環境のすべてに脅威をもたらし、誰にでも影響を及ぼす可能性があります。薬剤耐性の進行と拡大を抑え、医療の質と患者の安全を守るため、台湾疾病管制署は関係省庁との協力を通じ、国レベルのワンヘルスAMR対策行動計画を推進していきます。一般の方々には、健康的な生活習慣、手指衛生、推奨される予防接種、抗菌薬の適切な使用を通じて耐性菌感染を予防するよう呼びかけています。医療従事者と社会全体が協力し、重要な抗菌薬の有効性を守っていくことが大切です。",
+          "body": "",
+          "images": [
+            {
+              "alt": "2025年世界AMR啓発週間の関連画像",
+              "caption": ""
+            }
+          ]
+        }
+      }
     }
   ]
 }

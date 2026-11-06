@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "description": "Only approved public articles. Drafts must not be added to this file without review.",
+  "articles": [
+    {
+      "id": "demo-20261102034729-c3czw",
+      "title": "WHO bacterial priority pathogens list, 2024",
+      "category": "resource",
+      "summary": "WHO bacterial priority pathogens list, 2024: Bacterial pathogens of public health importance to guide research, development and strategies to prevent and control antimicrobial resistance",
+      "body": "",
+      "tags": [],
+      "published_at": "2026-11-02",
+      "event_date": "",
+      "link_url": "",
+      "featured": false,
+      "status": "published",
+      "images": [
+        {
+          "src": "./assets/news/images/demo-20261102034729-c3czw/f5e4e5a236a95d2b.webp",
+          "alt": "2026-11-02 11 47 08",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "id": "demo-20261102034232-08n6o",
+      "title": "2024年臺灣抗生素抗藥性監視年報",
+      "category": "report",
+      "summary": "臺灣抗生素抗藥性監視年報",
+      "body": "",
+      "tags": [],
+      "published_at": "2026-11-02",
+      "event_date": "",
+      "link_url": "https://www.cdc.gov.tw/Category/Page/tx7G1t-G3lyodZ8m8uoYMA",
+      "featured": false,
+      "status": "published",
+      "images": [
+        {
+          "src": "./assets/news/images/demo-20261102034232-08n6o/ab5bec596d18fb5a.webp",
+          "alt": "2026-11-02 11 44 06",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "id": "demo-20261102033635-mfcxg",
+      "title": "2025世界抗生素周",
+      "category": "news",
+      "summary": "抗生素抗藥性（Antimicrobial resistance, AMR）為全球公共衛生重要議題，須採取跨部門合作方式，以實踐聯合國永續發展目標。世界衛生組織已在108年將抗生素抗藥性列為全球十大健康威脅之一。為呼籲各國提高抗生素管理之認知與重視，世界衛生組織以每年11月18日至11月24日為「世界抗生素週」（World AMR Awareness Week）。\n\n為響應世界抗生素週，疾管署串聯政府農業、醫藥、食品相關部門與全國醫療院所共同響應，以「防疫一體（One Health）」之概念，共同宣誓攜手合作落實抗生素管理及感染管制，同時呼籲社會大眾共同預防抗生素抗藥性，齊心協力遏制抗藥性問題。此外，也歡迎醫療院所以影音或多元化方式辦理相關活動，向大眾宣導防範抗生素抗藥性的重要性，守護民眾健康。\n\n抗生素抗藥性對人類、動物、植物和環境都是一種威脅，並可影響每一個人，為有效減緩抗生素抗藥性，提升醫療照護品質及維護病人安全，疾管署將持續透過跨部會合作，建構國家級防疫一體抗生素抗藥性管理行動計畫，以優化整體防疫效能。疾管署呼籲民眾，保持健康的生活習慣、加強手部衛生、按建議接種疫苗、正確使用抗生素，以預防抗藥性感染的發生，同時籲請社會各界及醫界朋友應守護珍貴的抗生素，共同預防抗生素抗藥性。",
+      "body": "",
+      "tags": [],
+      "published_at": "2026-11-02",
+      "event_date": "",
+      "link_url": "https://www.cdc.gov.tw/Category/MPage/t2VWXn93ooNVJPuQRF7jzg",
+      "featured": true,
+      "status": "published",
+      "images": [
+        {
+          "src": "./assets/news/images/demo-20261102033635-mfcxg/b2ce56f1b25ba078.webp",
+          "alt": "消息配圖",
+          "caption": ""
+        }
+      ]
+    }
+  ]
+}
