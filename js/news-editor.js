@@ -596,7 +596,8 @@
           tags:Array.isArray(original.tags)?original.tags.filter(x=>typeof x==="string").slice(0,30):[],
           published_at:original.published_at,event_date:String(original.event_date||""),
           link_url:String(original.link_url||""),featured:!!original.featured,
-          status:"published",images:[]
+          status:"published",images:[],
+          translations:i18n.cleanTranslations(original.translations,images.length)
         };
         migrationStatus("正在轉移第 "+(i+1)+"／"+originals.length+" 則：「"+article.title+"」及圖片…");
         try{
@@ -681,8 +682,15 @@
     const imagesA=Array.isArray(local.images)?local.images:[];
     const imagesB=Array.isArray(remote.images)?remote.images:[];
     if(imagesA.length!==imagesB.length)return false;
-    return imagesA.every((img,i)=>String(img.alt||"")===String(imagesB[i].alt||"")
+    const imagesMatch=imagesA.every((img,i)=>String(img.alt||"")===String(imagesB[i].alt||"")
       &&String(img.caption||"")===String(imagesB[i].caption||""));
+    if(!imagesMatch)return false;
+    // Old browser-local posts had no translations; their original publication
+    // remains recognized. If locally edited translations exist, require a match.
+    const localTranslations=i18n.cleanTranslations(local.translations,imagesA.length);
+    if(!Object.keys(localTranslations).length)return true;
+    return JSON.stringify(localTranslations)===
+      JSON.stringify(i18n.cleanTranslations(remote.translations,imagesB.length));
   };
   async function reconcileExistingSharedArticles(){
     try{
@@ -702,8 +710,40 @@
     }
   }
 
+  // Public articles can be reopened for translation without having been
+  // authored in this particular browser. Fetch does not require a GitHub token.
+  $("loadPublicPosts").onclick=async()=>{
+    const box=$("publicPosts");
+    box.replaceChildren(node("p","正在取得共用網站文章…"));
+    $("loadPublicPosts").disabled=true;
+    try{
+      const response=await fetch("./data/news/manifest.json",{cache:"no-store"});
+      if(!response.ok)throw Error("HTTP "+response.status);
+      const manifest=await response.json();
+      if(!Array.isArray(manifest.articles))throw Error("消息清單格式不正確");
+      box.replaceChildren();
+      if(!manifest.articles.length){box.append(node("p","目前沒有共用網站文章。"));return}
+      for(const article of manifest.articles){
+        if(!/^[A-Za-z0-9_-]{3,100}$/.test(article.id||""))continue;
+        const row=node("div");row.className="public-editor-row";
+        const title=node("span",article.title||article.id);
+        const button=node("button","載入編輯");
+        button.type="button";
+        button.onclick=()=>{
+          fill(article);
+          message("已載入共用網站「"+article.title+"」的語言版本與圖片。修改後須使用 GitHub 授權按「發布到共用網站」；現有圖片不必重傳。");
+        };
+        row.append(title,button);
+        box.append(row);
+      }
+    }catch(e){
+      box.replaceChildren(node("p","無法讀取共用文章："+(e.message||"讀取失敗")));
+    }finally{$("loadPublicPosts").disabled=false}
+  };
+
   window.addEventListener("storage",event=>{if(event.key==="taiwan-amr-news-local-preview-v1")refreshLocalList()});
   renderImages();
+  translationStatus();
   refreshLocalList();
   reconcileExistingSharedArticles();
 })();
