@@ -1,5 +1,16 @@
 # Taiwan AMR Atlas
 
+## NEWS & EVENTS article localization (zh / en / ja) — 2026-11-06
+
+Published news cards and article detail pages now follow the site's existing language selector (`zh`, `en`, `ja`), including titles, abstracts, article body text and per-photo alt text/captions. Switching language in the current page or another tab re-renders the selected article without changing its public URL or image files.
+
+- New `js/news-i18n.js` owns the `translations.en` and `translations.ja` schema, field validation and original-text fallback. The top-level article fields remain the Traditional Chinese source of truth.
+- The existing 3 public posts have English and Japanese texts filled in, with source URLs and attached images preserved.
+- The NEWS & EVENTS editor now supports manual English/Japanese title, summary, body and photo-caption fields, language-selectable preview, JSON export/import of translations and read-only loading of existing published posts for revision. Publishing updated content still requires GitHub repository write access.
+- **Static GitHub Pages cannot automatically translate future new articles at runtime.** Missing translations are displayed in their source language with a notice. AI-assisted translations supplied in this prototype should be professionally reviewed before any formal institutional release.
+- Rollback and original snapshots: `history/NEWS-MULTILINGUAL-ROLLBACK-20261106.md` and `history/news-before-multilingual-20261106/`.
+
+
 ## AU / HAI annual-report inspired illustrative trends (2026-11-04)
 
 The 2024 AU and HAI annual reports are indexed on the official Taiwan CDC website, with the original links retained in the existing dashboard data files. In this execution environment, the Taiwan CDC `File/Get` endpoint could not return full usable PDF pages. To support the requested interactive preview **without inventing official figures**, new synthetic/model-assisted points live in separate datasets and are prominently marked as non-official.
